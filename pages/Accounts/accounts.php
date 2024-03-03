@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>SEC Admin</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/feather/feather.css">
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -279,7 +279,87 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
+        <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                            <h3 class="font-weight-bold">Accounts</h3>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                            <div class="justify-content-end d-flex">
+                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm">
+                                        <i class="icon-plus btn-icon-prepend"></i>
+                                        Add Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Profile</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Contact</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Jacob</td>
+                                        <td>Male</td>
+                                        <td>53275531</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Jacob</td>
+                                        <td>Male</td>
+                                        <td>53275531</td>
+                                        <td><span class="badge badge-warning">Inactive</span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Jacob</td>
+                                        <td>Male</td>
+                                        <td>53275531</td>
+                                        <td><span class="badge badge-warning">Inactive</span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Jacob</td>
+                                        <td>Male</td>
+                                        <td>53275531</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Jacob</td>
+                                        <td>Male</td>
+                                        <td>53275531</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     <!-- page-body-wrapper ends -->

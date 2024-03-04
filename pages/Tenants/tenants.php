@@ -298,6 +298,9 @@
                     </div>
                 </div>
             </div>
+            <div class="search-box mb-3">
+                <input type="text" class="form-control" placeholder="Search...">
+            </div>
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">

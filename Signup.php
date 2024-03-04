@@ -4,15 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Centered Form with Bootstrap</title>
+  <link rel="stylesheet" href="C:\xampp\htdocs\dormitory_management_system\dormitory_management_system\css\signup.css">
+  <title>Signup-Page</title>
+  <style>
+    body {
+      background-color: #f8f9fa; 
+
+    }
+    .custom-font {
+      font-family: 'Peanut Butter'; /* Replace 'Your Font Family' with your desired font */
+    }
+  </style>
 </head>
 <body>
 
-<div class="container mt-5">
+<div class="container mt-5 custom-font">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-6 bg-white p-4 rounded">
       <form>
         <div class="form-group">
+        <i class="fa-solid fa-user"></i>
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name" placeholder="Enter your name">
         </div>
@@ -30,7 +41,13 @@
         </div>
         <div class="form-group">
           <label for="profile">Profile</label>
-          <input type="text" class="form-control" id="profile" placeholder="Enter your profile">
+          <div class="input-group">
+            <div class="input-group-append">
+              <label class="btn btn-outline-secondary">
+                Upload Picture <input type="file" style="display: none;">
+              </label>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="username">Username</label>

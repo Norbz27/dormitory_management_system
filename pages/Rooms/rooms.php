@@ -17,6 +17,43 @@
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
+
+<style>
+  .card{
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  .card .btn{
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    background-color: #4B49AC;
+    border-color: #4B49AC;
+  }
+  .card-body .card-title{
+    margin-bottom: 10px;
+  }
+  .card .card-footer{
+    padding: 0;
+    height: 40px;
+  }
+  .badge{
+    padding: 8px 12px;
+    font-weight: 500;
+  }
+  .carousel-control-next{
+    border: none;
+    background-color: transparent;
+  }
+  .carousel-control-prev{
+    border: none;
+    background-color: transparent;
+  }
+</style>
 </head>
 <body>
   <div class="container-scroller">
@@ -296,6 +333,188 @@
                         </div>
                     </div>
                     </div>
+                    <h3 class="font-weight-bold">Floor 1</h3>
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-1">
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 101</h5>
+                            <span class="badge badge-pill badge-success">Available</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                          <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 102</h5>
+                            <span class="badge badge-pill badge-danger">Occupied</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 103</h5>
+                            <span class="badge badge-pill badge-warning">Lacking</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 104</h5>
+                            <span class="badge badge-pill badge-success">Available</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 104</h5>
+                            <span class="badge badge-pill badge-danger">Occupied</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <h3 class="font-weight-bold">Floor 2</h3>
+                    <div class="row row-cols-1 row-cols-md-5 g-1">
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 201</h5>
+                            <span class="badge badge-pill badge-warning">Lacking</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 202</h5>
+                            <span class="badge badge-pill badge-danger">Occupied</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 203</h5>
+                            <span class="badge badge-pill badge-success">Available</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 204</h5>
+                            <span class="badge badge-pill badge-danger">Occupied</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card">
+                          <img src="../../images/rooms/room1.jpg" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
+                          <div class="card-body">
+                            <h5 class="card-title">Room 104</h5>
+                            <span class="badge badge-pill badge-success">Available</span>
+                            <p class="card-text" style="margin-top: 10px;">This room is equipped with two beds, two desks and chairs, two wardrobes or closets, and shared amenities such as bathrooms and common areas.</p>
+                          </div>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Room 101</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px;">
+                              <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                  <img src="../../images/rooms/dormroom.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                  <img src="../../images/rooms/dormroom.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                  <img src="../../images/rooms/dormroom.jpg" class="d-block w-100" alt="...">
+                                </div>
+                              </div>
+                            <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                              </button>
+                              <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                              </button>
+                            </div>
+                            <h5>Room Details</h5>
+                            <div class="d-flex flex-column bd-highlight">
+                              <div class="bd-highlight">Bed: 1</div>
+                              <div class="bd-highlight">Closet: Large</div>
+                              <div class="bd-highlight">Comfort Room: 1</div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -323,4 +542,3 @@
 </body>
 
 </html>
-

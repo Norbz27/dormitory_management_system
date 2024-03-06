@@ -17,57 +17,7 @@
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
-
-<style>
-  .card{
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: transparent;
-  }
-  .card .btn{
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    padding: 2px;
-    background-color: #4B49AC;
-    border-color: #4B49AC;
-  }
-  .card .card-footer{
-    padding: 0;
-    height: 40px;
-    border: none;
-  }
-  .badge{
-    padding: 8px 12px;
-    font-weight: 500;
-  }
-  .room-title{
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  .card .card-body{
-    padding: 20px 5px;
-    margin: 0;
-  }
-  .carousel-control-next{
-    border: none;
-    background-color: transparent;
-  }
-  .carousel-control-prev{
-    border: none;
-    background-color: transparent;
-  }
-  .room-desc{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .card img{
-    border-radius: 10px;
-  }
-</style>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
   <div class="container-scroller">

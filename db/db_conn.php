@@ -3,7 +3,7 @@
 $servername = "localhost";
 $dBUsername = "root";
 $dBPassword = "";
-$dBName = "referraldb";
+$dBName = "dormitorydb";
 
 // Function to establish or reconnect to the MySQL server
 function connectToDatabase() {

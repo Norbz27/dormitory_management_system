@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
+  <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
@@ -288,15 +290,67 @@
                         <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm">
+                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#addAccountModal">
                                         <i class="icon-plus btn-icon-prepend"></i>
-                                        Add Tenant
+                                        New Tenant
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- Modal -->
+          <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="addAccountModalLabel">New Tenant</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- Your form elements go here -->
+                          <form>
+                              <div class="row">
+                                  <!-- Other Fields in Two Columns -->
+                                  <div class="col-md-6 text-center justify-content-center mb-3 d-flex align-items-center"> <!-- Added d-flex and align-items-center -->
+                                    <div>
+                                        <img src="../../images/profile.webp" id="profilePicturePreview" alt="Profile Picture Preview" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px; cursor: pointer;">
+                                        <label>Select user</label>
+                                        <select class="js-example-basic-single w-100"> <!-- Change w-500 to w-100 -->
+                                            <option value="AL">Norberto Bruzon Jr.</option>
+                                            <option value="WY">Wyoming Wyoming</option>
+                                            <option value="AM">America America</option>
+                                            <option value="CA">Canada Canada</option>
+                                            <option value="RU">Russia Russia</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                  <!-- Room # -->
+                                  <div class="col-md-12 mb-4">
+                                      <label for="gender">Room</label>
+                                      <select class="form-control" id="room">
+                                          <option value="101">101</option>
+                                          <option value="102">102</option>
+                                          <option value="103">103</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary btn-md">Save changes</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            <div class="search-box mb-3">
+                <input type="text" class="form-control" placeholder="Search...">
             </div>
             <div class="grid-margin stretch-card">
                 <div class="card">
@@ -369,11 +423,11 @@
         </div>
     </div>
 
-  <!-- plugins:js -->
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="../../vendors/chart.js/Chart.min.js"></script>
+  <script src="../../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="../../vendors/select2/select2.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="../../js/off-canvas.js"></script>
@@ -383,8 +437,9 @@
   <script src="../../js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../js/chart.js"></script>
-  <!-- End custom js for this page-->
+  <script src="../../js/file-upload.js"></script>
+  <script src="../../js/typeahead.js"></script>
+  <script src="../../js/select2.js"></script>
 </body>
 
 </html>

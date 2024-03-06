@@ -4,13 +4,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
-    <link rel="stylesheet" href="vendors/feather/feather.css">
-    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+    <title>Dorm Login</title>
+    <link rel="stylesheet" href="vendors/feather/feather.css">  
     <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 
@@ -28,20 +26,25 @@
                   <img src="images/logo.svg" alt="logo">
                   <p>SEC DORMITORY</p>
                 </div>
-                <h4>Hello! let's get started</h4>
-                <h6 class="font-weight-light">Sign in to continue.</h6>
+                <h4>Login</h4>
                 <form class="pt-3">
                   <div class="form-group">
+                  <i class="fa-duotone fa-user"></i>
                     <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
                   </div>
+                  <i class="fa-duotone fa-user"></i>
                   <div class="form-group">
                     <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=" Save " id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Save Password</label>
                   </div>
                   <div class="mt-3">
                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="index.php">SIGN IN</a>
                   </div>
                   <div class="text-center mt-4 font-weight-light">
-                    Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                    Don't have an account? <a href="Signup.php" class="text-primary">Create</a>
                   </div>
                 </form>
               </div>

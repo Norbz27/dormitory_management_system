@@ -32,8 +32,9 @@ body {
   -webkit-box-pack: center;
   justify-content: center;
   padding-top: 40px;
+  background-color: #f8f9fa; 
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+ 
 }
 
 .form-signin {

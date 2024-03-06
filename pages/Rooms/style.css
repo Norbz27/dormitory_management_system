@@ -47,3 +47,15 @@
 .card img {
   border-radius: 10px;
 }
+#display_img {
+  height: 30vh;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+#new_display_img {
+  height: 30vh;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}

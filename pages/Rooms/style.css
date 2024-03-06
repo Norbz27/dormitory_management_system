@@ -1,0 +1,49 @@
+.card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+.card .btn {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  background-color: #4b49ac;
+  border-color: #4b49ac;
+  color: #ffff;
+}
+.card .card-footer {
+  padding: 0;
+  height: 40px;
+  border: none;
+}
+.badge {
+  padding: 8px 12px;
+  font-weight: 500;
+}
+.room-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.card .card-body {
+  padding: 20px 5px;
+  margin: 0;
+}
+.carousel-control-next {
+  border: none;
+  background-color: transparent;
+}
+.carousel-control-prev {
+  border: none;
+  background-color: transparent;
+}
+.room-desc {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  justify-content: space-between;
+}
+.card img {
+  border-radius: 10px;
+}

@@ -1,4 +1,5 @@
 <?php include_once '../header.php' ?>
+<link rel="stylesheet" href="style.css">
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -31,7 +32,7 @@
                             </div>
                           </div>
                           <div class="card-footer">
-                          <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                          <button type="button" class="btn btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
                           </div>
                         </div>
                       </div>
@@ -295,16 +296,28 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <h5>Room Details</h5>
-                            <div class="d-flex flex-column bd-highlight">
-                              <div class="bd-highlight">Bed: 1</div>
-                              <div class="bd-highlight">Closet: Large</div>
-                              <div class="bd-highlight">Comfort Room: 1</div>
-                            </div>
+                            <form id="add_room">
+                              <div class="form-group">
+                                <label>Room Name</label>
+                                <input type="text" class="form-control mb-3" name="room_name" required>
+                                <label>Occupy Number</label>
+                                <input type="number" class="form-control mb-3" name="occupy_num" required>
+                                <label>Floor</label>
+                                <select class="form-control mb-3" name="floor_belong" required>
+                                  <option disabled selected value="">Choose</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                </select>
+                                <label>Room Image</label>
+                                <input type="file" class="form-control-file" name="staffformFile" required>
+                              </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                            </form>
                           </div>
                         </div>
                       </div>
@@ -316,4 +329,5 @@
       </div>
     <!-- page-body-wrapper ends -->
   </div>
+  <script src="room.js"></script>
   <?php include_once '../footer.php' ?>

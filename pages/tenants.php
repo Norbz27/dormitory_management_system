@@ -1,4 +1,4 @@
-<?php include_once '../header.php' ?>
+<?php include_once '../../header.php' ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -144,5 +144,5 @@
         </div>
     </div>
 
-    <?php include_once '../footer.php' ?>
+    <?php include_once '../../footer.php' ?>
 

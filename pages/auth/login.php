@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Signup Page</title>
+  <title>SignIn</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/feather/feather.css">
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -29,52 +29,34 @@
               <div class="brand-logo">
                 <img src="../../images/logo.svg" alt="logo">
               </div>
-              <h4>New here?</h4>
-              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3">
+              <h4>Hello! let's get started</h4>
+              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <form class="pt-3" action="login.inc.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputName" placeholder="Name">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="uid" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="tel" class="form-control form-control-lg" id="exampleInputPhone" placeholder="Phone Number">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="pwd" placeholder="Password">
                 </div>
-                <div class="form-group">
-                  <select class="form-control form-control-lg" id="exampleInputGender">
-                    <option>Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                  </select>
+                <div class="mt-3">
+                  <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputProfile">Profile</label>
-                  <div class="input-group">
-                    <div class="input-group-append">
-                      <label class="btn btn-outline-secondary">
-                        Add Profile <input type="file" style="display: none;">
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword" placeholder="Password">
-                </div>
-                <div class="mb-4">
+                <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
-                      I agree to all Terms & Conditions
+                      Keep me signed in
                     </label>
                   </div>
+                  <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div>
-                <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
+                <div class="mb-2">
+                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
+                    <i class="ti-facebook mr-2"></i>Connect using facebook
+                  </button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="login.php" class="text-primary">Login</a>
+                  Don't have an account? <a href="register.html" class="text-primary">Create</a>
                 </div>
               </form>
             </div>

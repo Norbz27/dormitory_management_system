@@ -1,5 +1,5 @@
 <?php
-include_once '../../db/db_conn.php';
+include_once '../db/db_conn.php';
 
 if (isset($_POST['add_room'])) {
     $room_name = $_POST['room_name'];

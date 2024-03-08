@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../db/db_conn.php';
+include_once '../db/db_conn.php';
 
 function getRoom1() {
     global $conn;

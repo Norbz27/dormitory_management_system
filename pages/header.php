@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["account"])) {
+  header("Location: auth/login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +29,8 @@
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
   <div class="container-scroller">
@@ -47,7 +57,7 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="auth/logout.inc.php">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>

@@ -1,5 +1,5 @@
 <?php
-include_once '../header.php';
+include_once 'header.php';
 include_once 'room_function.inc.php';
 
 $room1 = getRoom1();
@@ -243,7 +243,7 @@ $room3 = getRoom3();
                           <div class="modal-body">
                             <form id="edit_room">
                               <input type="hidden" name="new_room_id" id="new_room_id">
-                              <img id="new_display_img" src="logo.png" class="card-img-top" alt="">
+                              <img id="new_display_img" src="" class="card-img-top" alt="">
                               <input type="hidden" name="imageSrc" id="imageSrc">
                               <button type="button" class="btn btn-primary  mx-auto d-block mb-3" id="openFileBtn">Change Display Picture</button>
                               <input type="file" id="fileInput" name="fileInput" style="display: none;">
@@ -292,4 +292,4 @@ $room3 = getRoom3();
     <!-- page-body-wrapper ends -->
   </div>
   <script src="room.js"></script>
-  <?php include_once '../footer.php' ?>
+  <?php include_once 'footer.php' ?>

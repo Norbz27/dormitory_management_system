@@ -1,4 +1,4 @@
-<?php include_once '../../header.php' ?>
+<?php include_once 'header.php' ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -38,7 +38,7 @@
                                   <!-- Other Fields in Two Columns -->
                                   <div class="col-md-6 text-center justify-content-center mb-3 d-flex align-items-center"> <!-- Added d-flex and align-items-center -->
                                     <div>
-                                        <img src="../../images/profile.webp" id="profilePicturePreview" alt="Profile Picture Preview" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px; cursor: pointer;">
+                                        <img src="../images/profile.webp" id="profilePicturePreview" alt="Profile Picture Preview" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px; cursor: pointer;">
                                         <label>Select user</label>
                                         <select class="js-example-basic-single w-100"> <!-- Change w-500 to w-100 -->
                                             <option value="AL">Norberto Bruzon Jr.</option>
@@ -144,5 +144,5 @@
         </div>
     </div>
 
-    <?php include_once '../../footer.php' ?>
+    <?php include_once 'footer.php' ?>
 

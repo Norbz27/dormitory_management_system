@@ -174,8 +174,9 @@ if (isset($_POST['add_announcement'])) {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $date = $_POST['date'];
+    $time = $_POST['time'];
 
-    $sql = "CALL addAnnouncement(?, ?, ?)";
+    $sql = "CALL addAnnouncement(?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     
     if ($stmt === false) {
@@ -183,7 +184,7 @@ if (isset($_POST['add_announcement'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("sss", $title, $description, $date);
+    $stmt->bind_param("ssss", $title, $description, $date, $time);
 
     // Execute the statement
     if ($stmt->execute()) {

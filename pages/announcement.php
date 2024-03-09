@@ -1,4 +1,9 @@
-<?php include_once 'header.php' ?>
+<?php include_once 'header.php';
+include_once 'display_function.inc.php';
+
+$announcments = getAnnouncements();
+
+?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -21,28 +26,37 @@
                     </div>
                 </div>
             </div>
+            
+            <?php
+              foreach ($announcments as $key => $announcments) {
+                $title  = $announcments['title'];
+                $description = $announcments['description'];
+                $date = $announcments['date'];
+                $time = $announcments['time'];
+                $dateObj = new DateTime($announcments['date']);
+                $formattedDate = $dateObj->format('l, F j Y');
+                
+                // Convert time to the desired format (e.g., 10:48 pm)
+                $timeObj = new DateTime($announcments['time']);
+                $formattedTime = $timeObj->format('h:i A');
+                ?>
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                       <div class="mb-xl-0">
-                        <h5 class="font-weight-bold">Announcement Title</h3>
-                        <p class="text-muted" style="font-size: 12px">Friday, March 1, 2024 5:00 pm</p>
-                        <p style="width:100%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna et pharetra pharetra massa massa ultricies mi quis. Eu lobortis elementum nibh tellus molestie nunc non. Maecenas accumsan lacus vel facilisis. Feugiat in fermentum posuere urna nec. Elit duis tristique sollicitudin nibh sit amet commodo. Nisi est sit amet facilisis. Magna sit amet purus gravida quis blandit turpis cursus in. Lacus vel facilisis volutpat est velit egestas dui. Risus ultricies tristique nulla aliquet enim tortor. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor.</p>
+                        <div class="ann_header d-flex align-items-center justify-content-between">
+                        <h5 class="font-weight-bold"><?php echo $title?></h3>
+                        <button type="button" class="btn">Edit</button>
+                        </div>
+                        <p class="text-muted" style="font-size: 12px"><?php echo $formattedDate?> <?php echo $formattedTime?></p>
+                        <p style="width:100%"><?php echo $description?></p>
                       </div>
                     </div>
                 </div>
             </div>
-            <div class="grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                      <div class="mb-xl-0">
-                        <h5 class="font-weight-bold">Announcement Title</h3>
-                        <p class="text-muted" style="font-size: 12px">Friday, March 1, 2024 5:00 pm</p>
-                        <p style="width:100%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna et pharetra pharetra massa massa ultricies mi quis. Eu lobortis elementum nibh tellus molestie nunc non. Maecenas accumsan lacus vel facilisis. Feugiat in fermentum posuere urna nec. Elit duis tristique sollicitudin nibh sit amet commodo. Nisi est sit amet facilisis. Magna sit amet purus gravida quis blandit turpis cursus in. Lacus vel facilisis volutpat est velit egestas dui. Risus ultricies tristique nulla aliquet enim tortor. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor.</p>
-                      </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                }
+                ?>
         </div>
       </div>
       
@@ -50,7 +64,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="room_name"></h5>
+                <h4 class="modal-title">New Announcement</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,6 +83,10 @@
                   <div class="col">
                   <label>Date</label>
                   <input type="date" class="form-control mb-3" name="date" id="date" required>
+                  </div>
+                  <div class="col">
+                  <label>Time</label>
+                  <input type="time" class="form-control mb-3" name="time" id="time" required>
                   </div>
                 </div>
               </div>

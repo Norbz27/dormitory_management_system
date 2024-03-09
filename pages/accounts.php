@@ -1,8 +1,22 @@
 <?php
-require_once '../../db/db_conn.php';
 include_once 'header.php';
 include_once 'account_function.inc.php';
 ?>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .btn-group .dropdown-toggle::after {
+            content: none;
+        }
+
+        .dropdown-item{
+            width: 95%;
+            margin-left: 4px;
+        }
+    </style>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -35,14 +49,15 @@ include_once 'account_function.inc.php';
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
+                      <form action="addAccount.php" method="post">
                       <div class="modal-body">
-                          <form>
+                          
                               <div class="row">
                                   <!-- Full Name -->
                                   <div class="col-md-12">
                                       <div class="form-group">
                                           <label for="fullName">Full Name</label>
-                                          <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                                          <input type="text" class="form-control" id="fullName" name="name" placeholder="Enter full name">
                                       </div>
                                   </div>
                                   <!-- Other Fields in Two Columns -->
@@ -50,19 +65,19 @@ include_once 'account_function.inc.php';
                                       <!-- Phone Number -->
                                       <div class="form-group">
                                           <label for="phoneNumber">Phone Number</label>
-                                          <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter phone number">
+                                          <input type="tel" class="form-control" id="phoneNumber" name="contact" placeholder="Enter phone number">
                                       </div>
                                       <!-- Username -->
                                       <div class="form-group">
                                           <label for="username">Username</label>
-                                          <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                          <input type="text" class="form-control" id="username" name="uid" placeholder="Enter username">
                                       </div>
                                   </div>
                                   <div class="col-md-6">
                                       <!-- Gender -->
                                       <div class="form-group">
                                           <label for="gender">Gender</label>
-                                          <select class="form-control" id="gender">
+                                          <select class="form-control" id="gender" name="gender">
                                               <option value="male">Male</option>
                                               <option value="female">Female</option>
                                               <option value="other">Other</option>
@@ -71,28 +86,36 @@ include_once 'account_function.inc.php';
                                       <!-- Password -->
                                       <div class="form-group">
                                           <label for="password">Password</label>
-                                          <input type="password" class="form-control" id="password" placeholder="Enter password">
+                                          <input type="password" class="form-control" id="password" name="pwd" placeholder="Enter password">
                                       </div>
                                   </div>
                               </div>
                               <!-- Add more form fields as needed -->
-                          </form>
+                       
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary btn-md">Save</button>
+                          <button type="submit" class="btn btn-primary btn-md">Save</button>
                       </div>
+                      </form>
                   </div>
               </div>
           </div>
-            <div class="search-box mb-3">
-                <input type="text" class="form-control" placeholder="Search...">
-            </div>
+          <div class="search-box mb-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+          </div>
+
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
+                                <colgroup>
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: 20px;"> 
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>Username</th>
@@ -145,7 +168,19 @@ include_once 'account_function.inc.php';
         reader.readAsDataURL(input.files[0]);
     }
   </script>
-
+    <script>
+      feather.replace();
+    </script>
+    <script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@ $(document).on("click", "#view_button", function (e) {
 
   $.ajax({
     type: "GET",
-    url: "room_function.php?view_room_id=" + room_id,
+    url: "server_function.php?view_room_id=" + room_id,
     success: function (response) {
       var res = jQuery.parseJSON(response);
       if (res.status == 422) {
@@ -55,7 +55,7 @@ $(document).on("click", "#edit_button", function (e) {
   $("#exampleModal").modal("hide");
   $.ajax({
     type: "GET",
-    url: "room_function.php?view_room_id=" + room_id,
+    url: "server_function.php?view_room_id=" + room_id,
     success: function (response) {
       var res = jQuery.parseJSON(response);
       if (res.status == 422) {
@@ -108,7 +108,7 @@ $(document).on("submit", "#edit_room", function (e) {
 
   $.ajax({
     type: "POST",
-    url: "room_function.php",
+    url: "server_function.php",
     data: formData,
     processData: false,
     contentType: false,
@@ -120,6 +120,30 @@ $(document).on("submit", "#edit_room", function (e) {
         $("#errorMessage").text(res.message);
       } else if (res.status == 200) {
         $("#editRoom").modal("hide");
+        location.reload();
+      }
+    },
+  });
+});
+$(document).on("submit", "#addAnnouncement", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+  formData.append("add_announcement", true);
+
+  $.ajax({
+    type: "POST",
+    url: "server_function.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      var res = jQuery.parseJSON(response);
+      if (res.status == 422) {
+        console.log(res);
+      } else if (res.status == 200) {
+        $("#announcement").modal("hide");
+        $("#addAnnouncement")[0].reset();
         location.reload();
       }
     },

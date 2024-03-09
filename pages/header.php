@@ -246,6 +246,9 @@ if (!isset($_SESSION["account"])) {
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+        <?php 
+              if ($_SESSION["username"] == 'admin') {
+               ?>
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <i class="icon-grid menu-icon"></i>

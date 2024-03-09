@@ -11,7 +11,7 @@
                         <div class="col-12 col-xl-4">
                         <div class="justify-content-end d-flex">
                               <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                  <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#addAccountModal">
+                                  <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#announcement">
                                       <i class="icon-file btn-icon-prepend"></i>
                                       New
                                   </button>
@@ -45,6 +45,42 @@
             </div>
         </div>
       </div>
+      
+      <div class="modal fade" id="announcement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="room_name"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="addAnnouncement">
+                <div class="form-group">
+                  <div class="col">
+                  <label>Announcement Title</label>
+                  <input type="text" class="form-control mb-3" name="title" id="title" required>
+                  </div>
+                  <div class="col">
+                  <label>Description</label>
+                  <input type="text" class="form-control mb-3" name="description" id="description" required>
+                  </div>
+                  <div class="col">
+                  <label>Date</label>
+                  <input type="date" class="form-control mb-3" name="date" id="date" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
     <!-- page-body-wrapper ends -->
+  <script src="functions.js"></script>
   <?php include_once 'footer.php' ?>
 

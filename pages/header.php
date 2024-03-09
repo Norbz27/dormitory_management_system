@@ -246,6 +246,9 @@ if (!isset($_SESSION["account"])) {
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+        <?php 
+              if ($_SESSION["username"] == 'admin') {
+               ?>
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <i class="icon-grid menu-icon"></i>
@@ -288,6 +291,37 @@ if (!isset($_SESSION["account"])) {
               <span class="menu-title">Accounts</span>
             </a>
           </li>
+          <?php 
+            }else{
+              ?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="announcement.php">
+              <i class="icon-bell menu-icon"></i>
+              <span class="menu-title">Announcements</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="rooms.php">
+              <i class="icon-location menu-icon"></i>
+              <span class="menu-title">Rooms</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="payments.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Payments</span>
+            </a>
+          </li>
+
+     <?php 
+            }
+              ?>
           
         </ul>
       </nav>

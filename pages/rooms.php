@@ -182,7 +182,11 @@ $room3 = getRoom3();
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <?php 
+                              if ($_SESSION["username"] == 'admin') {
+                              ?>
                             <button type="button" id="edit_button" class="btn btn-primary">Edit Room</button>
+                            <?php } ?>
                           </div>
                         </div>
                       </div>
@@ -291,5 +295,5 @@ $room3 = getRoom3();
       </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <script src="room.js"></script>
+  <script src="functions.js"></script>
   <?php include_once 'footer.php' ?>

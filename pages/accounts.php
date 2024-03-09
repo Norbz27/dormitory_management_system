@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+require_once '../db/db_conn.php';
+>>>>>>> 3a78ebbadc8d12b84a328bdc4ff17263dda6d1cb
 include_once 'header.php';
 include_once 'account_function.inc.php';
 ?>

@@ -207,3 +207,119 @@ if (isset($_POST['add_announcement'])) {
     $stmt->close();
     $conn->close();
 }
+
+if (isset($_GET['view_announcement_id'])) {
+    $id = $_GET['view_announcement_id'];
+
+    $query = "SELECT * FROM announcements WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Check for errors in the query execution
+    if (!$result) {
+        die('Error in query: ' . mysqli_error($conn));
+    }
+
+    // Check the number of rows
+    if (mysqli_num_rows($result) == 1) {
+        $data = mysqli_fetch_array($result);
+
+        $res = [
+            'status' => 200,
+            'message' => 'Data fetched',
+            'data' => $data
+        ];
+    } else {
+        $res = [
+            'status' => 404,
+            'message' => 'Data not found'
+        ];
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}
+
+if (isset($_POST['edit_announcement'])) {
+    $title = $_POST['title_edit'];
+    $description = $_POST['description_edit'];
+    $date = $_POST['date_edit'];
+    $time = $_POST['time_edit'];
+    $ann_id = $_POST['ann_id'];
+
+    $sql = "CALL editAnnouncement(?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters
+    $stmt->bind_param("ssssi", $title, $description, $date, $time, $ann_id);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $res = [
+            'status' => 200,
+            'message' => 'Announcement edited successfully'
+        ];
+        echo json_encode($res);
+    } else {
+        $error = $stmt->error;
+        $res = [
+            'status' => 500,
+            'message' => 'Announcement not edited successfully',
+            'error' => $error
+        ];
+        echo json_encode($res);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+}
+
+if (isset($_GET['delete_announcement_id'])) {
+    $id = $_GET['delete_announcement_id'];
+
+    $query = "DELETE FROM announcements WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    // Check for errors in the query execution
+    if (mysqli_stmt_errno($stmt) != 0) {
+        $res = [
+            'status' => 500,
+            'message' => 'Error in query: ' . mysqli_stmt_error($stmt)
+        ];
+    } else {
+        // Check the number of affected rows
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        if ($affectedRows > 0) {
+            $res = [
+                'status' => 200,
+                'message' => 'Announcement deleted',
+                'affected_rows' => $affectedRows
+            ];
+        } else {
+            $res = [
+                'status' => 404,
+                'message' => 'Announcement not found or not deleted'
+            ];
+        }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}

@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-include_once 'room_function.inc.php';
+include_once 'display_function.inc.php';
 
 $room1 = getRoom1();
 $room2 = getRoom2();

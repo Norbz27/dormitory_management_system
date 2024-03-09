@@ -169,3 +169,41 @@ if (isset($_GET['view_room_id'])) {
 
     echo json_encode($res);
 }
+
+if (isset($_POST['add_announcement'])) {
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+
+    $sql = "CALL addAnnouncement(?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters
+    $stmt->bind_param("ssss", $title, $description, $date, $time);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $res = [
+            'status' => 200,
+            'message' => 'Announcement added successfully'
+        ];
+        echo json_encode($res);
+    } else {
+        $error = $stmt->error;
+        $res = [
+            'status' => 500,
+            'message' => 'Announcement not added successfully',
+            'error' => $error
+        ];
+        echo json_encode($res);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+}

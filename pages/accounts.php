@@ -1,4 +1,5 @@
 <?php
+require_once '../../db/db_conn.php';
 include_once 'header.php';
 ?>
       <!-- partial -->
@@ -34,14 +35,6 @@ include_once 'header.php';
                           </button>
                       </div>
                       <div class="modal-body">
-                          <!-- Profile Picture Preview -->
-                          <div class="text-center mb-3">
-                              <label for="profilePictureInput">
-                                  <img src="../../images/profile.webp" id="profilePicturePreview" alt="Profile Picture Preview" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px; cursor: pointer;">
-                              </label>
-                              <input type="file" class="form-control-file d-none" id="profilePictureInput" onchange="previewProfilePicture(event)">
-                          </div>
-                          <!-- Your form elements go here -->
                           <form>
                               <div class="row">
                                   <!-- Full Name -->
@@ -86,7 +79,7 @@ include_once 'header.php';
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary btn-md">Save changes</button>
+                          <button type="button" class="btn btn-primary btn-md">Save</button>
                       </div>
                   </div>
               </div>

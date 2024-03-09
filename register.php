@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SignIn</title>
+  <title>Signup Page</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/feather/feather.css">
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -29,23 +29,41 @@
               <div class="brand-logo">
                 <img src="../../images/logo.svg" alt="logo">
               </div>
-              <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
-              <form class="pt-3" action="login.inc.php" method="post">
+              <h4>New here?</h4>
+              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+              <form class="pt-3" action="register.inc.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="uid" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputName" name="name" placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="pwd" placeholder="Password">
+                  <input type="tel" class="form-control form-control-lg" id="exampleInputPhone" name="contact" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                  <select class="form-control form-control-lg" id="exampleInputGender" name="gender" required>
+                    <option selected disabled value="">Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername" name="uid" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword" name="pwd" placeholder="Password">
+                </div>
+                <div class="mb-4">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input">
+                      I agree to all Terms & Conditions
+                    </label>
+                  </div>
                 </div>
                 <div class="mt-3">
-                  <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
-                </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                  <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.php" class="text-primary">Create</a>
+                  Already have an account? <a href="login.php" class="text-primary">Login</a>
                 </div>
               </form>
             </div>

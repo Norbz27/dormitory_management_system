@@ -288,6 +288,11 @@ if (!isset($_SESSION["account"])) {
               <span class="menu-title">Accounts</span>
             </a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link" href="contract.php">
+              <i class="icon-briefcase menu-icon"></i>
+              <span class="menu-title">Contract</span>
+            </a>
+          </li>
         </ul>
       </nav>

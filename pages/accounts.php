@@ -1,6 +1,7 @@
 <?php
 require_once '../../db/db_conn.php';
 include_once 'header.php';
+include_once 'account_function.inc.php';
 ?>
       <!-- partial -->
       <div class="main-panel">
@@ -94,7 +95,6 @@ include_once 'header.php';
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Profile</th>
                                         <th>Username</th>
                                         <th>Gender</th>
                                         <th>Contact</th>
@@ -103,46 +103,9 @@ include_once 'header.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-warning">Inactive</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-warning">Inactive</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
-                                    </tr>
+                                    <?php
+                                        getAllAccounts();
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

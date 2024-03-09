@@ -33,6 +33,7 @@ $announcments = getAnnouncements();
                 $description = $announcments['description'];
                 $date = $announcments['date'];
                 $time = $announcments['time'];
+                $id = $announcments['id'];
                 $dateObj = new DateTime($announcments['date']);
                 $formattedDate = $dateObj->format('l, F j Y');
                 
@@ -46,7 +47,7 @@ $announcments = getAnnouncements();
                       <div class="mb-xl-0">
                         <div class="ann_header d-flex align-items-center justify-content-between">
                         <h5 class="font-weight-bold"><?php echo $title?></h3>
-                        <button type="button" class="btn">Edit</button>
+                        <button type="button" value="<?php echo $id?>" class="btn" id="ann_edit"><i class="fi fi-rr-edit"></i></button>
                         </div>
                         <p class="text-muted" style="font-size: 12px"><?php echo $formattedDate?> <?php echo $formattedTime?></p>
                         <p style="width:100%"><?php echo $description?></p>
@@ -71,23 +72,21 @@ $announcments = getAnnouncements();
               </div>
               <div class="modal-body">
                 <form id="addAnnouncement">
-                <div class="form-group">
-                  <div class="col">
+                  <div class="form-group">
                   <label>Announcement Title</label>
                   <input type="text" class="form-control mb-3" name="title" id="title" required>
                   </div>
-                  <div class="col">
+                  <div class="form-group">
                   <label>Description</label>
-                  <input type="text" class="form-control mb-3" name="description" id="description" required>
+                  <textarea class="form-control" name="description" id="description" rows="7" required></textarea>
                   </div>
-                  <div class="col">
+                  <div class="form-group">
                   <label>Date</label>
                   <input type="date" class="form-control mb-3" name="date" id="date" required>
                   </div>
-                  <div class="col">
+                  <div class="form-group">
                   <label>Time</label>
                   <input type="time" class="form-control mb-3" name="time" id="time" required>
-                  </div>
                 </div>
               </div>
               <div class="modal-footer">
@@ -97,7 +96,46 @@ $announcments = getAnnouncements();
               </form>
             </div>
           </div>
-        </div>
+      </div>
+
+      <div class="modal fade" id="announcement_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">New Announcement</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="addAnnouncement_edit">
+                  <input type="hidden" class="form-control mb-3" name="ann_id" id="ann_id">
+                  <div class="form-group">
+                  <label>Announcement Title</label>
+                  <input type="text" class="form-control mb-3" name="title_edit" id="title_edit" required>
+                  </div>
+                  <div class="form-group">
+                  <label>Description</label>
+                  <textarea class="form-control" name="description_edit" id="description_edit" rows="7" required></textarea>
+                  </div>
+                  <div class="form-group">
+                  <label>Date</label>
+                  <input type="date" class="form-control mb-3" name="date_edit" id="date_edit" required>
+                  </div>
+                  <div class="form-group">
+                  <label>Time</label>
+                  <input type="time" class="form-control mb-3" name="time_edit" id="time_edit" required>
+                  </div>
+                  <button type="button" class="btn btn-danger" id="ann_delete">Delete</button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+              </div>
+              </form>
+            </div>
+          </div>
+      </div>
     <!-- page-body-wrapper ends -->
   <script src="functions.js"></script>
   <?php include_once 'footer.php' ?>

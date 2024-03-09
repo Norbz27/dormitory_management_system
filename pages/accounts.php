@@ -1,5 +1,5 @@
 <?php
-require_once '../../db/db_conn.php';
+require_once '../db/db_conn.php';
 include_once 'header.php';
 include_once 'account_function.inc.php';
 ?>

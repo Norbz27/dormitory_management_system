@@ -149,3 +149,72 @@ $(document).on("submit", "#addAnnouncement", function (e) {
     },
   });
 });
+
+$(document).on("click", "#ann_edit", function (e) {
+  e.preventDefault();
+  var ann_id = $(this).val();
+  $("#exampleModal").modal("hide");
+  $.ajax({
+    type: "GET",
+    url: "server_function.php?view_announcement_id=" + ann_id,
+    success: function (response) {
+      var res = jQuery.parseJSON(response);
+      if (res.status == 422) {
+        alert(res.message);
+      } else if (res.status == 200) {
+        $("#title_edit").val(res.data.title);
+        $("#description_edit").val(res.data.description);
+        $("#date_edit").val(res.data.date);
+        $("#time_edit").val(res.data.time);
+        $("#ann_id").val(res.data.id);
+        $("#ann_delete").val(res.data.id);
+        $("#announcement_edit").modal("show");
+      }
+    },
+  });
+});
+
+$(document).on("submit", "#addAnnouncement_edit", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+  formData.append("edit_announcement", true);
+
+  $.ajax({
+    type: "POST",
+    url: "server_function.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      var res = jQuery.parseJSON(response);
+      if (res.status == 422) {
+        console.log(res);
+      } else if (res.status == 200) {
+        $("#announcement").modal("hide");
+        $("#addAnnouncement")[0].reset();
+        location.reload();
+      }
+    },
+  });
+});
+
+$(document).on("click", "#ann_delete", function (e) {
+  e.preventDefault();
+  if (confirm("Are you sure you want to delete this announcement?")) {
+    var ann_id = $(this).val();
+    $.ajax({
+      type: "GET",
+      url: "server_function.php?delete_announcement_id=" + ann_id,
+      success: function (response) {
+        var res = jQuery.parseJSON(response);
+        if (res.status == 422) {
+          alert(res.message);
+        } else if (res.status == 200) {
+          $("#announcement_edit").modal("hide");
+          location.reload();
+        }
+      },
+    });
+  }
+});

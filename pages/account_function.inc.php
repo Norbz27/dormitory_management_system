@@ -1,6 +1,26 @@
 <?php
     include_once '../db/db_conn.php';
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Include your database connection code here
+        // Replace 'your_db_connection_file.php' with the actual file name
+        include_once 'your_db_connection_file.php';
+    
+        // Retrieve form data
+        $name = $_POST['name'];
+        $contact = $_POST['contact'];
+        $gender = $_POST['gender'];
+        $uid = $_POST['uid'];
+        $pwd = $_POST['pwd'];
+    
+        // Call the addNewAccount function with the database connection and form data
+        addNewAccount($conn, $name, $contact, $gender, $uid, $pwd);
+    } else {
+        // Redirect to the signup page if the form is not submitted
+        header("Location: ../pages/accounts.php");
+        exit();
+    }
+
     function getAllAccounts() {
         global $conn;
         $sql = "SELECT id, name, contact, gender FROM users WHERE status != 'admin'";
@@ -36,38 +56,22 @@
         }
     }
 
-    function addAccount($name, $gender, $contact, $username, $password) {
-        global $conn;
-    
-        // Perform data sanitization and validation as needed
-    
-        // Hash the password for security (use appropriate password hashing method)
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-        // Prepare the SQL statement
-        $sql = "INSERT INTO user (name, gender, contact, username, password) VALUES (?, ?, ?, ?, ?)";
-        
-        // Use prepared statements to prevent SQL injection
-        $stmt = mysqli_prepare($conn, $sql);
-    
-        if ($stmt) {
-            // Bind parameters to the statement
-            mysqli_stmt_bind_param($stmt, "sssss", $name, $gender, $contact, $username, $hashedPassword);
-    
-            // Execute the statement
-            $success = mysqli_stmt_execute($stmt);
-    
-            // Check if the insertion was successful
-            if ($success) {
-                echo "Account added successfully!";
-            } else {
-                echo "Error adding account: " . mysqli_error($conn);
-            }
-    
-            // Close the statement
-            mysqli_stmt_close($stmt);
-        } else {
-            echo "Error preparing statement: " . mysqli_error($conn);
+    function addNewAccount($conn, $name, $contact, $gender, $uid, $pwd){
+        $sql = "INSERT INTO users (name, contact, gender, uid, pwd, status) VALUES (?, ?, ?, ?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ../pages/accounts.php");
+            exit();
         }
+
+        $status = "New";
+        $hasshedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        mysqli_stmt_bind_param($stmt, "ssssss", $name, $contact, $gender, $uid, $hasshedPwd, $status);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("Location: ../pages/accounts.php");
+        exit();
     }
 ?>

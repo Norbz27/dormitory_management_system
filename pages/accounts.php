@@ -50,7 +50,7 @@ include_once 'account_function.inc.php';
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
-                      <form action="addAccount.php" method="post">
+                      <form action="account_function.inc.php" method="post">
                       <div class="modal-body">
                           
                               <div class="row">
@@ -157,18 +157,7 @@ include_once 'account_function.inc.php';
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../js/chart.js"></script>
-  <!-- End custom js for this page-->
-  <script>
-    function previewProfilePicture(event) {
-        var input = event.target;
-        var reader = new FileReader();
-        reader.onload = function(){
-            var profilePicturePreview = document.getElementById('profilePicturePreview');
-            profilePicturePreview.src = reader.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-  </script>
+  
     <script>
       feather.replace();
     </script>

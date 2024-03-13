@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,15 +11,57 @@
   <link rel="stylesheet" href="../../vendors/feather/feather.css">
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
+  <style>
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-picture {
+    margin-bottom: 20px;
+}
+
+.profile-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ /* Style for profile picture */
+.profile-picture img {
+    width: 180px; /* Adjust as needed */
+    height: 180px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image round */
+}
+
+/* Style for profile name */
+.profile-name {
+    color: #333; /* Change text color */
+    font-size: 28px; /* Adjust font size */
+    margin-bottom: 15px; /* Add some space below the name */
+}
+
+/* Style for profile info */
+.profile-info {
+    color: #666; /* Change text color */
+    font-size: 20px; /* Adjust font size */
+    margin-bottom: 10px; /* Add some space below each info */
+}
+
+/* Style for profile wrapper */
+.profile-wrapper {
+    margin-bottom: 30px; /* Add space below each profile block */
+}
+ 
+</style>
 </head>
+
 <body>
+<?php include 'accountprofile-inc.php';?>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -276,26 +319,51 @@
           
         </ul>
       </nav>
-      <!-- partial -->
+
       <div class="main-panel">
-        <div class="content-wrapper">
+    <div class="content-wrapper">
         <div class="row">
-                <div class="col-md-12 grid-margin">
-                    <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Profile</h3>
-                        </div>
-                        <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                </div>
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold">Profile</h3>
+                    </div>
+                    <div class="col-12 col-xl-4">
+                        <div class="justify-content-end d-flex">
+                            <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-   
+        </div>
+        <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile-wrapper text-center">
+                                        <div class="profile-picture">
+                                            <img src="profile.png" class="rounded" alt="Profile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                <div class="profile-info-wrapper text-center">
+                                <h3 class="profile-name"><?php echo $username; ?></h3>
+                                <p class="profile-info">Age: <?php echo $age; ?></p>
+                                <p class="profile-info">Contact: <?php echo $contact; ?></p>
+                                <p class="profile-info">Gender: <?php echo $gender; ?></p>
+                                <p class="profile-info">UID: <?php echo $uid; ?></p>
+                                <p class="profile-info">Password: <?php echo $password; ?></p>
+                                <p class="profile-info">Status: <?php echo $status; ?></p>
+                            </div>
+                      </div>
+
+        </div>
+    </div>
+
        
     <!-- page-body-wrapper ends -->
   </div>

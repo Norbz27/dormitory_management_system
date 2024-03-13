@@ -59,6 +59,10 @@ if (!isset($_SESSION["account"])) {
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
+              <a class="dropdown-item" href="auth/accountprofile-inc.php">
+              <i class="bi bi-person-circle"></i>
+                Profile
+              </a>
               <a class="dropdown-item" href="auth/logout.inc.php">
                 <i class="ti-power-off text-primary"></i>
                 Logout

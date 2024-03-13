@@ -24,8 +24,8 @@ if(isset($_GET['id'])) {
         exit(); // Exit if no user found
     }
 } else {
-    echo "No ID provided.";
-    exit(); // Exit if no ID provided
+    echo "Way ID Tanga bobo.";
+    exit(); 
 }
 
 mysqli_close($conn);

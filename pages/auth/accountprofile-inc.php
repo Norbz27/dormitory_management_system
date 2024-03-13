@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 include "dbh.class.php";
 
@@ -10,24 +10,28 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Fetch data from the database
-$sql = "SELECT * FROM users WHERE username = '{$_SESSION['username']}'";
+$sql = "SELECT * FROM users WHERE id = '{$_SESSION['id']}'";
 $result = mysqli_query($conn, $sql);
+
+// Check if the query executed successfully
+if (!$result) {
+    die("Database query failed: " . mysqli_error($conn));
+}
 
 // Check if there are any results
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    $username = $row['username'];
-    $age = $row['age'];
-    $contact = $row['contact']; // Add this line to fetch contact
-    $gender = $row['gender']; // Add this line to fetch gender
-    $uid = $row['uid']; // Add this line to fetch uid
-    $password = $row['password']; // Add this line to fetch password
-    $status = $row['status']; // Add this line to fetch status
+    $username = $row['name']; // assuming 'name' is the column name for username
+    $contact = $row['contact'];
+    $gender = $row['gender'];
+    $uid = $row['uid'];
+    $password = $row['pwd'];
+    $age = $row['age']; // assuming 'age' is the column name for age
+    $status = $row['status']; // assuming 'status' is the column name for status
     // Add more fields as needed
 } else {
-    // Handle no results found
+    echo "No records found in the database.";
 }
 
-// Close the database connection
 mysqli_close($conn);
 ?>

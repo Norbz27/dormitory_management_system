@@ -30,7 +30,32 @@
     align-items: center;
 }
 
-  
+ /* Style for profile picture */
+.profile-picture img {
+    width: 180px; /* Adjust as needed */
+    height: 180px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image round */
+}
+
+/* Style for profile name */
+.profile-name {
+    color: #333; /* Change text color */
+    font-size: 28px; /* Adjust font size */
+    margin-bottom: 15px; /* Add some space below the name */
+}
+
+/* Style for profile info */
+.profile-info {
+    color: #666; /* Change text color */
+    font-size: 20px; /* Adjust font size */
+    margin-bottom: 10px; /* Add some space below each info */
+}
+
+/* Style for profile wrapper */
+.profile-wrapper {
+    margin-bottom: 30px; /* Add space below each profile block */
+}
+ 
 </style>
 </head>
 
@@ -310,29 +335,33 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 grid-margin">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-wrapper text-center">
-                            <div class="profile-picture">
-                                <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="profile-info-wrapper text-center">
-                            <h3 class="profile-name">John Doe</h3>
-                            <p class="profile-info">Age: 30</p>
-                            <p class="profile-info">Username: johndoe</p>
-                            <p class="profile-info">Password: *********</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile-wrapper text-center">
+                                        <div class="profile-picture">
+                                            <img src="profile.png" class="rounded" alt="Profile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                          <div class="profile-info-wrapper text-center">
+                              <h3 class="profile-name"><?php echo $username; ?></h3>
+                              <p class="profile-info">Age: <?php echo $age; ?></p>
+                              <p class="profile-info">Contact: <?php echo $contact; ?></p> <!-- Display Contact -->
+                              <p class="profile-info">Gender: <?php echo $gender; ?></p> <!-- Display Gender -->
+                              <p class="profile-info">UID: <?php echo $uid; ?></p> <!-- Display UID -->
+                              <p class="profile-info">Password: <?php echo $password; ?></p> <!-- Display Password -->
+                              <p class="profile-info">Status: <?php echo $status; ?></p> <!-- Display Status -->
+                              
+                          </div>
+                      </div>
+
         </div>
     </div>
-</div>
 
        
     <!-- page-body-wrapper ends -->

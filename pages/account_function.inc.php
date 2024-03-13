@@ -3,7 +3,7 @@
 
     function getAllAccounts() {
         global $conn;
-        $sql = "SELECT id, name, contact, gender FROM users WHERE status != 'admin'";
+        $sql = "SELECT id, name, contact, gender, status FROM users WHERE status != 'admin'";
         $result = mysqli_query($conn, $sql);
 
         if (!$result) {
@@ -14,24 +14,24 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
+                $badge_color = ($row["status"] == 'New') ? 'badge-success' : 'badge-warning';
                 echo '<tr data-user-id="' . $row["id"] . '">
                         <td>' . $row["name"]. '</td>
                         <td>' . $row["gender"]. '</td>
                         <td>' . $row["contact"]. '</td>
-                        <td><span class="badge badge-success">Active</span></td>
+                        <td><span class="badge ' . $badge_color . '">' . $row["status"]. '</span></td>
                         <td><div class="btn-group">
-                        <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i data-feather="more-horizontal"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">View</a>
-                            <a class="dropdown-item" href="#">Edit</a>
-                            <a class="dropdown-item delete-btn" href="#">Delete</a>
-                        </div>
-                    </div></td>
-                </tr>';
+                            <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i data-feather="more-horizontal"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">View</a>
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item delete-btn" href="#">Delete</a>
+                            </div>
+                        </div></td>
+                      </tr>';
             }
-            
         } else {
             echo "0 results";
         }

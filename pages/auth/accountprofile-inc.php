@@ -3,8 +3,8 @@ session_start();
 include "dbh.class.php";
 
 // Check if the ID is provided in the session
-if(isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
+if(isset($_SESSION['userid'])) { // Change 'id' to 'userid'
+    $id = $_SESSION['userid']; // Change 'id' to 'userid'
 
     try {
         // Create a new instance of Dbh and establish a database connection
@@ -25,8 +25,10 @@ if(isset($_SESSION['id'])) {
             $gender = $row['gender'];
             $uid = $row['uid'];
             $password = $row['pwd'];
-            $age = $row['age'];
             $status = $row['status'];
+
+            // Set the user ID in the session (This line is not necessary since it's already set)
+            // $_SESSION['userid'] = $id;
         } else {
             echo "No user found with the provided ID.";
             exit(); // Exit if no user found
@@ -39,7 +41,7 @@ if(isset($_SESSION['id'])) {
         $conn = null;
     }
 } else {
-    echo "Bulok man kaw na jawa kaw balik saimo condition mali imo pag tawag bulok piste yawa animal";
+    echo "Way ID Utrohon ra siolom";
     exit(); 
 }
 ?>

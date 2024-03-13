@@ -273,52 +273,85 @@
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Announcements/announcement.php">
-              <i class="icon-bell menu-icon"></i>
-              <span class="menu-title">Announcements</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Tenants/tenants.php">
-              <i class="icon-paper-stack menu-icon"></i>
-              <span class="menu-title">Tenants</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Rooms/rooms.php">
-              <i class="icon-location menu-icon"></i>
-              <span class="menu-title">Rooms</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Payments/payments.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Payments</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Reports/reports.php">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Reports</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/Accounts/accounts.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Accounts</span>
-            </a>
-          </li>
-          
-        </ul>
-      </nav>
+    <ul class="nav">
+        <?php if ($_SESSION["username"] == 'admin') { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/index.php">
+                    <i class="icon-grid menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="dormitory_management_system-1/pages/announcement.php">
+                    <i class="icon-bell menu-icon"></i>
+                    <span class="menu-title">Announcements</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/tenants.php">
+                    <i class="icon-paper-stack menu-icon"></i>
+                    <span class="menu-title">Tenants</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/rooms.php">
+                    <i class="icon-location menu-icon"></i>
+                    <span class="menu-title">Rooms</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/payments.php">
+                    <i class="icon-paper menu-icon"></i>
+                    <span class="menu-title">Payments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/reports.php">
+                    <i class="icon-bar-graph menu-icon"></i>
+                    <span class="menu-title">Reports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/accounts.php">
+                    <i class="icon-head menu-icon"></i>
+                    <span class="menu-title">Accounts</span>
+                </a>
+            </li>
+        <?php } else { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/index.php">
+                    <i class="icon-grid menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/announcement.php">
+                    <i class="icon-bell menu-icon"></i>
+                    <span class="menu-title">Announcements</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/rooms.php">
+                    <i class="icon-location menu-icon"></i>
+                    <span class="menu-title">Rooms</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/payments.php">
+                    <i class="icon-paper menu-icon"></i>
+                    <span class="menu-title">Payments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/contract.php">
+                    <i class="icon-briefcase menu-icon"></i>
+                    <span class="menu-title">Contract</span>
+                </a>
+            </li>
+        <?php } ?>
+    </ul>
+</nav>
+
 
       <div class="main-panel">
     <div class="content-wrapper">
@@ -352,7 +385,6 @@
                                 <div class="col-md-8">
                                 <div class="profile-info-wrapper text-center">
                                 <h3 class="profile-name"><?php echo $username; ?></h3>
-                                <p class="profile-info">Age: <?php echo $age; ?></p>
                                 <p class="profile-info">Contact: <?php echo $contact; ?></p>
                                 <p class="profile-info">Gender: <?php echo $gender; ?></p>
                                 <p class="profile-info">UID: <?php echo $uid; ?></p>

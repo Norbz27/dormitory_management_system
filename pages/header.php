@@ -5,15 +5,12 @@ if (!isset($_SESSION["account"])) {
   header("Location: auth/login.php");
   exit();
 }
-$currentMonth = date('F');
-$currentDay = date('j');
 
-// Calculate next months
-$nextMonth1 = date('F', strtotime('+1 month'));
-$nextMonth2 = date('F', strtotime('+3 month'));
-$nextMonth3 = date('F', strtotime('+6 month'));
-$nextMonth4 = date('F', strtotime('+9 month'));
+// Assuming you have verified the user's credentials and obtained the user ID
+$id = 3; // Assigning a fixed user ID like 3
+$_SESSION['userid'] = $id;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +61,7 @@ $nextMonth4 = date('F', strtotime('+9 month'));
               <span><?php echo $_SESSION["usersname"] ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="auth/accountprofile-inc.php?id=<?php echo $_SESSION['userid']; ?>">
+            <a class="dropdown-item" href="auth/accountprofile.php?id=<?php echo $_SESSION['userid']; ?>">
                 <i class="bi bi-person-circle"></i>
                 Profile
               </a>

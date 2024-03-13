@@ -2,6 +2,8 @@
 require_once '../db/db_conn.php';
 include_once 'header.php';
 include_once 'account_function.inc.php';
+
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>
     <style>
         table {
@@ -50,9 +52,8 @@ include_once 'account_function.inc.php';
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
-                      <form action="account_function.inc.php" method="post">
+                      <form action="addAccount.php" method="post">
                       <div class="modal-body">
-                          
                               <div class="row">
                                   <!-- Full Name -->
                                   <div class="col-md-12">
@@ -92,7 +93,6 @@ include_once 'account_function.inc.php';
                                   </div>
                               </div>
                               <!-- Add more form fields as needed -->
-                       
                       </div>
                       <div class="modal-footer">
                           <button type="submit" class="btn btn-primary btn-md">Save</button>
@@ -157,7 +157,7 @@ include_once 'account_function.inc.php';
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../js/chart.js"></script>
-  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
       feather.replace();
     </script>
@@ -171,7 +171,30 @@ include_once 'account_function.inc.php';
         });
     });
 </script>
+
+<script>
+    <?php
+        if ($status === 'success') {
+            echo 'swal({
+                title: "Success",
+                text: "New account have been added!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'stmtfailed') {
+            echo 'swal({
+                title: "Error",
+                text: "No account have been added!",
+                icon: "error",
+                button: false,
+              });
+              ';
+        }
+    ?>
+</script>
 </body>
 
 </html>
+
 

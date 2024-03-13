@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -348,16 +349,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                          <div class="profile-info-wrapper text-center">
-                              <h3 class="profile-name"><?php echo $username; ?></h3>
-                              <p class="profile-info">Age: <?php echo $age; ?></p>
-                              <p class="profile-info">Contact: <?php echo $contact; ?></p> <!-- Display Contact -->
-                              <p class="profile-info">Gender: <?php echo $gender; ?></p> <!-- Display Gender -->
-                              <p class="profile-info">UID: <?php echo $uid; ?></p> <!-- Display UID -->
-                              <p class="profile-info">Password: <?php echo $password; ?></p> <!-- Display Password -->
-                              <p class="profile-info">Status: <?php echo $status; ?></p> <!-- Display Status -->
-                              
-                          </div>
+                                <div class="profile-info-wrapper text-center">
+                                <h3 class="profile-name"><?php echo $username; ?></h3>
+                                <p class="profile-info">Age: <?php echo $age; ?></p>
+                                <p class="profile-info">Contact: <?php echo $contact; ?></p>
+                                <p class="profile-info">Gender: <?php echo $gender; ?></p>
+                                <p class="profile-info">UID: <?php echo $uid; ?></p>
+                                <p class="profile-info">Password: <?php echo $password; ?></p>
+                                <p class="profile-info">Status: <?php echo $status; ?></p>
+                            </div>
                       </div>
 
         </div>

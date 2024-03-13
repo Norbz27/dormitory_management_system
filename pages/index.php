@@ -1,13 +1,6 @@
 <?php
 include_once 'header.php';
-$currentMonth = date('F');
-$currentDay = date('j');
 
-// Calculate next months
-$nextMonth1 = date('F', strtotime('+1 month'));
-$nextMonth2 = date('F', strtotime('+3 month'));
-$nextMonth3 = date('F', strtotime('+6 month'));
-$nextMonth4 = date('F', strtotime('+9 month'));
 ?>
       <!-- partial -->
       <div class="main-panel">
@@ -16,8 +9,7 @@ $nextMonth4 = date('F', strtotime('+9 month'));
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Welcome Jezmahboi </h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">Welcome <?php echo $_SESSION["usersname"] ?>  </h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">

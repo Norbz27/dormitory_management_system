@@ -4,7 +4,6 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include your database connection code here
         // Replace 'your_db_connection_file.php' with the actual file name
-        include_once 'your_db_connection_file.php';
     
         // Retrieve form data
         $name = $_POST['name'];

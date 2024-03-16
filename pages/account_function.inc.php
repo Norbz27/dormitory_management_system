@@ -25,8 +25,7 @@
                                 <i data-feather="more-horizontal"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">View</a>
-                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
                                 <a class="dropdown-item delete-btn" href="#">Delete</a>
                             </div>
                         </div></td>
@@ -39,18 +38,17 @@
 ?>
 <script>
     $(document).ready(function() {
-        $('.delete-btn').on('click', function(e) {
-            e.preventDefault();
-            var row = $(this).closest('tr');
-            var userId = row.data('user-id');
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this account!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-            .then((willDelete) => {
+    $('.delete-btn').on('click', function(e) {
+        e.preventDefault();
+        var row = $(this).closest('tr');
+        var userId = row.data('user-id');
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
                     url: 'deleteAccount.php',
@@ -78,8 +76,64 @@
                     }
                 });
             }
-            });
         });
     });
-    
+    $(document).ready(function() {
+        $('#editAccountBtn').on('click', function() {
+            // Make specific input fields editable
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword').prop('disabled', false);
+            // Toggle visibility of buttons
+            $('#editAccountBtn').hide();
+            $('button[type="submit"]').show();
+        });
+    });
+
+
+    // Fetch user information and populate the modal on view button click
+    $('#viewAccountModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var userId = button.closest('tr').data('user-id'); // Extract user ID from data attribute
+        var modal = $(this);
+
+        // AJAX call to fetch user information
+        $.ajax({
+            url: 'viewAccountInfo.php', // Modify the URL according to your setup
+            type: 'POST',
+            data: {userId: userId},
+            success: function(response) {
+                // Parse the JSON response
+                var userData = JSON.parse(response);
+                // Populate modal fields with user data
+                modal.find('#edid').val(userId);
+                modal.find('#edfullName').val(userData.name);
+                modal.find('#edphoneNumber').val(userData.contact);
+                modal.find('#edusername').val(userData.uid);
+                modal.find('#edpassword').val(userData.pwd);
+                // Populate gender dropdown with text
+                var genderSelect = modal.find('#edgender');
+                genderSelect.empty(); // Clear previous options
+                var genderOptions = {
+                    'Male': 'Male',
+                    'Female': 'Female',
+                    'Other': 'Other'
+                };
+                $.each(genderOptions, function(value, text) {
+                    genderSelect.append($('<option></option>').val(value).text(text));
+                });
+                // Set selected gender
+                genderSelect.val(userData.gender);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                swal({
+                    title: "Error",
+                    text: "Failed to fetch user information!",
+                    icon: "error",
+                    button: false,
+                });
+            }
+        });
+    });
+});
+
 </script>

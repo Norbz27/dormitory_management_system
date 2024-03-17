@@ -11,7 +11,7 @@ if (!isset($_SESSION["account"])) {
   header("Location: auth/login.php");
   exit();
 }
-?>
+?>  
 
 <!DOCTYPE html>
 <html lang="en">

@@ -204,17 +204,17 @@ $room3 = getRoom3();
                           <div class="modal-body">
                             <form id="add_room">
                               <div class="form-group">
-                                <label>Room Name</label>
-                                <input type="text" class="form-control mb-3" name="room_name" required>
-                                <label>Occupy Number</label>
-                                <input type="number" class="form-control mb-3" name="occupy_num" required>
-                                <label>Floor</label>
-                                <select class="form-control mb-3" name="floor_belong" required>
+                              <label>Floor</label>
+                                <select class="form-control mb-3" name="floor_belong" id="floor_belong" required>
                                   <option disabled selected value="">Choose</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
                                   <option value="3">3</option>
                                 </select>
+                                <label>Room Name</label>
+                                <input type="text" class="form-control mb-3" name="room_name" id="auto_room_name" required>
+                                <label>Occupy Number</label>
+                                <input type="number" class="form-control mb-3" name="occupy_num" required>
                                 <label>Status</label>
                                 <select class="form-control mb-3" name="status" required>
                                   <option selected value="Available">Available</option>

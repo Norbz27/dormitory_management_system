@@ -6,7 +6,7 @@ $(document).on("submit", "#add_room", function (e) {
 
   $.ajax({
     type: "POST",
-    url: "room_function.php",
+    url: "server_function.php",
     data: formData,
     processData: false,
     contentType: false,
@@ -219,4 +219,25 @@ $(document).on("click", "#ann_delete", function (e) {
   } else {
     $("#announcement_edit").modal("hide");
   }
+});
+
+$("#floor_belong").change(function () {
+  var selectedValue = $(this).val();
+
+  $.ajax({
+    type: "GET",
+    url: "server_function.php?get_latest_room=" + selectedValue,
+    success: function (response) {
+      var res = jQuery.parseJSON(response);
+      if (res.status == 422) {
+        alert(res.message);
+      } else if (res.status == 200) {
+        var roomData = res.data.room_name;
+        var roomNumber = parseInt(roomData.match(/\d+/)[0]);
+        roomNumber++;
+        var updatedRoomData = roomData.replace(/\d+/, roomNumber);
+        $("#auto_room_name").val(updatedRoomData);
+      }
+    },
+  });
 });

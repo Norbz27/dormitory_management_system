@@ -323,3 +323,50 @@ if (isset($_GET['delete_announcement_id'])) {
 
     echo json_encode($res);
 }
+
+if (isset($_GET['get_latest_room'])) {
+    $id = $_GET['get_latest_room'];
+
+    // Prepare the SQL statement with a parameter placeholder
+    $query = "SELECT * FROM room_details WHERE floor_belong = ? ORDER BY room_id DESC LIMIT 1";
+    $stmt = mysqli_prepare($conn, $query);
+
+    // Bind the parameter
+    mysqli_stmt_bind_param($stmt, "i", $id);
+
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+
+    // Get the result
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Check for errors in the query execution
+    if (!$result) {
+        die('Error in query: ' . mysqli_error($conn));
+    }
+
+    // Check the number of rows
+    if (mysqli_num_rows($result) == 1) {
+        // Fetch the data
+        $data = mysqli_fetch_array($result);
+
+        // Prepare response
+        $res = [
+            'status' => 200,
+            'message' => 'Data fetched',
+            'data' => $data
+        ];
+    } else {
+        // Prepare response for no data found
+        $res = [
+            'status' => 404,
+            'message' => 'Data not found'
+        ];
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    // Output response as JSON
+    echo json_encode($res);
+}

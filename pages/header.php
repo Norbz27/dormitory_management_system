@@ -6,9 +6,11 @@ if (!isset($_SESSION["account"])) {
   exit();
 }
 
-// Assuming you have verified the user's credentials and obtained the user ID
-$id = 3; // Assigning a fixed user ID like 3
-$_SESSION['userid'] = $id;
+
+if (!isset($_SESSION["account"])) {
+  header("Location: auth/login.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>

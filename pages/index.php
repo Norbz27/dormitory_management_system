@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+
 ?>
       <!-- partial -->
       <div class="main-panel">
@@ -8,8 +9,7 @@ include_once 'header.php';
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Welcome Aamir</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">Welcome <?php echo $_SESSION["usersname"] ?>  </h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -18,10 +18,10 @@ include_once 'header.php';
                      <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
+                      <a class="dropdown-item" href="#"><?php echo $currentMonth; ?> - <?php echo $nextMonth1; ?></a>
+                      <a class="dropdown-item" href="#"><?php echo $nextMonth1; ?> - <?php echo $nextMonth2; ?></a>
+                      <a class="dropdown-item" href="#"><?php echo $nextMonth2; ?> - <?php echo $nextMonth3; ?></a>
+                      <a class="dropdown-item" href="#"><?php echo $nextMonth3; ?> - <?php echo $nextMonth4; ?></a>
                     </div>
                   </div>
                  </div>

@@ -2,7 +2,24 @@
 require_once '../db/db_conn.php';
 include_once 'header.php';
 include_once 'account_function.inc.php';
+
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .btn-group .dropdown-toggle::after {
+            content: none;
+        }
+
+        .dropdown-item{
+            width: 95%;
+            margin-left: 4px;
+        }
+    </style>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -35,14 +52,14 @@ include_once 'account_function.inc.php';
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
+                      <form action="addAccount.php" method="post">
                       <div class="modal-body">
-                          <form>
                               <div class="row">
                                   <!-- Full Name -->
                                   <div class="col-md-12">
                                       <div class="form-group">
                                           <label for="fullName">Full Name</label>
-                                          <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                                          <input type="text" class="form-control" id="fullName" name="name" placeholder="Enter full name">
                                       </div>
                                   </div>
                                   <!-- Other Fields in Two Columns -->
@@ -50,49 +67,112 @@ include_once 'account_function.inc.php';
                                       <!-- Phone Number -->
                                       <div class="form-group">
                                           <label for="phoneNumber">Phone Number</label>
-                                          <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter phone number">
+                                          <input type="tel" class="form-control" id="phoneNumber" name="contact" placeholder="Enter phone number">
                                       </div>
                                       <!-- Username -->
                                       <div class="form-group">
                                           <label for="username">Username</label>
-                                          <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                          <input type="text" class="form-control" id="username" name="uid" placeholder="Enter username">
                                       </div>
                                   </div>
                                   <div class="col-md-6">
                                       <!-- Gender -->
                                       <div class="form-group">
                                           <label for="gender">Gender</label>
-                                          <select class="form-control" id="gender">
-                                              <option value="male">Male</option>
-                                              <option value="female">Female</option>
-                                              <option value="other">Other</option>
+                                          <select class="form-control" id="gender" name="gender">
+                                              <option value="Male">Male</option>
+                                              <option value="Female">Female</option>
+                                              <option value="Other">Other</option>
                                           </select>
                                       </div>
                                       <!-- Password -->
                                       <div class="form-group">
                                           <label for="password">Password</label>
-                                          <input type="password" class="form-control" id="password" placeholder="Enter password">
+                                          <input type="password" class="form-control" id="password" name="pwd" placeholder="Enter password">
                                       </div>
                                   </div>
                               </div>
                               <!-- Add more form fields as needed -->
-                          </form>
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary btn-md">Save</button>
+                          <button type="submit" class="btn btn-primary btn-md">Save</button>
                       </div>
+                      </form>
                   </div>
               </div>
           </div>
-            <div class="search-box mb-3">
-                <input type="text" class="form-control" placeholder="Search...">
+           <!-- View Modal -->
+            <div class="modal fade" id="viewAccountModal" tabindex="-1" role="dialog" aria-labelledby="viewAccountModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="editAccount.php" method="post">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Full Name -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="edid" name="edid" hidden>
+                                            <label for="fullName">Full Name</label>
+                                            <input type="text" class="form-control" id="edfullName" name="edname" placeholder="Enter full name" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- Other Fields in Two Columns -->
+                                    <div class="col-md-6">
+                                        <!-- Phone Number -->
+                                        <div class="form-group">
+                                            <label for="phoneNumber">Phone Number</label>
+                                            <input type="tel" class="form-control" id="edphoneNumber" name="edcontact" placeholder="Enter phone number" disabled>
+                                        </div>
+                                        <!-- Username -->
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" id="edusername" name="eduid" placeholder="Enter username" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- Gender -->
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <select class="form-control" id="edgender" name="edgender" disabled>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <!-- Password -->
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="edpassword" name="edpwd" placeholder="Enter password" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add more form fields as needed -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
+                                <button type="button" id="editAccountBtn" class="btn btn-primary btn-md">Edit Account</button>
+                                <button type="submit" class="btn btn-primary btn-md" style="display: none;">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+          <div class="search-box mb-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+          </div>
+
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
+                                <colgroup>
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: 20px;"> 
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>Username</th>
@@ -133,20 +213,52 @@ include_once 'account_function.inc.php';
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../js/chart.js"></script>
-  <!-- End custom js for this page-->
-  <script>
-    function previewProfilePicture(event) {
-        var input = event.target;
-        var reader = new FileReader();
-        reader.onload = function(){
-            var profilePicturePreview = document.getElementById('profilePicturePreview');
-            profilePicturePreview.src = reader.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-  </script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+      feather.replace();
+    </script>
+    <script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
 
+<script>
+    <?php
+        if ($status === 'success') {
+            echo 'swal({
+                title: "Success",
+                text: "New account have been added!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'stmtfailed') {
+            echo 'swal({
+                title: "Error",
+                text: "No account have been added!",
+                icon: "error",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'updated') {
+            echo 'swal({
+                title: "Success",
+                text: "Account have been Updated!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        }
+    ?>
+</script>
 </body>
 
 </html>
+
 

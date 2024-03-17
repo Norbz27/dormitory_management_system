@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $_POST['contact'];
     $gender = $_POST['gender'];
     $uid = $_POST['uid'];
+    $password = $_POST['password']; // Assuming you have a password field in your form
 
     // Check if the received data is valid (perform additional validation if necessary)
 
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = $dbh->connect();
 
         // Prepare the SQL statement to update the user profile
-        $sql = "UPDATE users SET name = :username, contact = :contact, gender = :gender WHERE uid = :uid";
+        $sql = "UPDATE users SET name = :username, contact = :contact, gender = :gender, uid = :uid, pwd = :password WHERE uid = :uid";
         $stmt = $conn->prepare($sql);
 
         // Bind parameters to the prepared statement
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':contact', $contact);
         $stmt->bindParam(':gender', $gender);
         $stmt->bindParam(':uid', $uid);
-
+        $stmt->bindParam(':password', $password); // Bind the password parameter
         // Execute the update statement
         $stmt->execute();
 

@@ -216,5 +216,7 @@ $(document).on("click", "#ann_delete", function (e) {
         }
       },
     });
+  } else {
+    $("#announcement_edit").modal("hide");
   }
 });

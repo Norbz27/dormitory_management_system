@@ -47,7 +47,13 @@ $announcments = getAnnouncements();
                       <div class="mb-xl-0">
                         <div class="ann_header d-flex align-items-center justify-content-between">
                         <h5 class="font-weight-bold"><?php echo $title?></h3>
+                        <?php 
+                        if ($_SESSION["username"] == 'admin') {
+                        ?>
                         <button type="button" value="<?php echo $id?>" class="btn" id="ann_edit"><i class="fi fi-rr-edit"></i></button>
+                        <?php 
+                        }
+                          ?>
                         </div>
                         <p class="text-muted" style="font-size: 12px"><?php echo $formattedDate?> <?php echo $formattedTime?></p>
                         <p style="width:100%"><?php echo $description?></p>

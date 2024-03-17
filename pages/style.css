@@ -48,14 +48,18 @@
   border-radius: 10px;
 }
 #display_img {
-  height: 30vh;
+  height: 20vh;
   object-fit: cover;
   margin-bottom: 20px;
   border-radius: 15px;
 }
 #new_display_img {
-  height: 30vh;
+  height: 20vh;
   object-fit: cover;
   margin-bottom: 20px;
   border-radius: 15px;
+}
+
+#editRoom .modal-body {
+  padding: 25px 25px 0 25px;
 }

@@ -163,8 +163,8 @@ $room3 = getRoom3();
                       ?>
                     </div>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                    <div class="modal fade" id="exampleModal" role="dialog"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="room_name"></h5>
@@ -192,8 +192,8 @@ $room3 = getRoom3();
                       </div>
                     </div>
 
-                    <div class="modal fade" id="addRoom" tabindex="-1" aria-labelledby="addRoomLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                    <div class="modal fade" id="addRoom" role="dialog" tabindex="-1" aria-labelledby="addRoomLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel"><h3>Add Room</h3></h5>
@@ -235,8 +235,8 @@ $room3 = getRoom3();
                       </div>
                     </div>
 
-                    <div class="modal fade" id="editRoom" tabindex="-1" aria-labelledby="addRoomLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                    <div class="modal fade" id="editRoom" tabindex="-1" role="dialog" aria-labelledby="addRoomLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel"><h3>Edit Room</h3></h5>

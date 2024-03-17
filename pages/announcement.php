@@ -16,10 +16,16 @@ $announcments = getAnnouncements();
                         <div class="col-12 col-xl-4">
                         <div class="justify-content-end d-flex">
                               <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                  <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#announcement">
-                                      <i class="icon-file btn-icon-prepend"></i>
-                                      New
-                                  </button>
+                              <?php 
+                                if ($_SESSION["username"] == 'admin') {
+                                ?>
+                                <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#announcement">
+                                  <i class="icon-file btn-icon-prepend"></i>
+                                    New
+                                </button>
+                                <?php 
+                                }
+                                  ?>
                               </div>
                         </div>
                     </div>

@@ -19,10 +19,16 @@ $room3 = getRoom3();
                         <div class="col-12 col-xl-4">
                         <div class="justify-content-end d-flex">    
                             <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                            <?php 
+                                if ($_SESSION["username"] == 'admin') {
+                                ?>
                                 <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#addRoom">
                                     <i class="icon-plus btn-icon-prepend"></i>
                                     Add Room
                                 </button>
+                                <?php 
+                                }
+                                  ?>
                             </div>
                         </div>
                     </div>

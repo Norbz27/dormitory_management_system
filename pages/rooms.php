@@ -163,7 +163,7 @@ $room3 = getRoom3();
                       ?>
                     </div>
 
-                    <div class="modal fade" id="exampleModal" role="dialog"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -294,6 +294,5 @@ $room3 = getRoom3();
         </div>
       </div>
     <!-- page-body-wrapper ends -->
-  </div>
   <script src="functions.js"></script>
   <?php include_once 'footer.php' ?>

@@ -25,10 +25,7 @@
   font-weight: bold;
   font-size: 1.1rem;
 }
-.card .card-body {
-  padding: 20px 5px;
-  margin: 0;
-}
+
 .carousel-control-next {
   border: none;
   background-color: transparent;
@@ -48,13 +45,13 @@
   border-radius: 10px;
 }
 #display_img {
-  height: 20vh;
+  height: 30vh;
   object-fit: cover;
   margin-bottom: 20px;
   border-radius: 15px;
 }
 #new_display_img {
-  height: 20vh;
+  height: 30vh;
   object-fit: cover;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -62,4 +59,8 @@
 
 #editRoom .modal-body {
   padding: 25px 25px 0 25px;
+}
+
+.modal {
+  overflow-y: auto;
 }

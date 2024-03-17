@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "dbh.class.php";
+require_once '../pages/auth/dbh.class.php';
 
 // Check if the ID is provided in the session
 if(isset($_SESSION['userid'])) { // Change 'id' to 'userid'

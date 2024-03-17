@@ -61,7 +61,7 @@ $_SESSION['userid'] = $id;
               <span><?php echo $_SESSION["usersname"] ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="auth/accountprofile.php?id=<?php echo $_SESSION['userid']; ?>">
+            <a class="dropdown-item" href="../pages/accountprofile.php?id=<?php echo $_SESSION['userid']; ?>">
                 <i class="bi bi-person-circle"></i>
                 Profile
               </a>

@@ -39,7 +39,7 @@
                   <input type="tel" class="form-control form-control-lg" id="exampleInputPhone" name="contact" placeholder="Phone Number" required>
                 </div>
                 <div class="form-group">
-                  <select class="form-control form-control-lg" id="exampleInputGender" name="gender" required>
+                  <select class="form-control form-control-lg" style="padding-left: 30px" id="exampleInputGender" name="gender" required>
                     <option selected disabled value="">Gender</option>
                     <option>Male</option>
                     <option>Female</option>

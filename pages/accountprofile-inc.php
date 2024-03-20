@@ -19,6 +19,7 @@ if(isset($_SESSION['userid'])) { // Change 'id' to 'userid'
         // Check if the query executed successfully
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $id = $row['id'];
             $username = $row['name'];
             $contact = $row['contact'];
             $gender = $row['gender'];

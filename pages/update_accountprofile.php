@@ -1,53 +1,95 @@
 <?php
-// Include the necessary database connection file
-require_once '../pages/auth/dbh.class.php';
+include_once '../db/db_conn.php';
 
-// Check if the request is a POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the data sent via POST
-    $username = $_POST['username'];
+    // Retrieve form data
+    $id = $_POST['edid'];
+    $name = $_POST['username'];
     $contact = $_POST['contact'];
     $gender = $_POST['gender'];
     $uid = $_POST['uid'];
-    $password = $_POST['password']; // Assuming you have a password field in your form
+    $pwd = $_POST['password'];
 
-    // Check if the received data is valid (perform additional validation if necessary)
-
-    try {
-        // Create a new instance of Dbh and establish a database connection
-        $dbh = new Dbh();
-        $conn = $dbh->connect();
-
-        // Prepare the SQL statement to update the user profile
-        $sql = "UPDATE users SET name = :username, contact = :contact, gender = :gender, uid = :uid, pwd = :password WHERE uid = :uid";
-        $stmt = $conn->prepare($sql);
-
-        // Bind parameters to the prepared statement
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':contact', $contact);
-        $stmt->bindParam(':gender', $gender);
-        $stmt->bindParam(':uid', $uid);
-        $stmt->bindParam(':password', $password); // Bind the password parameter
-        // Execute the update statement
-        $stmt->execute();
-
-        // Check if the update was successful
-        if ($stmt->rowCount() > 0) {
-            // Return a success message (this will be sent back to the AJAX success callback)
-            echo "Profile updated successfully!";
-        } else {
-            // Return an error message if no rows were affected (this will be sent back to the AJAX error callback)
-            echo "Failed to update profile. No rows affected.";
-        }
-    } catch (PDOException $e) {
-        // Handle database connection errors
-        echo "Connection failed: " . $e->getMessage();
-    } finally {
-        // Close the database connection
-        $conn = null;
-    }
+    // Call the updateAccount function with the database connection and form data
+    updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id);
 } else {
-    // Return an error message if the request method is not POST
-    echo "Invalid request method.";
+    // Redirect to the accounts page if the form is not submitted
+    header("Location: ../pages/accountprofile.php?status='error'");
+    exit();
 }
+
+function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
+    // Check if the UID and password are the same as those in the database
+    $sql = "SELECT uid, pwd FROM users WHERE id=?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("Location: ../pages/accountprofile.php?status=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    
+    // Bind the result variables
+    mysqli_stmt_bind_result($stmt, $db_uid, $db_pwd);
+    mysqli_stmt_fetch($stmt);
+
+    // If UID and password are the same, don't update
+    if($uid == $db_uid && password_verify($pwd, $db_pwd)) {
+        // Redirect back with a status indicating no changes were made
+        header("Location: ../pages/accountprofile.php?status=nochanges");
+        exit();
+    }
+
+    // If UID or password are different, proceed with updating the account
+    mysqli_stmt_close($stmt);
+
+    // Check if the UID is taken by other users (except the current one)
+    $sql = "SELECT id FROM users WHERE uid=? AND id != ?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("Location: ../pages/accountprofile.php?status=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $uid, $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
+    // If a user with the UID already exists (except the current one), redirect back with an error status
+    if(mysqli_stmt_num_rows($stmt) > 0) {
+        header("Location: ../pages/accountprofile.php?status=uidtaken");
+        exit();
+    }
+
+    // If UID is not taken and UID/pwd are different, proceed with updating the account
+    mysqli_stmt_close($stmt);
+
+    // Prepare the UPDATE query
+    $sql = "UPDATE users SET name=?, contact=?, gender=?, uid=?, pwd=? WHERE id=?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("Location: ../pages/accountprofile.php?status=stmtfailed");
+        exit();
+    }
+
+    // Hash the password
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+    // Bind parameters to the prepared statement
+    mysqli_stmt_bind_param($stmt, "ssssss", $name, $contact, $gender, $uid, $hashedPwd, $id);
+
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    // Redirect back to the accounts page with a success status parameter
+    header("Location: ../pages/accountprofile.php?status=updated");
+    exit();
+}
+
 ?>

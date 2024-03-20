@@ -39,7 +39,7 @@ include 'accountprofile-inc.php';
 /* Style for profile info */
 .profile-info {
     color: #666; /* Change text color */
-    font-size: 20px; /* Adjust font size */
+    font-size: 16px; /* Adjust font size */
     margin-bottom: 10px; /* Add some space below each info */
 }
 
@@ -89,43 +89,45 @@ include 'accountprofile-inc.php';
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="editForm" class="row">
+            <form action="update_accountprofile.php" method="post">
+            <div class="modal-body row">
                     <div class="col-md-4"> <!-- First column -->
                         <div class="form-group">
+                            <input type="text" class="form-control" id="edid" name="edid" value="<?php echo htmlspecialchars($id); ?>" hidden>
                             <label for="username" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="username" value="<?php echo htmlspecialchars($username); ?>">
+                            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>">
                         </div>
                         <div class="form-group">
                             <label for="contact" class="col-form-label">Contact:</label>
-                            <input type="text" class="form-control" id="contact" value="<?php echo htmlspecialchars($contact); ?>">
+                            <input type="text" class="form-control" id="contact" name="contact" value="<?php echo htmlspecialchars($contact); ?>">
                         </div>
                     </div>
                     <div class="col-md-4"> <!-- Second column -->
                         <div class="form-group">
                             <label for="gender" class="col-form-label">Gender:</label>
-                            <select class="form-control" id="gender">
+                            <select class="form-control" id="gender" name="gender">
                                 <option value="Male" <?php if ($gender === "Male") echo "selected"; ?>>Male</option>
                                 <option value="Female" <?php if ($gender === "Female") echo "selected"; ?>>Female</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="uid" class="col-form-label">Username:</label>
-                            <input type="text" class="form-control" id="uid" value="<?php echo htmlspecialchars($uid); ?>">
+                            <input type="text" class="form-control" id="uid" name="uid" value="<?php echo htmlspecialchars($uid); ?>">
                         </div>
                     </div>
                     <div class="col-md-4"> <!-- Third column -->
                         <div class="form-group">
                             <label for="password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="password" value="<?php echo htmlspecialchars(substr($password, 0, 10)); ?>">
+                            <input type="password" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars(substr($password, 0, 10)); ?>">
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="saveChangesBtn" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -163,36 +165,6 @@ include 'accountprofile-inc.php';
     <script>
       feather.replace();
     </script>
-    <script>
-$(document).ready(function() {
-  $('#saveChangesBtn').click(function() {
-    var username = $('#username').val();
-    var contact = $('#contact').val();
-    var gender = $('#gender').val();
-    var uid = $('#uid').val();
-    $.ajax({
-      url: 'update_accountprofile.php',
-      method: 'POST',
-      data: {
-        username: username,
-        contact: contact,
-        gender: gender,
-        uid: uid
-      },
-      success: function(response) {
-        console.log(response);
-        alert('Changes Where Made');
-        $('#exampleModal').modal('hide');
-      },
-      error: function(xhr, status, error) {
-        console.error(xhr.responseText);
-        alert('Error updating profile. Please try again.');
-      }
-    });
-  });
-});
-    
-</script>
 
 </body>
 

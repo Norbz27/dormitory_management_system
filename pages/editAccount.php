@@ -46,8 +46,8 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
     // If UID or password are different, proceed with updating the account
     mysqli_stmt_close($stmt);
 
-    // Check if the UID is taken
-    $sql = "SELECT id FROM users WHERE uid=?";
+    // Check if the UID is taken by other users (except the current one)
+    $sql = "SELECT id FROM users WHERE uid=? AND id != ?";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -55,11 +55,11 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "s", $uid);
+    mysqli_stmt_bind_param($stmt, "ss", $uid, $id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
 
-    // If a user with the UID already exists, redirect back with an error status
+    // If a user with the UID already exists (except the current one), redirect back with an error status
     if(mysqli_stmt_num_rows($stmt) > 0) {
         header("Location: ../pages/accounts.php?status=uidtaken");
         exit();

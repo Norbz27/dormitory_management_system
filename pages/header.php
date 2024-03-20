@@ -57,7 +57,7 @@ $_SESSION['userid'] = $id;
         
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../images/profile.png" alt="profile"/>
+              <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; margin-right:8px" alt="profile"/>
               <span><?php echo $_SESSION["usersname"] ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

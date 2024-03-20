@@ -31,7 +31,7 @@
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3" action="register.inc.php" method="post">
+              <form class="pt-3" action="register.inc.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputName" name="name" placeholder="Name" required>
                 </div>
@@ -50,6 +50,10 @@
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword" name="pwd" placeholder="Password">
+                </div>
+                <div class="form-group">
+                <label>Profile Picture</label>
+                    <input type="file" class="form-control-file" name="display_picture" required>
                 </div>
                 <div class="mb-4">
                   <div class="form-check">

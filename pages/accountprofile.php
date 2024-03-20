@@ -68,28 +68,77 @@ include 'accountprofile-inc.php';
     </div>
 
     <div class="row">
-      <div class="col-md-12 ">
-        <div class="row">
-          <div class="col-md-8">
-          <div class="profile-info-wrapper text-center">
+    <div class="col-md-8">
+        <div class="profile-info-wrapper text-center">
             <h2 class="profile-name"><?php echo $username; ?></h2>
             <p class="profile-info">Contact: <?php echo $contact; ?></p>
             <p class="profile-info">Gender: <?php echo $gender; ?></p>
             <h4 class="profile-name mt-5">Log in credentials</h4>
             <p class="profile-info">Username: <?php echo $uid; ?></p>
             <p class="profile-info">Password: 
-              <input type="password"  value="<?php echo substr($password, 0, 10); ?>" maxlength="12" readonly>
+                <input type="password"  value="<?php echo substr($password, 0, 10); ?>" maxlength="12" readonly>
             </p>
-          </div>
-          </div>
-          <div class="col-md-4">
-            <div class="profile-wrapper text-center">
-              <div class="profile-picture">
-                <img src="../images/profile.png" class="rounded" alt="Profile">
-              </div>
-            </div>
-          </div>
         </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Change Somethings</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document"> <!-- Added modal-lg class for larger modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" class="row">
+                    <div class="col-md-4"> <!-- First column -->
+                        <div class="form-group">
+                            <label for="username" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="username" value="<?php echo htmlspecialchars($username); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact" class="col-form-label">Contact:</label>
+                            <input type="text" class="form-control" id="contact" value="<?php echo htmlspecialchars($contact); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4"> <!-- Second column -->
+                        <div class="form-group">
+                            <label for="gender" class="col-form-label">Gender:</label>
+                            <select class="form-control" id="gender">
+                                <option value="Male" <?php if ($gender === "Male") echo "selected"; ?>>Male</option>
+                                <option value="Female" <?php if ($gender === "Female") echo "selected"; ?>>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="uid" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="uid" value="<?php echo htmlspecialchars($uid); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4"> <!-- Third column -->
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" value="<?php echo htmlspecialchars(substr($password, 0, 10)); ?>">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="saveChangesBtn" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="col-md-4">
+        <div class="profile-wrapper text-center">
+            <div class="profile-picture">
+                <img src="../images/profile.png" class="rounded" alt="Profile">
+            </div>
+        </div>
+    </div>
+</div>
+
       </div>
     </div>
   </div>
@@ -115,14 +164,34 @@ include 'accountprofile-inc.php';
       feather.replace();
     </script>
     <script>
-    $(document).ready(function () {
-        $("#searchInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("table tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
-        });
+$(document).ready(function() {
+  $('#saveChangesBtn').click(function() {
+    var username = $('#username').val();
+    var contact = $('#contact').val();
+    var gender = $('#gender').val();
+    var uid = $('#uid').val();
+    $.ajax({
+      url: 'update_accountprofile.php',
+      method: 'POST',
+      data: {
+        username: username,
+        contact: contact,
+        gender: gender,
+        uid: uid
+      },
+      success: function(response) {
+        console.log(response);
+        alert('Changes Where Made');
+        $('#exampleModal').modal('hide');
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText);
+        alert('Error updating profile. Please try again.');
+      }
     });
+  });
+});
+    
 </script>
 
 </body>

@@ -86,6 +86,14 @@
             $('#editAccountBtn').hide();
             $('button[type="submit"]').show();
         });
+
+        $('#close-btn').on('click', function() {
+            // Make specific input fields editable
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword').prop('disabled', true);
+            // Toggle visibility of buttons
+            $('#editAccountBtn').show();
+            $('button[type="submit"]').hide();
+        });
     });
 
 

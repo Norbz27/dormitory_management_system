@@ -137,7 +137,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     <div class="col-md-4">
         <div class="profile-wrapper text-center">
             <div class="profile-picture">
-                <img src="../images/profile.png" class="rounded" alt="Profile">
+            <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; margin-right:8px" alt="profile"/>
             </div>
         </div>
     </div>

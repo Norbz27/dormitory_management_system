@@ -2,7 +2,7 @@
 include_once '../db/db_conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    
     $id = $_POST['edid'];
     $name = $_POST['username'];
     $contact = $_POST['contact'];
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Call the updateAccount function with the database connection and form data
     updateAccountprof($conn, $name, $contact, $gender, $uid, $pwd, $id);
 } else {
-    // Redirect to the accounts page if the form is not submitted
+    
     header("Location: ../pages/accountprofile.php?status='error'");
     exit();
 }
@@ -108,6 +108,8 @@ function updateAccountprof($conn, $name, $contact, $gender, $uid, $pwd, $id){
     // Redirect back to the accounts page with a success status parameter
     header("Location: ../pages/accountprofile.php?status=updated");
     exit();
+
+    echo "<script>window.location.reload();</script>";
 }
 
 ?>

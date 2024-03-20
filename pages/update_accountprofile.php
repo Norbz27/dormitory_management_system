@@ -90,6 +90,8 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
     // Redirect back to the accounts page with a success status parameter
     header("Location: ../pages/accountprofile.php?status=updated");
     exit();
+
+    echo "<script>window.location.reload();</script>";
 }
 
 ?>

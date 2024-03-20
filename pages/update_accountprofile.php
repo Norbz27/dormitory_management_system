@@ -2,7 +2,7 @@
 include_once '../db/db_conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    
     $id = $_POST['edid'];
     $name = $_POST['username'];
     $contact = $_POST['contact'];
@@ -10,16 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uid = $_POST['uid'];
     $pwd = $_POST['password'];
 
-    // Call the updateAccount function with the database connection and form data
+    
     updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id);
 } else {
-    // Redirect to the accounts page if the form is not submitted
+    
     header("Location: ../pages/accountprofile.php?status='error'");
     exit();
 }
 
 function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
-    // Check if the UID and password are the same as those in the database
+  
     $sql = "SELECT uid, pwd FROM users WHERE id=?";
     $stmt = mysqli_stmt_init($conn);
 

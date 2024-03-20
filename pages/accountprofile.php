@@ -3,6 +3,8 @@
 include_once 'header.php';
 include_once 'account_function.inc.php';
 include 'accountprofile-inc.php';
+
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>
   <style>
 .profile-wrapper {
@@ -118,7 +120,7 @@ include 'accountprofile-inc.php';
                     <div class="col-md-4"> <!-- Third column -->
                         <div class="form-group">
                             <label for="password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars(substr($password, 0, 10)); ?>">
+                            <input type="password" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($password); ?>">
                         </div>
                     </div>
                 
@@ -165,7 +167,35 @@ include 'accountprofile-inc.php';
     <script>
       feather.replace();
     </script>
-
+<script>
+    <?php
+        if ($status === 'success') {
+            echo 'swal({
+                title: "Success",
+                text: "New account have been added!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'stmtfailed') {
+            echo 'swal({
+                title: "Error",
+                text: "No account have been added!",
+                icon: "error",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'updated') {
+            echo 'swal({
+                title: "Success",
+                text: "Account have been Updated!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        }
+    ?>
+</script>
 </body>
 
 </html>

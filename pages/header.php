@@ -31,7 +31,10 @@ if (!isset($_SESSION["account"])) {
   <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css"/>
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+    <!-- Include Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" type="text/css" href="../js/select.dataTables.min.css">
+  
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">

@@ -37,9 +37,27 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
     mysqli_stmt_fetch($stmt);
 
     // If UID and password are the same, don't update
-    if($uid == $db_uid && password_verify($pwd, $db_pwd)) {
-        // Redirect back with a status indicating no changes were made
-        header("Location: ../pages/accounts.php?status=nochanges");
+    if(password_verify($pwd, $db_pwd) || $pwd == $db_pwd) {
+        $sql = "UPDATE users SET name=?, contact=?, gender=?, uid=? WHERE id=?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ../pages/accounts.php?status=stmtfailed");
+            exit();
+        }
+
+        // Hash the password
+        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        // Bind parameters to the prepared statement
+        mysqli_stmt_bind_param($stmt, "sssss", $name, $contact, $gender, $uid, $id);
+
+        // Execute the statement
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        // Redirect back to the accounts page with a success status parameter
+        header("Location: ../pages/accounts.php?status=updated");
         exit();
     }
 

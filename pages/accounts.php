@@ -161,7 +161,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
           <div class="search-box mb-3">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search...">
           </div>
-
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">

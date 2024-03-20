@@ -95,6 +95,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                               <!-- Add more form fields as needed -->
                       </div>
                       <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary btn-md">Save</button>
                       </div>
                       </form>
@@ -149,7 +150,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                 <!-- Add more form fields as needed -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="close-btn" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
+                                <button type="button" id="close-btn" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
                                 <button type="button" id="editAccountBtn" class="btn btn-primary btn-md">Edit Account</button>
                                 <button type="submit" class="btn btn-primary btn-md" style="display: none;">Save Changes</button>
                             </div>

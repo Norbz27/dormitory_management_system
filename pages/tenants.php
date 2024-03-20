@@ -1,4 +1,19 @@
 <?php include_once 'header.php' ?>
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .btn-group .dropdown-toggle::after {
+            content: none;
+        }
+
+        .dropdown-item{
+            width: 95%;
+            margin-left: 4px;
+        }
+    </style>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -11,7 +26,7 @@
                         <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#addAccountModal">
+                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#newTenant">
                                         <i class="icon-plus btn-icon-prepend"></i>
                                         New Tenant
                                     </button>
@@ -22,54 +37,52 @@
                 </div>
             </div>
             <!-- Modal -->
-          <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="addAccountModalLabel">New Tenant</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <!-- Your form elements go here -->
-                          <form>
-                              <div class="row">
-                                  <!-- Other Fields in Two Columns -->
-                                  <div class="col-md-6 text-center justify-content-center mb-3 d-flex align-items-center"> <!-- Added d-flex and align-items-center -->
-                                    <div>
-                                        <img src="../images/profile.webp" id="profilePicturePreview" alt="Profile Picture Preview" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px; cursor: pointer;">
-                                        <label>Select user</label>
-                                        <select class="js-example-basic-single w-100"> <!-- Change w-500 to w-100 -->
-                                            <option value="AL">Norberto Bruzon Jr.</option>
-                                            <option value="WY">Wyoming Wyoming</option>
-                                            <option value="AM">America America</option>
-                                            <option value="CA">Canada Canada</option>
-                                            <option value="RU">Russia Russia</option>
-                                        </select>
-                                    </div>
-                                </div>
+            <div class="modal fade" id="newTenant">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-                                  <!-- Room # -->
-                                  <div class="col-md-12 mb-4">
-                                      <label for="gender">Room</label>
-                                      <select class="form-control" id="room">
-                                          <option value="101">101</option>
-                                          <option value="102">102</option>
-                                          <option value="103">103</option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </form>
-                      </div>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Tenant</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary btn-md">Save changes</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <!-- Profile Picture Placeholder -->
+                        <div class="text-center mb-3">
+                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                        </div>
+                        
+                        <!-- Profile and Room Selection -->
+                        <div class="form-group">
+                        <label for="profileSelect">Select User:</label>
+                        <select class="form-control" id="profileSelect">
+                            <option>Profile 1</option>
+                            <option>Profile 2</option>
+                            <option>Profile 3</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="roomSelect">Select Room:</label>
+                        <select class="form-control" id="roomSelect">
+                            <option>Room 1</option>
+                            <option>Room 2</option>
+                            <option>Room 3</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="search-box mb-3">
                 <input type="text" class="form-control" placeholder="Search...">
             </div>
@@ -78,6 +91,15 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
+                                <colgroup>
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: auto;"> 
+                                    <col style="width: 20px;"> 
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>Room</th>
@@ -97,7 +119,17 @@
                                         <td>Male</td>
                                         <td>53275531</td>
                                         <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i data-feather="more-horizontal"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
+                                                    <a class="dropdown-item delete-btn" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>101</td>
@@ -106,34 +138,17 @@
                                         <td>Male</td>
                                         <td>53275531</td>
                                         <td><span class="badge badge-warning">Inactive</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>101</td>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-warning">Inactive</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>101</td>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>101</td>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i data-feather="more-horizontal"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
+                                                    <a class="dropdown-item delete-btn" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -143,6 +158,18 @@
             </div>
         </div>
     </div>
-
+    <script>
+      feather.replace();
+    </script>
+    <script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
     <?php include_once 'footer.php' ?>
 

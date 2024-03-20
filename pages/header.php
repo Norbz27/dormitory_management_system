@@ -134,7 +134,7 @@ if (!isset($_SESSION["account"])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="payments.php">
+            <a class="nav-link" href="payments-admin.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Payments</span>
             </a>
@@ -173,7 +173,7 @@ if (!isset($_SESSION["account"])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="payments.php">
+            <a class="nav-link" href="payments-user.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Payments</span>
             </a>

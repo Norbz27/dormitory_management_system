@@ -53,7 +53,11 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                           </button>
                       </div>
                       <form action="addAccount.php" method="post">
-                      <div class="modal-body">
+                        <div class="modal-body">
+                         <!-- Profile Picture Placeholder -->
+                            <div class="text-center mb-3">
+                                <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                            </div>
                               <div class="row">
                                   <!-- Full Name -->
                                   <div class="col-md-12">
@@ -108,6 +112,10 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                     <div class="modal-content">
                         <form action="editAccount.php" method="post">
                             <div class="modal-body">
+                                 <!-- Profile Picture Placeholder -->
+                                <div class="text-center mb-3">
+                                    <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                </div>
                                 <div class="row">
                                     <!-- Full Name -->
                                     <div class="col-md-12">

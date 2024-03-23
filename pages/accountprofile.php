@@ -26,8 +26,8 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 
  /* Style for profile picture */
 .profile-picture img {
-    width: 180px; /* Adjust as needed */
-    height: 180px; /* Adjust as needed */
+    width: 300px; /* Adjust as needed */
+    height: 300px; /* Adjust as needed */
     border-radius: 50%; /* Makes the image round */
 }
 

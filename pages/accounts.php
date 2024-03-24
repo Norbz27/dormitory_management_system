@@ -19,6 +19,31 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
             width: 95%;
             margin-left: 4px;
         }
+
+        .profile-picture {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 180px; 
+            height: 180px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .profile-picture:hover .overlay {
+            opacity: 1;
+        }
     </style>
       <!-- partial -->
       <div class="main-panel">
@@ -55,8 +80,16 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                       <form action="addAccount.php" method="post">
                         <div class="modal-body">
                          <!-- Profile Picture Placeholder -->
-                            <div class="text-center mb-3">
-                                <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                            <div class="profile-wrapper text-center">
+                                <div class="profile-picture">
+                                    <label for="adprofile">
+                                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                        <div class="overlay">
+                                            <p style="font-size: 14px">Upload new profile</p>
+                                        </div>
+                                        <input type="file" name="adprofile" id="adprofile" hidden>
+                                    </label>
+                                </div>
                             </div>
                               <div class="row">
                                   <!-- Full Name -->
@@ -113,8 +146,16 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         <form action="editAccount.php" method="post">
                             <div class="modal-body">
                                  <!-- Profile Picture Placeholder -->
-                                <div class="text-center mb-3">
-                                    <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                <div class="profile-wrapper text-center">
+                                    <div class="profile-picture">
+                                        <label for="profile">
+                                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                            <div class="overlay">
+                                                <p style="font-size: 14px">Upload new profile</p>
+                                            </div>
+                                            <input type="file" name="profile" id="profile" hidden disabled>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <!-- Full Name -->
@@ -183,7 +224,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
+                                        <th>Name</th>
                                         <th>Gender</th>
                                         <th>Contact</th>
                                         <th>Status</th>

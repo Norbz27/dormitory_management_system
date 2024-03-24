@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-include_once 'tenantsfunc.php'; 
+include 'tenantsfunc.php';
 include_once '../pages/auth/dbh.class.php'; 
 
 $dbh = new Dbh();
@@ -68,44 +68,46 @@ $userTypes = getUserTypes($pdo);
     </div>
     
     <!-- Profile and Room Selection -->
-    <div class="form-group">
-        <label for="profileSelect">Select User:</label>
-        <select class="form-control" id="profileSelect">
-            <?php foreach ($users as $user): ?>
-                <option value="<?php echo $user['id']; ?>"><?php echo $user['name']; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="userType">User Type:</label>
-        <select class="form-control" id="userType">
-        <?php foreach ($userTypes as $type): ?>
-            <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
-        <?php endforeach; ?>
-    </select>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" class="form-control" id="date">
-    </div>
-    <div class="form-group">
-        <label for="roomSelect">Select Room:</label>
-        <select class="form-control" id="roomSelect">
-        <?php foreach ($rooms as $room): ?>
-            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
-        <?php endforeach; ?>
-        </select>
-    </div>
-                    </div>
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="saveTenantBtn">Save</button>
+    <form id="new-tenants">
+                <div class="form-group">
+                    <label for="profileSelect">Select User:</label>
+                    <select class="form-control" id="profileSelect" name="profileSelect">
+                        <?php foreach ($users as $user): ?>
+                            <option value="<?php echo $user['id']; ?>"><?php echo $user['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userType">User Type:</label>
+                    <select class="form-control" id="userType" name="userType">
+                    <?php foreach ($userTypes as $type): ?>
+                        <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="roomSelect">Select Room:</label>
+                    <select class="form-control" id="roomSelect" name="roomSelect">
+                    <?php foreach ($rooms as $room): ?>
+                        <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" class="btn btn-primary" id="saveTenantBtn">Save</button>
 
-                    </div>
+                </div>
+        </form>
 
-                    </div>
+                </div>
                 </div>
             </div>
 
@@ -187,6 +189,7 @@ $userTypes = getUserTypes($pdo);
     <script>
       feather.replace();
     </script>
+
 <script>
 // Your JavaScript code here
 $(document).ready(function () {
@@ -207,25 +210,9 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
     });
-
-    $('#saveTenantBtn').on('click', function () {
-        console.log('jawa na button');
-        var userId = $('#profileSelect').val();
-        var userTypeId = $('#userType').val();
-        var roomId = $('#roomSelect').val();
-        var date = $('#date').val();
-        var role = ''; 
-        
-        var result = saveTenant(userId, userTypeId, roomId, date, role, <?php echo json_encode($pdo); ?>);
-        
-        if (result) {
-            $('#newTenant').modal('hide');
-        } else {
-            alert('Failed to save tenant data. Please try again.');
-        }
-    });
 });
 </script>
+<script src="functions.js"></script>
 
 
     <?php include_once 'footer.php' ?>

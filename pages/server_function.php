@@ -370,3 +370,41 @@ if (isset($_GET['get_latest_room'])) {
     // Output response as JSON
     echo json_encode($res);
 }
+
+if (isset($_POST['add_tenants'])) {
+    $profileSelect = $_POST['profileSelect'];
+    $userType = $_POST['userType'];
+    $date = $_POST['date'];
+    $roomSelect = $_POST['roomSelect'];
+
+    $sql = "CALL addTenants(?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters
+    $stmt->bind_param("iisi", $profileSelect, $userType, $date, $roomSelect);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $res = [
+            'status' => 200,
+            'message' => 'Tenants added successfully'
+        ];
+        echo json_encode($res);
+    } else {
+        $error = $stmt->error;
+        $res = [
+            'status' => 500,
+            'message' => 'Tenants not added successfully',
+            'error' => $error
+        ];
+        echo json_encode($res);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+}

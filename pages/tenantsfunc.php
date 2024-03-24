@@ -1,11 +1,21 @@
 <?php
-  include_once '../db/db_conn.php';
-// Include your database connection file here if it's not already included
+include_once '../pages/auth/dbh.class.php';
 
-function getTenants($pdo) {
-    // Query to fetch tenant data including names
-    $sql = "SELECT * FROM users";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+function getUsers() {
+    try {
+        // Create an instance of the Dbh class
+        $dbh = new Dbh();
+        // Call the connect method to establish a database connection
+        $pdo = $dbh->connect();
+        
+        $sql = "SELECT id, name FROM users"; // Select only the id and name columns
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Handle any database errors here
+        echo "Error: " . $e->getMessage();
+        return []; // Return an empty array in case of an error
+    }
 }
+?>

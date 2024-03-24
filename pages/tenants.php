@@ -1,7 +1,18 @@
-<?php include_once 'header.php'; ?>
-<?php include_once 'tenantsfunc.php';
-$users = getTenants($pdo);
- ?>
+<?php
+include_once 'header.php';
+include_once 'tenantsfunc.php'; // Include the tenantfunc.php file
+include_once '../pages/auth/dbh.class.php'; // Include the database connection file
+
+// Create an instance of the Dbh class
+$dbh = new Dbh();
+
+// Call the connect method to establish a database connection
+$pdo = $dbh->connect();
+
+// Call the getUsers function to fetch user data
+$users = getUsers($pdo);
+?>
+
 <style>
         table {
             border-collapse: collapse;
@@ -52,29 +63,48 @@ $users = getTenants($pdo);
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <!-- Profile Picture Placeholder -->
-                        <div class="text-center mb-3">
-                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
-                        </div>
-                        
-                        <!-- Profile and Room Selection -->
-                        <div class="form-group">
-                        <label for="profileSelect">Select User:</label>
-                        <select class="form-control" id="profileSelect">
-                        <?php foreach ($users as $users): ?>
-                <option value="<?php echo $tenant['id']; ?>"><?php echo $tenant['name']; ?></option>
+    <!-- Profile Picture Placeholder -->
+    <div class="text-center mb-3">
+        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+    </div>
+    
+    <!-- Profile and Room Selection -->
+    <div class="form-group">
+        <label for="profileSelect">Select User:</label>
+        <select class="form-control" id="profileSelect">
+            <?php foreach ($users as $user): ?>
+                <option value="<?php echo $user['id']; ?>"><?php echo $user['name']; ?></option>
             <?php endforeach; ?>
-                        </select>
-                        </div>
-                        <div class="form-group">
-                        <label for="roomSelect">Select Room:</label>
-                        <select class="form-control" id="roomSelect">
-                            <option>Room 1</option>
-                            <option>Room 2</option>
-                            <option>Room 3</option>
-                        </select>
-                        </div>
-                    </div>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="userType">User Type:</label>
+        <select class="form-control" id="userType">
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Staff">Staff</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control" id="date">
+    </div>
+    <div class="form-group">
+        <label for="availability">Availability:</label>
+        <select class="form-control" id="availability">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="roomSelect">Select Room:</label>
+        <select class="form-control" id="roomSelect">
+            <option>Room 1</option>
+            <option>Room 2</option>
+            <option>Room 3</option>
+        </select>
+    </div>
+</div>
 
                     <!-- Modal Footer -->
                     <div class="modal-footer">

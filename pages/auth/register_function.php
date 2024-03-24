@@ -24,7 +24,7 @@ function uidExist($conn, $uid){
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("Location: ../auth/register.php?error=stmtfailed");
+        header("Location: ../auth/register.php?error=username-already-exist");
         exit();
     }
 
@@ -81,7 +81,7 @@ function createUser($conn, $name, $contact, $gender, $uid, $pwd, $dp)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../signup.php?error=stmtfailed");
+        header("Location: ../auth/register.php?error=stmtfailed");
         exit();
     }
 

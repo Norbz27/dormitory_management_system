@@ -6,6 +6,10 @@ include_once '../pages/auth/dbh.class.php'; // Include the database connection f
 $dbh = new Dbh();
 $pdo = $dbh->connect();
 $users = getUsers($pdo);
+$rooms = getAvailableRooms($pdo); 
+$userTypes = getUserTypes($pdo);
+
+
 ?>
 
 <style>
@@ -75,9 +79,10 @@ $users = getUsers($pdo);
     <div class="form-group">
         <label for="userType">User Type:</label>
         <select class="form-control" id="userType">
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Staff">Staff</option>
+        <?php foreach ($userTypes as $type): ?>
+            <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+        <?php endforeach; ?>
+    </select>
         </select>
     </div>
     <div class="form-group">
@@ -87,17 +92,17 @@ $users = getUsers($pdo);
     <div class="form-group">
         <label for="roomSelect">Select Room:</label>
         <select class="form-control" id="roomSelect">
-            <option>Room 1</option>
-            <option>Room 2</option>
-            <option>Room 3</option>
+        <?php foreach ($rooms as $room): ?>
+            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
+        <?php endforeach; ?>
         </select>
     </div>
-</div>
-
+                    </div>
                     <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary" id="saveTenantBtn">Save</button>
+
                     </div>
 
                     </div>
@@ -182,25 +187,50 @@ $users = getUsers($pdo);
     <script>
       feather.replace();
     </script>
-    <script>
 <script>
+// Your JavaScript code here
 $(document).ready(function () {
-        // Function to update tenant's name based on selected profile
-        $('#profileSelect').on('change', function () {
-            var selectedProfile = $(this).val();
-            var selectedTenant = <?php echo json_encode($tenants); ?>.find(tenant => tenant.id == selectedProfile);
-            $('#tenantNamePlaceholder').text(selectedTenant.name);
-        });
+    // Define the $tenants variable with PHP to use it in JavaScript
+    var tenants = <?php echo json_encode($users); ?>;
+    
+    // Function to update tenant's name based on selected profile
+    $('#profileSelect').on('change', function () {
+        var selectedProfile = $(this).val();
+        var selectedTenant = tenants.find(tenant => tenant.id == selectedProfile);
+        $('#tenantNamePlaceholder').text(selectedTenant.name);
+    });
 
-        // Function to filter table rows based on search input
-        $("#searchInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("table tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
+    // Function to filter table rows based on search input
+    $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("table tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
     });
 
+    // Function to handle the click event on the "Save" button
+    $('#saveTenantBtn').on('click', function () {
+        console.log('jawa na button');
+        var userId = $('#profileSelect').val();
+        var userTypeId = $('#userType').val();
+        var roomId = $('#roomSelect').val();
+        var date = $('#date').val();
+        var role = ''; // You need to specify the role value
+        
+        // Call the saveTenant function with $pdo parameter
+        var result = saveTenant(userId, userTypeId, roomId, date, role, <?php echo json_encode($pdo); ?>);
+        
+        // Check if the saving was successful
+        if (result) {
+            // If successful, close the modal
+            $('#newTenant').modal('hide');
+        } else {
+            // If not successful, display an error message or handle it accordingly
+            alert('Failed to save tenant data. Please try again.');
+        }
+    });
+});
 </script>
-    <?php include_once 'footer.php' ?>
 
+
+    <?php include_once 'footer.php' ?>

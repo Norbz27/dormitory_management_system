@@ -1,7 +1,7 @@
 <?php
 include_once 'header.php';
-include_once 'tenantsfunc.php'; // Include the tenantfunc.php file
-include_once '../pages/auth/dbh.class.php'; // Include the database connection file
+include_once 'tenantsfunc.php'; 
+include_once '../pages/auth/dbh.class.php'; 
 
 $dbh = new Dbh();
 $pdo = $dbh->connect();
@@ -190,17 +190,17 @@ $userTypes = getUserTypes($pdo);
 <script>
 // Your JavaScript code here
 $(document).ready(function () {
-    // Define the $tenants variable with PHP to use it in JavaScript
+
     var tenants = <?php echo json_encode($users); ?>;
     
-    // Function to update tenant's name based on selected profile
+    
     $('#profileSelect').on('change', function () {
         var selectedProfile = $(this).val();
         var selectedTenant = tenants.find(tenant => tenant.id == selectedProfile);
         $('#tenantNamePlaceholder').text(selectedTenant.name);
     });
 
-    // Function to filter table rows based on search input
+    
     $("#searchInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("table tbody tr").filter(function () {
@@ -208,24 +208,19 @@ $(document).ready(function () {
         });
     });
 
-    // Function to handle the click event on the "Save" button
     $('#saveTenantBtn').on('click', function () {
         console.log('jawa na button');
         var userId = $('#profileSelect').val();
         var userTypeId = $('#userType').val();
         var roomId = $('#roomSelect').val();
         var date = $('#date').val();
-        var role = ''; // You need to specify the role value
+        var role = ''; 
         
-        // Call the saveTenant function with $pdo parameter
         var result = saveTenant(userId, userTypeId, roomId, date, role, <?php echo json_encode($pdo); ?>);
         
-        // Check if the saving was successful
         if (result) {
-            // If successful, close the modal
             $('#newTenant').modal('hide');
         } else {
-            // If not successful, display an error message or handle it accordingly
             alert('Failed to save tenant data. Please try again.');
         }
     });

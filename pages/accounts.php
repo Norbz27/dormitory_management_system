@@ -19,6 +19,31 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
             width: 95%;
             margin-left: 4px;
         }
+
+        .profile-picture {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 180px; 
+            height: 180px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .profile-picture:hover .overlay {
+            opacity: 1;
+        }
     </style>
       <!-- partial -->
       <div class="main-panel">
@@ -26,10 +51,10 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
         <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <div class="col-6 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Accounts</h3>
                         </div>
-                        <div class="col-12 col-xl-4">
+                        <div class="col-6 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                                     <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#addAccountModal">
@@ -53,7 +78,19 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                           </button>
                       </div>
                       <form action="addAccount.php" method="post">
-                      <div class="modal-body">
+                        <div class="modal-body">
+                         <!-- Profile Picture Placeholder -->
+                            <div class="profile-wrapper text-center">
+                                <div class="profile-picture">
+                                    <label for="adprofile">
+                                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                        <div class="overlay">
+                                            <p style="font-size: 14px">Upload new profile</p>
+                                        </div>
+                                        <input type="file" name="adprofile" id="adprofile" hidden>
+                                    </label>
+                                </div>
+                            </div>
                               <div class="row">
                                   <!-- Full Name -->
                                   <div class="col-md-12">
@@ -108,6 +145,18 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                     <div class="modal-content">
                         <form action="editAccount.php" method="post">
                             <div class="modal-body">
+                                 <!-- Profile Picture Placeholder -->
+                                <div class="profile-wrapper text-center">
+                                    <div class="profile-picture">
+                                        <label for="profile">
+                                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                            <div class="overlay">
+                                                <p style="font-size: 14px">Upload new profile</p>
+                                            </div>
+                                            <input type="file" name="profile" id="profile" hidden disabled>
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <!-- Full Name -->
                                     <div class="col-md-12">
@@ -175,7 +224,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
+                                        <th>Name</th>
                                         <th>Gender</th>
                                         <th>Contact</th>
                                         <th>Status</th>

@@ -81,7 +81,7 @@
     $(document).ready(function() {
         $('#editAccountBtn').on('click', function() {
             // Make specific input fields editable
-            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword').prop('disabled', false);
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #profile').prop('disabled', false);
             // Toggle visibility of buttons
             $('#editAccountBtn').hide();
             $('button[type="submit"]').show();
@@ -89,7 +89,7 @@
 
         $('#close-btn').on('click', function() {
             // Make specific input fields editable
-            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword').prop('disabled', true);
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #profile').prop('disabled', true);
             // Toggle visibility of buttons
             $('#editAccountBtn').show();
             $('button[type="submit"]').hide();

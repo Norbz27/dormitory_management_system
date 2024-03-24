@@ -56,6 +56,33 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     outline: none; /* Remove outline when clicked */
     /* Optionally, you can adjust other styles as needed */
   }
+
+.profile-picture {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 300px; 
+    height: 300px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-picture:hover .overlay {
+    opacity: 1;
+}
+
 </style>
 <div class="main-panel">
   <div class="content-wrapper">
@@ -70,7 +97,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     </div>
 
     <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="profile-info-wrapper text-center">
             <h2 class="profile-name"><?php echo $username; ?></h2>
             <p class="profile-info">Contact: <?php echo $contact; ?></p>
@@ -123,7 +150,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                             <input type="password" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($password); ?>">
                         </div>
                     </div>
-                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -135,12 +161,19 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 </div>
     </div>
     <div class="col-md-4">
-        <div class="profile-wrapper text-center">
-            <div class="profile-picture">
-            <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; margin-right:8px" alt="profile"/>
-            </div>
+    <div class="profile-wrapper text-center">
+        <div class="profile-picture">
+            <label for="profile">
+                <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; border-radius: 50%; margin-right:8px;" alt="profile"/>
+                <div class="overlay">
+                    <p style="font-size: 18px">Upload new profile</p>
+                </div>
+                <input type="file" name="profile" id="profile" hidden>
+            </label>
         </div>
     </div>
+</div>
+
 </div>
 
       </div>

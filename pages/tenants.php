@@ -1,4 +1,7 @@
-<?php include_once 'header.php' ?>
+<?php include_once 'header.php'; ?>
+<?php include_once 'tenantsfunc.php';
+$users = getTenants($pdo);
+ ?>
 <style>
         table {
             border-collapse: collapse;
@@ -58,9 +61,9 @@
                         <div class="form-group">
                         <label for="profileSelect">Select User:</label>
                         <select class="form-control" id="profileSelect">
-                            <option>Profile 1</option>
-                            <option>Profile 2</option>
-                            <option>Profile 3</option>
+                        <?php foreach ($users as $users): ?>
+                <option value="<?php echo $tenant['id']; ?>"><?php echo $tenant['name']; ?></option>
+            <?php endforeach; ?>
                         </select>
                         </div>
                         <div class="form-group">
@@ -162,7 +165,16 @@
       feather.replace();
     </script>
     <script>
-    $(document).ready(function () {
+<script>
+$(document).ready(function () {
+        // Function to update tenant's name based on selected profile
+        $('#profileSelect').on('change', function () {
+            var selectedProfile = $(this).val();
+            var selectedTenant = <?php echo json_encode($tenants); ?>.find(tenant => tenant.id == selectedProfile);
+            $('#tenantNamePlaceholder').text(selectedTenant.name);
+        });
+
+        // Function to filter table rows based on search input
         $("#searchInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
             $("table tbody tr").filter(function () {
@@ -170,6 +182,7 @@
             });
         });
     });
+
 </script>
     <?php include_once 'footer.php' ?>
 

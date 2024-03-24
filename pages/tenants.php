@@ -3,13 +3,8 @@ include_once 'header.php';
 include_once 'tenantsfunc.php'; // Include the tenantfunc.php file
 include_once '../pages/auth/dbh.class.php'; // Include the database connection file
 
-// Create an instance of the Dbh class
 $dbh = new Dbh();
-
-// Call the connect method to establish a database connection
 $pdo = $dbh->connect();
-
-// Call the getUsers function to fetch user data
 $users = getUsers($pdo);
 ?>
 
@@ -88,13 +83,6 @@ $users = getUsers($pdo);
     <div class="form-group">
         <label for="date">Date:</label>
         <input type="date" class="form-control" id="date">
-    </div>
-    <div class="form-group">
-        <label for="availability">Availability:</label>
-        <select class="form-control" id="availability">
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
-        </select>
     </div>
     <div class="form-group">
         <label for="roomSelect">Select Room:</label>

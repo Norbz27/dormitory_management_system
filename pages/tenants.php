@@ -1,16 +1,15 @@
 <?php
 include_once 'header.php';
-include_once 'tenantsfunc.php'; // Include the tenantfunc.php file
-include_once '../pages/auth/dbh.class.php'; // Include the database connection file
+include_once 'tenantsfunc.php'; 
+include_once '../pages/auth/dbh.class.php'; 
 
-// Create an instance of the Dbh class
 $dbh = new Dbh();
-
-// Call the connect method to establish a database connection
 $pdo = $dbh->connect();
-
-// Call the getUsers function to fetch user data
 $users = getUsers($pdo);
+$rooms = getAvailableRooms($pdo); 
+$userTypes = getUserTypes($pdo);
+
+
 ?>
 
 <style>
@@ -80,9 +79,10 @@ $users = getUsers($pdo);
     <div class="form-group">
         <label for="userType">User Type:</label>
         <select class="form-control" id="userType">
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Staff">Staff</option>
+        <?php foreach ($userTypes as $type): ?>
+            <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+        <?php endforeach; ?>
+    </select>
         </select>
     </div>
     <div class="form-group">
@@ -90,26 +90,19 @@ $users = getUsers($pdo);
         <input type="date" class="form-control" id="date">
     </div>
     <div class="form-group">
-        <label for="availability">Availability:</label>
-        <select class="form-control" id="availability">
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label for="roomSelect">Select Room:</label>
         <select class="form-control" id="roomSelect">
-            <option>Room 1</option>
-            <option>Room 2</option>
-            <option>Room 3</option>
+        <?php foreach ($rooms as $room): ?>
+            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
+        <?php endforeach; ?>
         </select>
     </div>
-</div>
-
+                    </div>
                     <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary" id="saveTenantBtn">Save</button>
+
                     </div>
 
                     </div>
@@ -194,25 +187,45 @@ $users = getUsers($pdo);
     <script>
       feather.replace();
     </script>
-    <script>
 <script>
+// Your JavaScript code here
 $(document).ready(function () {
-        // Function to update tenant's name based on selected profile
-        $('#profileSelect').on('change', function () {
-            var selectedProfile = $(this).val();
-            var selectedTenant = <?php echo json_encode($tenants); ?>.find(tenant => tenant.id == selectedProfile);
-            $('#tenantNamePlaceholder').text(selectedTenant.name);
-        });
 
-        // Function to filter table rows based on search input
-        $("#searchInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("table tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
+    var tenants = <?php echo json_encode($users); ?>;
+    
+    
+    $('#profileSelect').on('change', function () {
+        var selectedProfile = $(this).val();
+        var selectedTenant = tenants.find(tenant => tenant.id == selectedProfile);
+        $('#tenantNamePlaceholder').text(selectedTenant.name);
+    });
+
+    
+    $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("table tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
     });
 
+    $('#saveTenantBtn').on('click', function () {
+        console.log('jawa na button');
+        var userId = $('#profileSelect').val();
+        var userTypeId = $('#userType').val();
+        var roomId = $('#roomSelect').val();
+        var date = $('#date').val();
+        var role = ''; 
+        
+        var result = saveTenant(userId, userTypeId, roomId, date, role, <?php echo json_encode($pdo); ?>);
+        
+        if (result) {
+            $('#newTenant').modal('hide');
+        } else {
+            alert('Failed to save tenant data. Please try again.');
+        }
+    });
+});
 </script>
-    <?php include_once 'footer.php' ?>
 
+
+    <?php include_once 'footer.php' ?>

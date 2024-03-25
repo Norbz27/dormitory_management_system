@@ -64,16 +64,20 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                     <div class="modal-body">
     <!-- Profile Picture Placeholder -->
     <div class="text-center mb-3">
-        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+        <!-- Image container for user profile picture -->
+        <div id="profilePictureContainer">
+            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+        </div>
     </div>
     
     <!-- Profile and Room Selection -->
+   <!-- Profile and Room Selection -->
     <form id="new-tenants">
                 <div class="form-group">
                     <label for="profileSelect">Select User:</label>
                     <select class="form-control" id="profileSelect" name="profileSelect">
                         <?php foreach ($users as $user): ?>
-                            <option value="<?php echo $user['id']; ?>"><?php echo $user['name']; ?></option>
+                            <option value="<?php echo $user['id']; ?>" data-image="<?php echo $user['display_img']; ?>"><?php echo $user['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -202,6 +206,16 @@ $(document).ready(function () {
               ';
         }
     ?>
+</script>
+<script>
+    // JavaScript to update profile picture when a user is selected from the dropdown
+    document.getElementById('profileSelect').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var imageUrl = selectedOption.getAttribute('data-image');
+        var profilePictureContainer = document.getElementById('profilePictureContainer');
+        // Update the image source
+        profilePictureContainer.innerHTML = '<img src="assets/' + imageUrl + '" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">';
+    });
 </script>
 
     <?php include_once 'footer.php' ?>

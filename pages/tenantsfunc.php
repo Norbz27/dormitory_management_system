@@ -4,12 +4,12 @@ include_once '../db/db_conn.php';
 
 function getUsers() {
     try {
-        
         $dbh = new Dbh();
-       
         $pdo = $dbh->connect();
         
-        $sql = "SELECT id, name FROM users"; 
+        // Modify the SQL query to check if users exist in tenants table
+        $sql = "SELECT u.id, u.name, u.display_img FROM users u LEFT JOIN tenants t ON u.id = t.user_id WHERE t.user_id IS NULL AND u.status != 'admin'";
+        
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,13 +20,14 @@ function getUsers() {
     }
 }
 
+
 function getAvailableRooms() {
     try {
     
         $dbh = new Dbh();
         $pdo = $dbh->connect();
         
-        $sql = "SELECT room_id, room_name FROM room_details WHERE status = 'available'";
+        $sql = "SELECT room_id, room_name FROM room_details WHERE status = 'available' OR status = 'lacking'";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

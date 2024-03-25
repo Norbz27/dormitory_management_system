@@ -44,6 +44,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
         .profile-picture:hover .overlay {
             opacity: 1;
         }
+        .form-label{
+            font-size: 14px;
+        }
     </style>
       <!-- partial -->
       <div class="main-panel">

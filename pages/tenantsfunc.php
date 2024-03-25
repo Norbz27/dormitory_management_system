@@ -78,7 +78,7 @@ function getAllTenants() {
                             <i data-feather="more-horizontal"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
+                            <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewTenantModal">View</a>
                             <a class="dropdown-item delete-btn" href="#">Delete</a>
                         </div>
                     </div></td>
@@ -131,5 +131,44 @@ function getAllTenants() {
                 }
             });
         });
+
+        $('#viewTenantModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var tenantId = button.closest('tr').data('tenant-id'); // Extract user ID from data attribute
+        var modal = $(this);
+
+        // AJAX call to fetch user information
+        $.ajax({
+            url: 'viewTenantsInfo.php', // Modify the URL according to your setup
+            type: 'POST',
+            data: {tenantId: tenantId},
+            success: function(response) {
+                // Parse the JSON response
+                var tenantData = JSON.parse(response);
+                // Populate modal fields with user data
+                modal.find('#edid').val(tenantId);
+                modal.find('#edProfile').attr('src', 'assets/'+tenantData.display_img);
+                modal.find('#edtenantName').val(tenantData.name);
+                modal.find('#edgender').val(tenantData.gender);
+                modal.find('#edcontactNo').val(tenantData.contact);
+                modal.find('#eduserType').val(tenantData.description);
+                modal.find('#edstartDate').val(tenantData.Date);
+                modal.find('#edroomName').val(tenantData.room_name);
+                modal.find('#edfloorBelong').val(tenantData.floor_belong);
+                modal.find('#edmonthlyRate').val(tenantData.monthly_rate);
+                modal.find('#edadditionalFee').val("0");
+                modal.find('#edtotalFee').val("0");
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                swal({
+                    title: "Error",
+                    text: "Failed to fetch user information!",
+                    icon: "error",
+                    button: false,
+                });
+            }
+        });
+    });
     });
 </script>

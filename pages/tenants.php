@@ -26,6 +26,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
             width: 95%;
             margin-left: 4px;
         }
+        .form-label{
+            font-size: 14px;
+        }
     </style>
       <!-- partial -->
       <div class="main-panel">
@@ -48,6 +51,85 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- View Modal -->
+            <div class="modal fade" id="viewTenantModal" tabindex="-1" aria-labelledby="viewTenantModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Tenant Information</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="post">
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <!-- Image container for user profile picture -->
+                        <div id="profilePictureContainer">
+                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" id="edProfile" name="edProfile" class="img-fluid rounded-circle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="edid" name="edid" hidden>
+                        <div class="col-md-12"><h6><strong>Personal Information</strong></h6></div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="tenantName" class="form-label">Tenant Name:</label>
+                                <input type="text" class="form-control" id="edtenantName" name="edtenantName" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender:</label>
+                                <input type="text" class="form-control" id="edgender" name="edgender" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactNo" class="form-label">Contact No.:</label>
+                                <input type="text" class="form-control" id="edcontactNo" name="edcontactNo" readonly>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                        <div class="mb-3">
+                                <label for="userType" class="form-label">User Type:</label>
+                                <input type="text" class="form-control" id="eduserType" name="eduserType" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">Start Date:</label>
+                                <input type="text" class="form-control" id="edstartDate" name="edstartDate" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12"><h6><strong>Room Information</strong></h6></div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="roomName" class="form-label">Room Name:</label>
+                                <input type="text" class="form-control" id="edroomName" name="edroomName" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="floorBelong" class="form-label">Floor Belong:</label>
+                                <input type="text" class="form-control" id="edfloorBelong" name="edfloorBelong" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="monthlyRate" class="form-label">Monthly Rate:</label>
+                                <input type="text" class="form-control" id="edmonthlyRate" name="edmonthlyRate" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="additionalFee" class="form-label">Additional Fee:</label>
+                                <input type="text" class="form-control" id="edadditionalFee" name="edadditionalFee" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="totalFee" class="form-label">Total Fee:</label>
+                                <input type="text" class="form-control" id="edtotalFee" name="edtotalFee" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </form>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="newTenant">

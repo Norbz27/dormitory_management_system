@@ -9,7 +9,7 @@ $users = getUsers($pdo);
 $rooms = getAvailableRooms($pdo); 
 $userTypes = getUserTypes($pdo);
 
-
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>
 
 <style>
@@ -112,7 +112,7 @@ $userTypes = getUserTypes($pdo);
             </div>
 
             <div class="search-box mb-3">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
             </div>
             <div class="grid-margin stretch-card">
                 <div class="card">
@@ -125,7 +125,6 @@ $userTypes = getUserTypes($pdo);
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
-                                    <col style="width: auto;"> 
                                     <col style="width: 20px;"> 
                                 </colgroup>
                                 <thead>
@@ -133,51 +132,13 @@ $userTypes = getUserTypes($pdo);
                                         <th>Room</th>
                                         <th>Profile</th>
                                         <th>Name</th>
-                                        <th>Gender</th>
                                         <th>Contact</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>101</td>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i data-feather="more-horizontal"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
-                                                    <a class="dropdown-item delete-btn" href="#">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>101</td>
-                                        <td></td>
-                                        <td>Jacob</td>
-                                        <td>Male</td>
-                                        <td>53275531</td>
-                                        <td><span class="badge badge-warning">Inactive</span></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i data-feather="more-horizontal"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
-                                                    <a class="dropdown-item delete-btn" href="#">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php getAllTenants()?>
                                 </tbody>
                             </table>
                         </div>
@@ -213,6 +174,34 @@ $(document).ready(function () {
 });
 </script>
 <script src="functions.js"></script>
-
+<script>
+    <?php
+        if ($status === 'success') {
+            echo 'swal({
+                title: "Success",
+                text: "New account have been added!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'stmtfailed') {
+            echo 'swal({
+                title: "Error",
+                text: "No account have been added!",
+                icon: "error",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'updated') {
+            echo 'swal({
+                title: "Success",
+                text: "Account have been Updated!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        }
+    ?>
+</script>
 
     <?php include_once 'footer.php' ?>

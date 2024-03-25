@@ -33,25 +33,27 @@ $(document).on("submit", "#new-tenants", function (e) {
   formData.append("add_tenants", true);
 
   $.ajax({
-    type: "POST",
-    url: "server_function.php",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (response) {
-      var res = jQuery.parseJSON(response);
-      if (res.status == 422) {
-        console.log(res); // Log the response for debugging
-        $("#errorMessage").removeClass("d-none");
-        $("#errorMessage").text(res.message);
-      } else if (res.status == 200) {
-        $("#errorMessage").addClass("d-none");
-        $("#addRoom").modal("hide");
-        $("#add_room")[0].reset();
-      }
-    },
+      type: "POST",
+      url: "server_function.php",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+          var res = JSON.parse(response);
+          if (res.status == 500) {
+              console.log(res); // Log the response for debugging
+              $("#errorMessage").removeClass("d-none");
+              $("#errorMessage").text(res.message);
+          } else if (res.status == 200) {
+              $("#errorMessage").addClass("d-none");
+              $("#newTenant").modal("hide");
+              $("#new-tenants")[0].reset();
+              window.location.href = "../pages/tenants.php?status=success";
+          }
+      },
   });
 });
+
 
 $(document).on("click", "#view_button", function (e) {
   e.preventDefault();

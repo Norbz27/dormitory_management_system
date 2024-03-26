@@ -27,7 +27,7 @@ function getAvailableRooms() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
         
-        $sql = "SELECT room_id, room_name FROM room_details WHERE status = 'available' OR status = 'lacking'";
+        $sql = "SELECT room_id, room_name, floor_belong FROM room_details WHERE status = 'available' OR status = 'lacking'";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -132,6 +132,22 @@ function getAllTenants() {
             });
         });
 
+        $('#editTenantBtn').on('click', function() {
+            // Make specific input fields editable
+            $('#eduserType, #roomName, #edadditionalFee').prop('disabled', false);
+            // Toggle visibility of buttons
+            $('#editTenantBtn').hide();
+            $('button[type="submit"]').show();
+        });
+
+        $('#close-btn').on('click', function() {
+            // Make specific input fields editable
+            $('#eduserType, #roomName, #edadditionalFee').prop('disabled', true)
+            // Toggle visibility of buttons
+            $('#editTenantBtn').show();
+            $('button[type="submit"]').hide();
+        });
+       
         $('#viewTenantModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var tenantId = button.closest('tr').data('tenant-id'); // Extract user ID from data attribute
@@ -151,13 +167,18 @@ function getAllTenants() {
                 modal.find('#edtenantName').val(tenantData.name);
                 modal.find('#edgender').val(tenantData.gender);
                 modal.find('#edcontactNo').val(tenantData.contact);
-                modal.find('#eduserType').val(tenantData.description);
+                modal.find('#eduserType').val(tenantData.user_type_id);
                 modal.find('#edstartDate').val(tenantData.Date);
-                modal.find('#edroomName').val(tenantData.room_name);
+                modal.find('#edroomName').val(tenantData.room_id);
                 modal.find('#edfloorBelong').val(tenantData.floor_belong);
-                modal.find('#edmonthlyRate').val(tenantData.monthly_rate);
-                modal.find('#edadditionalFee').val("0");
-                modal.find('#edtotalFee').val("0");
+                var monthlyRate = parseFloat(tenantData.monthly_rate);
+                var additionalFee = parseFloat(tenantData.additional_fee);
+                var totalFee = monthlyRate + additionalFee;
+
+                modal.find('#edmonthlyRate').val(monthlyRate);
+                modal.find('#edadditionalFee').val(additionalFee);
+                modal.find('#edtotalFee').val(totalFee);
+
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -170,5 +191,49 @@ function getAllTenants() {
             }
         });
     });
+
+    function updateTotalFee() {
+        var monthlyRate = parseFloat($('#edmonthlyRate').val()) || 0; // Get the monthly rate, default to 0 if not a number
+        var additionalFee = parseFloat($('#edadditionalFee').val()) || 0; // Get the additional fee, default to 0 if not a number
+        var userType = $('#eduserType').val(); // Get the selected user type
+        
+        if (userType === '2') {
+            var totalFee = monthlyRate;
+            totalFee = 750;
+            $('#edmonthlyRate').val(totalFee.toFixed(2));
+            // Add additional fee to total fee
+            totalFee += additionalFee;
+
+            // Update the total fee field
+            $('#edtotalFee').val(totalFee.toFixed(2));
+        } else if (userType === '1') {
+            var totalFee = monthlyRate;
+            totalFee = 3000;
+            $('#edmonthlyRate').val(totalFee.toFixed(2));
+            // Add additional fee to total fee
+            totalFee += additionalFee;
+
+            // Update the total fee field
+            $('#edtotalFee').val(totalFee.toFixed(2));
+        }
+
+         // Set the total fee, rounded to 2 decimal places
+    }
+
+    // Trigger updateTotalFee when userType, monthlyRate, or additionalFee changes
+    $('#eduserType, #edmonthlyRate, #edadditionalFee').on('change', updateTotalFee);
     });
+
+    $(document).ready(function() {
+    // Function to update floor belong based on selected room name
+    $('#roomName').on('change', function() {
+        // Get the selected room ID and floor belong data
+        var room_id = $(this).val();
+        var floor_belong = $(this).find('option:selected').data('floor-belong');
+
+        // Update the floor belong field with the fetched value
+        $('#edfloorBelong').val(floor_belong);
+    });
+});
+
 </script>

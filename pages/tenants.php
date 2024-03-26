@@ -54,83 +54,97 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
             </div>
             <!-- View Modal -->
             <div class="modal fade" id="viewTenantModal" tabindex="-1" aria-labelledby="viewTenantModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Tenant Information</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form method="post">
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <!-- Image container for user profile picture -->
-                        <div id="profilePictureContainer">
-                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" id="edProfile" name="edProfile" class="img-fluid rounded-circle">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Tenant Information</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <input type="text" class="form-control" id="edid" name="edid" hidden>
-                        <div class="col-md-12"><h6><strong>Personal Information</strong></h6></div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="tenantName" class="form-label">Tenant Name:</label>
-                                <input type="text" class="form-control" id="edtenantName" name="edtenantName" readonly>
+                        <form action="update_tenantInfo.php" method="post">
+                            <div class="modal-body">
+                                <div class="text-center mb-4">
+                                    <!-- Image container for user profile picture -->
+                                    <div id="">
+                                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" id="edProfile" name="edProfile" class="img-fluid rounded-circle">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="text" class="form-control" id="edid" name="edid" hidden>
+                                    <div class="col-md-12"><h6><strong>Personal Information</strong></h6></div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="tenantName" class="form-label">Tenant Name:</label>
+                                            <input type="text" class="form-control" id="edtenantName" name="edtenantName" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Gender:</label>
+                                            <input type="text" class="form-control" id="edgender" name="edgender" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactNo" class="form-label">Contact No.:</label>
+                                            <input type="text" class="form-control" id="edcontactNo" name="edcontactNo" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="eduserType" class="form-label">User Type:</label>
+                                            <select class="form-control" id="eduserType" name="eduserType" disabled>
+                                                <?php foreach ($userTypes as $type): ?>
+                                                    <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="startDate" class="form-label">Start Date:</label>
+                                            <input type="date" class="form-control" id="edstartDate" name="edstartDate" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12"><h6><strong>Room Information</strong></h6></div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="edroomName" class="form-label">Room Name:</label>
+                                            <select class="form-control" id="edroomName" name="edroomName" disabled>
+                                                <?php foreach ($rooms as $room): ?>
+                                                    <!-- Embed floor belong data as data attribute -->
+                                                    <option value="<?php echo $room['room_id']; ?>" data-floor-belong="<?php echo $room['floor_belong']; ?>"><?php echo $room['room_name']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="monthlyRate" class="form-label">Monthly Rate:</label>
+                                            <input type="text" class="form-control" id="edmonthlyRate" name="edmonthlyRate" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="totalFee" class="form-label">Total Fee:</label>
+                                            <input type="text" class="form-control" id="edtotalFee" name="edtotalFee" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="floorBelong" class="form-label">Floor Belong:</label>
+                                            <input type="text" class="form-control" id="edfloorBelong" name="edfloorBelong" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="additionalFee" class="form-label">Additional Fee:</label>
+                                            <input type="text" class="form-control" id="edadditionalFee" name="edadditionalFee" disabled>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="gender" class="form-label">Gender:</label>
-                                <input type="text" class="form-control" id="edgender" name="edgender" readonly>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" name="editTenantBtn" class="btn btn-primary" id="editTenantBtn">Edit Tenant</button>
+                                <button type="submit" name="saveTenant" class="btn btn-primary" id="saveTenant"  style="display: none;">Save</button>
                             </div>
-                            <div class="mb-3">
-                                <label for="contactNo" class="form-label">Contact No.:</label>
-                                <input type="text" class="form-control" id="edcontactNo" name="edcontactNo" readonly>
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6">
-                        <div class="mb-3">
-                                <label for="userType" class="form-label">User Type:</label>
-                                <input type="text" class="form-control" id="eduserType" name="eduserType" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="startDate" class="form-label">Start Date:</label>
-                                <input type="text" class="form-control" id="edstartDate" name="edstartDate" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12"><h6><strong>Room Information</strong></h6></div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="roomName" class="form-label">Room Name:</label>
-                                <input type="text" class="form-control" id="edroomName" name="edroomName" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="floorBelong" class="form-label">Floor Belong:</label>
-                                <input type="text" class="form-control" id="edfloorBelong" name="edfloorBelong" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="monthlyRate" class="form-label">Monthly Rate:</label>
-                                <input type="text" class="form-control" id="edmonthlyRate" name="edmonthlyRate" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="additionalFee" class="form-label">Additional Fee:</label>
-                                <input type="text" class="form-control" id="edadditionalFee" name="edadditionalFee" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="totalFee" class="form-label">Total Fee:</label>
-                                <input type="text" class="form-control" id="edtotalFee" name="edtotalFee" readonly>
-                            </div>
-                        </div>
-                    </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            </form>
-            </div>
+
             <!-- Modal -->
             <div class="modal fade" id="newTenant">
                 <div class="modal-dialog">
@@ -144,13 +158,13 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-    <!-- Profile Picture Placeholder -->
-    <div class="text-center mb-3">
-        <!-- Image container for user profile picture -->
-        <div id="profilePictureContainer">
-            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
-        </div>
-    </div>
+                    <!-- Profile Picture Placeholder -->
+                    <div class="text-center mb-3">
+                        <!-- Image container for user profile picture -->
+                        <div id="profilePictureContainer">
+                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                        </div>
+                    </div>
     
     <!-- Profile and Room Selection -->
    <!-- Profile and Room Selection -->
@@ -183,6 +197,10 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
                     <?php endforeach; ?>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Additional Fee:</label>
+                    <input type="text" class="form-control" id="addFee" name="addFee">
                 </div>
                 </div>
                 <!-- Modal Footer -->
@@ -243,12 +261,6 @@ $(document).ready(function () {
 
     var tenants = <?php echo json_encode($users); ?>;
     
-    
-    $('#profileSelect').on('change', function () {
-        var selectedProfile = $(this).val();
-        var selectedTenant = tenants.find(tenant => tenant.id == selectedProfile);
-        $('#tenantNamePlaceholder').text(selectedTenant.name);
-    });
 
     
     $("#searchInput").on("keyup", function () {

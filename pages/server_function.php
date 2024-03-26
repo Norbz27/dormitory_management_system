@@ -376,8 +376,9 @@ if (isset($_POST['add_tenants'])) {
     $userType = $_POST['userType'];
     $date = $_POST['date'];
     $roomSelect = $_POST['roomSelect'];
+    $addFee = $_POST['addFee'];
 
-    $sql = "CALL addTenants(?, ?, ?, ?)";
+    $sql = "CALL addTenants(?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     
     if ($stmt === false) {
@@ -385,7 +386,7 @@ if (isset($_POST['add_tenants'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("iisi", $profileSelect, $userType, $date, $roomSelect);
+    $stmt->bind_param("iisdi", $profileSelect, $userType, $date, $roomSelect, $addFee);
 
     // Execute the statement
     if ($stmt->execute()) {

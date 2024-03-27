@@ -35,38 +35,42 @@
         <div class="grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="datepicker">Date:</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="datepicker" placeholder="Select month and year" autocomplete="off">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="month_of">Month of:</label>
+                                    <div class="input-group">
+                                        <input type="month" class="form-control" id="month_of" name="month_of" placeholder="Select month and year">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="amount">Amount:</label>
-                                <input type="number" id="amount" class="form-control" step="0.01">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="amount">Amount:</label>
+                                    <input type="number" id="amount" name="amount" class="form-control" step="0.01">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center mb-2 mt-4">
-                            <h5>Upload Reciept</h5>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="dropzone" for="image" id="dropzone">
-                                    <p>Drag & drop your files here or click to select files</p>
-                                    <input type="file" id="image" class="form-control-file" hidden>
-                                </label>
+                        <div class="row">
+                            <div class="col-md-12 text-center mb-2 mt-4">
+                                <h5>Upload Reciept</h5>
+                            </div> 
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="dropzone" for="image" id="dropzone">
+                                        <p>Drag & drop your files here or click to select files</p>
+                                        <input type="file" id="image" name="image" class="form-control-file" accept="image/*" hidden>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mb-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-md" style="width:100%">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -75,11 +79,6 @@
 
 <script>
     $(document).ready(function(){
-        $('#datepicker').datepicker({
-            format: 'MM yyyy',
-            viewMode: 'months',
-            minViewMode: 'months'
-        });
         
         // Drag and drop functionality
         var dropzone = document.getElementById('dropzone');

@@ -277,7 +277,7 @@ $(document).ready(function () {
         if ($status === 'success') {
             echo 'swal({
                 title: "Success",
-                text: "New account have been added!",
+                text: "New tenant have been added!",
                 icon: "success",
                 button: false,
               });
@@ -285,7 +285,7 @@ $(document).ready(function () {
         } elseif ($status === 'stmtfailed') {
             echo 'swal({
                 title: "Error",
-                text: "No account have been added!",
+                text: "No tenant have been added!",
                 icon: "error",
                 button: false,
               });
@@ -293,7 +293,7 @@ $(document).ready(function () {
         } elseif ($status === 'updated') {
             echo 'swal({
                 title: "Success",
-                text: "Account have been Updated!",
+                text: "Tenant Information have been Updated!",
                 icon: "success",
                 button: false,
               });

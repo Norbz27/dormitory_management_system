@@ -1,4 +1,5 @@
-<?php include_once 'header.php' ?>
+<?php include_once 'header.php';
+$status = isset($_GET['status']) ? $_GET['status'] : '';?>
 
 <style>
     /* Custom CSS for Datepicker size */
@@ -35,7 +36,7 @@
         <div class="grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="submit_payment.php" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -54,7 +55,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center mb-2 mt-4">
-                                <h5>Upload Reciept</h5>
+                                <h5>Upload Receipt</h5>
                             </div> 
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -135,5 +136,26 @@
             }
         }
     });
+</script>
+<script>
+    <?php
+        if ($status === 'success') {
+            echo 'swal({
+                title: "Success",
+                text: "Payment submitted!",
+                icon: "success",
+                button: false,
+              });
+              ';
+        } elseif ($status === 'stmtfailed') {
+            echo 'swal({
+                title: "Error",
+                text: "No payment have been submitted!",
+                icon: "error",
+                button: false,
+              });
+              ';
+        }
+    ?>
 </script>
 <?php include_once 'footer.php' ?>

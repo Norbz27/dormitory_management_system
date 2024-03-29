@@ -260,9 +260,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 $(document).ready(function () {
 
     var tenants = <?php echo json_encode($users); ?>;
-    
 
-    
     $("#searchInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("table tbody tr").filter(function () {

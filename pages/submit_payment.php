@@ -1,6 +1,6 @@
 <?php
 include_once '../db/db_conn.php';
-
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $month_of = $_POST['month_of'];
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = date("Y-m-d"); // Get current date
 
     $stmt = $conn->prepare("INSERT INTO payments (user_id, amount, receipt_img, month_of, date) VALUES (?, ?, ?, ?, ?)");
-    $user_id = 1; // Assuming user_id is 1 for this example
+    $user_id = $_SESSION['userid'];
     $stmt->bind_param("idsss", $user_id, $amount, $relative_path, $month_of, $date);    
     
     if ($stmt->execute()) {

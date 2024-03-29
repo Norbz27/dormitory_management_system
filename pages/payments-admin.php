@@ -1,4 +1,6 @@
-<?php include_once 'header.php' ?>
+<?php 
+include_once 'header.php';
+include_once 'payment-admin_function.php' ?>
 <style>
         table {
             border-collapse: collapse;
@@ -26,56 +28,7 @@
                     </div>
                 </div>
             </div>
-           <!-- Modal -->
-            <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Payment ID:</strong> 123456</p>
-                            <p><strong>Room No:</strong> 101</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>User type:</strong> Student</p>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-4 mb-5">
-                        <div class="col-md-6">
-                            <p><strong>Monthly Rate:</strong> ₱500</p>
-                            <p><strong>Additional fee:</strong> ₱50</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Month of:</strong> Febuary 2024</p>
-                            <p><strong>Total Amount:</strong> ₱1000</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="display: flex; justify-content: space-between;">
-                                <span style="text-align: left; font-size: 18px">March 20, 2024</span>
-                                <span style="text-align: right; font-size: 18px"><strong>Paid Amount:</strong> ₱550</span>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">View Receipt</button>
-                </div>
-                </div>
-            </div>
-            </div>
+           
             <div class="search-box mb-3">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search...">
           </div>
@@ -101,22 +54,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <tr>
-                                        <td>00000000</td>
-                                        <td>Norberto Bruzon</td>
-                                        <td>₱850.00</td>
-                                        <td>04-20-2023</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i data-feather="more-horizontal"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#paymentModal">View Details</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                   </tr>
+                                   <?php getAllPayments(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -125,6 +63,7 @@
             </div>
         </div>
       </div>
+     
       <script>
       feather.replace();
     </script>
@@ -135,6 +74,35 @@
             $("table tbody tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
+        });
+    });
+</script>
+<div id="modal-container"></div>
+<script>
+    // jQuery script to handle modal display
+    $(document).ready(function(){
+        // Listen for click on any element with class 'view-btn'
+        $('.view-btn').click(function(){
+            // Get the payment ID from the clicked element's data-payment-id attribute
+            var payment_id = $(this).data('payment-id');
+            // Call the PHP function to display payment details passing the payment ID
+            $.ajax({
+                url: 'server_function.php', // Replace with your PHP script file
+                method: 'GET',
+                data: {payment_id: payment_id}, // Pass payment ID to PHP script
+                success: function(response){
+                    // Inject the modal content into a container div
+                    $('#modal-container').html(response);
+                    // Show the modal with the dynamically generated ID
+                    $('#paymentModal_' + payment_id).modal('show');
+                }
+            });
+        });
+
+        // When the modal is hidden, remove its content
+        $('#modal-container').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+            $(this).find('.modal-content').empty();
         });
     });
 </script>

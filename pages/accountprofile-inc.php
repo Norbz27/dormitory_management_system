@@ -11,6 +11,11 @@ if(isset($_SESSION['userid'])) {
         $dbh = new Dbh();
         $conn = $dbh->connect();
 
+        if (!$conn) {
+            echo "Failed to connect to the database.";
+            exit();
+        }
+
         // Fetch user data from the database
         $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $conn->prepare($sql);

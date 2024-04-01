@@ -164,11 +164,18 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     <div class="profile-wrapper text-center">
         <div class="profile-picture">
             <label for="profile">
-                <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; border-radius: 50%; margin-right:8px;" alt="profile"/>
-                <div class="overlay">
-                    <p style="font-size: 18px">Upload new profile</p>
-                </div>
-                <input type="file" name="profile" id="profile" hidden>
+            <form action="accountprofile.php" method="post" enctype="multipart/form-data">
+    <div class="profile-picture">
+        <label for="profile">
+            <img src="assets/<?php echo $displayImg; ?>" style="object-fit: cover; border-radius: 50%; margin-right:8px;" alt="profile"/>
+            <div class="overlay">
+                <p style="font-size: 18px">Upload new profile</p>
+            </div>
+            <input type="file" name="profile" id="profile" onchange="this.form.submit()" hidden>
+        </label>
+    </div>
+</form>
+
             </label>
         </div>
     </div>

@@ -1,5 +1,4 @@
 <?php
-
 require_once '../pages/auth/dbh.class.php';
 
 // Check if the ID is provided in the session
@@ -11,9 +10,8 @@ if(isset($_SESSION['userid'])) {
         $dbh = new Dbh();
         $conn = $dbh->connect();
 
-        if (!$conn) {
-            echo "Failed to connect to the database.";
-            exit();
+        if(!$conn) {
+            throw new Exception("Database connection failed.");
         }
 
         // Fetch user data from the database
@@ -25,7 +23,6 @@ if(isset($_SESSION['userid'])) {
         // Check if the query executed successfully
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $id = $row['id'];
             $username = $row['name'];
             $contact = $row['contact'];
             $gender = $row['gender'];
@@ -39,6 +36,9 @@ if(isset($_SESSION['userid'])) {
         }
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
+        exit();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
         exit();
     } finally {
         // Close the database connection
@@ -81,6 +81,9 @@ if(isset($_SESSION['userid'])) {
         if (move_uploaded_file($file['tmp_name'], $destPath)) {
             // Update the user's profile picture filename in the database
             try {
+                // Re-establish the database connection
+                $conn = $dbh->connect();
+
                 // Update the user's profile picture filename in the database
                 $sql = "UPDATE users SET display_img = :display_img WHERE id = :id";
                 $stmt = $conn->prepare($sql);
@@ -93,6 +96,9 @@ if(isset($_SESSION['userid'])) {
             } catch (PDOException $e) {
                 echo "Failed to update profile picture: " . $e->getMessage();
                 exit();
+            } finally {
+                // Close the database connection
+                $conn = null;
             }
         } else {
             echo "Failed to move uploaded file.";

@@ -101,7 +101,7 @@ if(isset($_SESSION['userid'])) {
                 $conn = null;
             }
         } else {
-            echo "Failed to move uploaded file.";
+          
             exit();
         }
     }

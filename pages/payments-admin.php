@@ -87,7 +87,7 @@ include_once 'payment-admin_function.php' ?>
             var payment_id = $(this).data('payment-id');
             // Call the PHP function to display payment details passing the payment ID
             $.ajax({
-                url: 'server_function.php', // Replace with your PHP script file
+                url: 'viewpaymentinfo.php', // Replace with your PHP script file
                 method: 'GET',
                 data: {payment_id: payment_id}, // Pass payment ID to PHP script
                 success: function(response){

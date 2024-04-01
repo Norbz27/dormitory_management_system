@@ -232,3 +232,4 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 </body>
 
 </html>
+<script src="functions.js"></script>

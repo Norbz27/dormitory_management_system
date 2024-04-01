@@ -311,3 +311,4 @@ $(document).ready(function () {
 </script>
 
     <?php include_once 'footer.php' ?>
+    <script src="functions.js"></script>

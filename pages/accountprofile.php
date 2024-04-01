@@ -5,6 +5,12 @@ include_once 'account_function.inc.php';
 include 'accountprofile-inc.php';
 
 $status = isset($_GET['status']) ? $_GET['status'] : '';
+
+// Check if form is submitted for updating profile picture
+if(isset($_FILES['profile'])) {
+    // Include the code to handle profile picture upload and update
+    include 'accountprofile-inc.php';
+}
 ?>
   <style>
 .profile-wrapper {

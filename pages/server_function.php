@@ -410,24 +410,82 @@ if (isset($_POST['add_tenants'])) {
     $conn->close();
 }
 
-if(isset($_GET['payment_id'])) {
-    // Sanitize the input
-    $payment_id = mysqli_real_escape_string($conn, $_GET['payment_id']);
-    include_once 'payment-admin_function.php';
-    // Call the displayPaymentDetails function to generate modal content
-    displayPaymentDetails($payment_id);
-} else {
-    // If payment_id is not set, return an error message
-    echo "Payment ID is not set.";
+if (isset($_POST['accept_payment'])) {
+    $id = $_POST['id'];
+    $status = "Accepted";
+
+    $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    mysqli_stmt_execute($stmt);
+
+    // Check for errors in the query execution
+    if (mysqli_stmt_errno($stmt) != 0) {
+        $res = [
+            'status' => 500,
+            'message' => 'Error in query: ' . mysqli_stmt_error($stmt)
+        ];
+    } else {
+        // Check the number of affected rows
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        if ($affectedRows > 0) {
+            $res = [
+                'status' => 200,
+                'message' => 'Payment accepted',
+                'affected_rows' => $affectedRows
+            ];
+        } else {
+            $res = [
+                'status' => 404,
+                'message' => 'Payment not found or not accepted'
+            ];
+        }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
 }
 
-// Add JavaScript to remove previous modal content when closing the modal
-echo '<script>
-        $(document).ready(function(){
-            // When the modal is hidden, remove its content
-            $("#paymentModal").on("hidden.bs.modal", function () {
-                $(this).removeData("bs.modal");
-                $(this).find(".modal-content").empty();
-            });
-        });
-    </script>';
+if (isset($_POST['reject_payment'])) {
+    $id = $_POST['id'];
+    $status = "Rejected";
+
+    $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    mysqli_stmt_execute($stmt);
+
+    // Check for errors in the query execution
+    if (mysqli_stmt_errno($stmt) != 0) {
+        $res = [
+            'status' => 500,
+            'message' => 'Error in query: ' . mysqli_stmt_error($stmt)
+        ];
+    } else {
+        // Check the number of affected rows
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        if ($affectedRows > 0) {
+            $res = [
+                'status' => 200,
+                'message' => 'Payment Rejected',
+                'affected_rows' => $affectedRows
+            ];
+        } else {
+            $res = [
+                'status' => 404,
+                'message' => 'Payment not found or not Rejected'
+            ];
+        }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}

@@ -41,6 +41,7 @@ include_once 'payment-admin_function.php' ?>
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
+                                    <col style="width: auto;">
                                     <col style="width: auto;"> 
                                     <col style="width: 20px;"> 
                                 </colgroup>
@@ -50,6 +51,7 @@ include_once 'payment-admin_function.php' ?>
                                         <th>Client Name</th>
                                         <th>Ammount</th>
                                         <th>Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -87,7 +89,7 @@ include_once 'payment-admin_function.php' ?>
             var payment_id = $(this).data('payment-id');
             // Call the PHP function to display payment details passing the payment ID
             $.ajax({
-                url: 'server_function.php', // Replace with your PHP script file
+                url: 'viewpaymentinfo.php', // Replace with your PHP script file
                 method: 'GET',
                 data: {payment_id: payment_id}, // Pass payment ID to PHP script
                 success: function(response){
@@ -103,6 +105,54 @@ include_once 'payment-admin_function.php' ?>
         $('#modal-container').on('hidden.bs.modal', '.modal', function () {
             $(this).removeData('bs.modal');
             $(this).find('.modal-content').empty();
+        });
+
+        $(document).on("click", ".accept-btn", function (e) {
+            e.preventDefault();
+            var id = $(this).val();
+            var formData = new FormData();
+            formData.append("accept_payment", true);
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: "server_function.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                var res = jQuery.parseJSON(response);
+                if (res.status == 422) {
+                    console.log(res);
+                } else if (res.status == 200) {
+                    location.reload();
+                }
+                },
+            });
+        });
+
+        $(document).on("click", ".reject-btn", function (e) {
+            e.preventDefault();
+            var id = $(this).val();
+            var formData = new FormData();
+            formData.append("reject_payment", true);
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: "server_function.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                var res = jQuery.parseJSON(response);
+                if (res.status == 422) {
+                    console.log(res);
+                } else if (res.status == 200) {
+                    location.reload();
+                }
+                },
+            });
         });
     });
 </script>

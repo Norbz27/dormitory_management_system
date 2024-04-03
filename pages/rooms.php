@@ -182,7 +182,7 @@ $room3 = getRoom3();
                             <img id="display_img" src="" class="card-img-top" alt="">
                             <div class="d-flex flex-column bd-highlight">
                               <div class="bd-highlight">Floor: <span id="floor"></span></div>
-                              <div class="bd-highlight">Occupy Numbers: <span id="occupy_num"></span></div>
+                              <div class="bd-highlight">Available Occupation: <span id="occupy_num"></span></div>
                               <div class="bd-highlight">Status: <span id="status"></span></div>
                             </div>
                           </div>
@@ -219,7 +219,7 @@ $room3 = getRoom3();
                                 </select>
                                 <label>Room Name</label>
                                 <input type="text" class="form-control mb-3" name="room_name" id="auto_room_name" required>
-                                <label>Occupy Number</label>
+                                <label>Max Occupation</label>
                                 <input type="number" class="form-control mb-3" name="occupy_num" required>
                                 <label>Status</label>
                                 <select class="form-control mb-3" name="status" required>

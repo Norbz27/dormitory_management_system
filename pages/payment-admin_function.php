@@ -3,7 +3,7 @@
 
     function getAllPayments() {
         global $conn;
-        $sql = "SELECT p.payment_id, u.name, p.amount, p.date FROM payments p LEFT JOIN users u ON p.user_id = u.id;";
+        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status FROM payments p LEFT JOIN users u ON p.user_id = u.id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
@@ -19,6 +19,7 @@
                         <td>' . $row["name"] . '</td>
                         <td>₱' . $row["amount"] . '</td>
                         <td>' . $row["date"] . '</td>
+                        <td>' . $row["status"] . '</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,6 +27,8 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">View Details</a>
+                                    <button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Accept</button>
+                                    <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>
                                 </div>
                             </div>
                         </td>

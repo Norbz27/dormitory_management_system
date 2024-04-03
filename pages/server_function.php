@@ -410,4 +410,82 @@ if (isset($_POST['add_tenants'])) {
     $conn->close();
 }
 
+if (isset($_POST['accept_payment'])) {
+    $id = $_POST['id'];
+    $status = "Accepted";
 
+    $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    mysqli_stmt_execute($stmt);
+
+    // Check for errors in the query execution
+    if (mysqli_stmt_errno($stmt) != 0) {
+        $res = [
+            'status' => 500,
+            'message' => 'Error in query: ' . mysqli_stmt_error($stmt)
+        ];
+    } else {
+        // Check the number of affected rows
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        if ($affectedRows > 0) {
+            $res = [
+                'status' => 200,
+                'message' => 'Payment accepted',
+                'affected_rows' => $affectedRows
+            ];
+        } else {
+            $res = [
+                'status' => 404,
+                'message' => 'Payment not found or not accepted'
+            ];
+        }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}
+
+if (isset($_POST['reject_payment'])) {
+    $id = $_POST['id'];
+    $status = "Rejected";
+
+    $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    mysqli_stmt_execute($stmt);
+
+    // Check for errors in the query execution
+    if (mysqli_stmt_errno($stmt) != 0) {
+        $res = [
+            'status' => 500,
+            'message' => 'Error in query: ' . mysqli_stmt_error($stmt)
+        ];
+    } else {
+        // Check the number of affected rows
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        if ($affectedRows > 0) {
+            $res = [
+                'status' => 200,
+                'message' => 'Payment Rejected',
+                'affected_rows' => $affectedRows
+            ];
+        } else {
+            $res = [
+                'status' => 404,
+                'message' => 'Payment not found or not Rejected'
+            ];
+        }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}

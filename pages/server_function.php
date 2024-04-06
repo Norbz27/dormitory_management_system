@@ -412,7 +412,7 @@ if (isset($_POST['add_tenants'])) {
 
 if (isset($_POST['accept_payment'])) {
     $id = $_POST['id'];
-    $status = "Accepted";
+    $status = "Verified";
 
     $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
     $stmt = mysqli_prepare($conn, $query);

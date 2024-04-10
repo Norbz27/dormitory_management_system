@@ -1,134 +1,155 @@
-
-
-.img {
+.ftco-section .img {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center; }
+  background-position: center center;
+}
 
-.elegant-calencar {
+.ftco-section .elegant-calencar {
   max-width: 100%;
   text-align: center;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 19px 27px -20px rgba(0, 0, 0, 0.16);
-  -moz-box-shadow: 0px 19px 27px -20px rgba(0, 0, 0, 0.16);
-  box-shadow: 0px 19px 27px -20px rgba(0, 0, 0, 0.16); }
+  box-shadow: 0px 19px 27px -20px rgba(0, 0, 0, 0.16);
+}
 
-.wrap-header {
+.ftco-section .wrap-header {
   position: relative;
   width: 45%;
-  background: #4B49AC; }
-  @media (max-width: 767.98px) {
-    .wrap-header {
-      width: 100%;
-      padding: 20px 0; } }
+  background: #4B49AC;
+}
 
-#header {
+@media (max-width: 767.98px) {
+  .ftco-section .wrap-header {
+    width: 100%;
+    padding: 20px 0;
+  }
+}
+
+.ftco-section #header {
   width: 100%;
-  position: relative; }
-  #header .pre-button, #header .next-button {
-    cursor: pointer;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    font-size: 18px; }
-    #header .pre-button i, #header .next-button i {
-      color: #fff; }
+  position: relative;
+}
 
-.pre-button {
-  left: 5px; }
+.ftco-section #header .pre-button,
+.ftco-section #header .next-button {
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
 
-.next-button {
-  right: 5px; }
+.ftco-section #header .pre-button i,
+.ftco-section #header .next-button i {
+  color: #fff;
+}
 
+.ftco-section .pre-button {
+  left: 5px;
+}
 
+.ftco-section .next-button {
+  right: 5px;
+}
 
-.calendar-wrap {
+.ftco-section .calendar-wrap {
   width: 100%;
   background: #fff;
-  padding: 40px 20px 20px 20px; }
+  padding: 40px 20px 20px 20px;
+}
 
-#calendar {
-  width: 100%; }
+.ftco-section #calendar {
+  width: 100%;
+}
 
-#calendar tr {
-  height: 3em; }
+.ftco-section #calendar tr {
+  height: 3em;
+}
 
-thead tr {
+.ftco-section thead tr {
   color: #000;
-  font-weight: 700; }
+  font-weight: 700;
+}
 
-tbody tr {
-  color: #000; }
+.ftco-section tbody tr {
+  color: #000;
+}
 
-tbody td {
+.ftco-section tbody td {
   width: 14%;
   border-radius: 50%;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease-in;
-  -o-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
   position: relative;
-  z-index: 0; }
-  tbody td:after {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    content: '';
-    width: 44px;
-    height: 44px;
-    margin: 0 auto;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    border-radius: 50%;
-    -webkit-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-    z-index: -1; }
-    @media (prefers-reduced-motion: reduce) {
-      tbody td:after {
-        -webkit-transition: none;
-        -o-transition: none;
-        transition: none; } }
+  z-index: 0;
+}
 
-tbody td:hover, .selected {
+.ftco-section tbody td:after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  transition: 0.3s;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ftco-section tbody td:after {
+    transition: none;
+  }
+}
+
+.ftco-section tbody td:hover,
+.ftco-section .selected {
   color: #fff;
-  border: none; }
-  tbody td:hover:after, .selected:after {
-    background: #2a3246; }
+  border: none;
+}
 
-tbody td:active {
-  -webkit-transform: scale(0.7);
-  -ms-transform: scale(0.7);
-  transform: scale(0.7); }
+.ftco-section tbody td:hover:after,
+.ftco-section .selected:after {
+  background: #2a3246;
+}
 
-#today {
-  color: #fff; }
-  #today:after {
-    background: #4B49AC; }
+.ftco-section tbody td:active {
+  transform: scale(0.7);
+}
 
-#disabled {
+.ftco-section #today {
+  color: #fff;
+}
+
+.ftco-section #today:after {
+  background: #4B49AC;
+}
+
+.ftco-section #disabled {
   cursor: default;
-  background: #fff; }
-
-#disabled:hover {
   background: #fff;
-  color: #c9c9c9; }
-  #disabled:hover:after {
-    background: transparent; }
+}
 
-#reset {
+.ftco-section #disabled:hover {
+  background: #fff;
+  color: #c9c9c9;
+}
+
+.ftco-section #disabled:hover:after {
+  background: transparent;
+}
+
+.ftco-section #reset {
   display: block;
   position: absolute;
   right: 0.5em;
@@ -139,17 +160,16 @@ tbody td:active {
   padding: 0 0.5em;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 4px;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   text-transform: uppercase;
-  font-size: 11px; }
+  font-size: 11px;
+}
 
-#reset:hover {
+.ftco-section #reset:hover {
   color: #fff;
-  border-color: #fff; }
+  border-color: #fff;
+}
 
-#reset:active {
-  -webkit-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8); }
+.ftco-section #reset:active {
+  transform: scale(0.8);
+}

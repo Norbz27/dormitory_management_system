@@ -61,14 +61,25 @@
             // Calculate the total fee
             $total_fee = $row["monthly_rate"] + $row["additional_fee"];
             // Format month_of as "Month Year"
-            $month_of_formatted = date('F Y', strtotime($row["month_of"]));
+            // Assuming $row["month_of"] contains the date range "2024-04 - 2024-05"
+            $date_range = explode(" - ", $row["month_of"]);
+
+            // Format the start date
+            $start_date = date('F Y', strtotime($date_range[0]));
+
+            // Format the end date
+            $end_date = date('F Y', strtotime($date_range[1]));
+
+            // Concatenate the formatted dates with a hyphen in between
+            $formatted_date_range = $start_date . ' - ' . $end_date;
+
             // Format date as "Month Day, Year"
             $date_formatted = date('F j, Y', strtotime($row["date"]));
             // Generate unique modal IDs
             $modal_id = 'paymentModal_' . $payment_id;
             // Display modal content dynamically
             echo '<div class="modal fade" id="' . $modal_id . '" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
@@ -78,23 +89,23 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <p><strong>Payment ID:</strong> ' . $row["payment_id"] . '</p>
                                     <p><strong>Room No:</strong> ' . $row["room_name"] . '</p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <p><strong>Name:</strong> ' . $row["name"] . '</p>
                                     <p><strong>User type:</strong> ' . $row["description"] . '</p>
                                 </div>
                             </div>
                             
                             <div class="row mt-4 mb-5">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <p><strong>Monthly Rate:</strong> ₱' . $row["monthly_rate"] . '</p>
                                     <p><strong>Additional fee:</strong> ₱' . $row["additional_fee"] . '</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <p><strong>Month of:</strong> ' . $month_of_formatted . '</p>
+                                <div class="col-md-7">
+                                    <p><strong>Month of:</strong> ' . $formatted_date_range . '</p>
                                     <p><strong>Total Amount:</strong> ₱' . $total_fee . '</p>
                                 </div>
                             </div>

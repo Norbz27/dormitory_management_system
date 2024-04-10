@@ -3,9 +3,11 @@ include_once '../db/db_conn.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $month_of = $_POST['month_of'];
+    $month_from = $_POST['month_of'];
+    $month_to = $_POST['month_to'];
     $amount = $_POST['amount'];
-    
+    $month_of = $month_from ." - ". $month_to;
+
     // Upload image
     $target_dir = "assets/";
     $originalFileName = basename($_FILES["image"]["name"]);

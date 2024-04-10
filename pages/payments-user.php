@@ -38,15 +38,23 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';?>
                 <div class="card-body">
                     <form action="submit_payment.php" method="post" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="month_of">Month of:</label>
+                                    <label for="month_of">Month from:</label>
                                     <div class="input-group">
                                         <input type="month" class="form-control" id="month_of" name="month_of" placeholder="Select month and year">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="month_of">To:</label>
+                                    <div class="input-group">
+                                        <input type="month" class="form-control" id="month_to" name="month_to" placeholder="Select month and year">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="amount">Amount:</label>
                                     <input type="number" id="amount" name="amount" class="form-control" step="0.01">

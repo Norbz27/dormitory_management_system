@@ -6,11 +6,6 @@ include 'accountprofile-inc.php';
 
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 
-// Check if form is submitted for updating profile picture
-if(isset($_FILES['profile'])) {
-    // Include the code to handle profile picture upload and update
-    include 'accountprofile-inc.php';
-}
 ?>
   <style>
 .profile-wrapper {
@@ -170,22 +165,20 @@ if(isset($_FILES['profile'])) {
     <div class="profile-wrapper text-center">
         <div class="profile-picture">
             <label for="profile">
-            <form action="accountprofile.php" method="post" enctype="multipart/form-data">
-    <div class="profile-picture">
-                                <label for="profile">
-                            <img src="assets/<?php echo $displayImg; ?>" style="object-fit: cover; border-radius: 50%; margin-right:8px;" alt="profile"/>
-                            <div class="overlay">
-                                <p style="font-size: 18px">Upload new profile</p>
-                            </div>
-                            <!-- Form for updating profile picture -->
-                            <form action="accountprofile.php" method="post" enctype="multipart/form-data">
-                                <input type="file" name="profile" id="profile" onchange="this.form.submit()" hidden>
-                            </form>
-                        </label>
+            <div class="profile-picture">
+                <label for="profile">
+                    <img src="assets/<?php echo $displayImg; ?>" style="object-fit: cover; border-radius: 50%; margin-right:8px;" alt="profile"/>
+                    <div class="overlay">
+                        <p style="font-size: 18px">Upload new profile</p>
+                    </div>
+                    <!-- Form for updating profile picture -->
+                    <form action="update_profileAcc.php" method="post" enctype="multipart/form-data">
+                        <input type="file" name="profile" id="profile" onchange="this.form.submit()" hidden>
+                    </form>
+                </label>
+            </div>
         </div>
     </div>
-</div>
-
 </div>
 
       </div>

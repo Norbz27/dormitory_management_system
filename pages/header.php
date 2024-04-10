@@ -62,8 +62,16 @@ if (!isset($_SESSION["account"])) {
         
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="assets/<?php echo $_SESSION["displayImg"] ?>" style="object-fit: cover; margin-right:8px" alt="profile"/>
-              <span><?php echo $_SESSION["usersname"] ?></span>
+            <?php 
+            // Check if the session variable for the profile image exists and use it
+            if(isset($_SESSION["displayImg"])) {
+              echo '<img src="assets/' . $_SESSION["displayImg"] . '" style="object-fit: cover; margin-right:8px" alt="profile"/>';
+            } else {
+              // Use a default image if the session variable doesn't exist
+              echo '<img src="assets/profile.png" style="object-fit: cover; margin-right:8px" alt="profile"/>';
+            }
+          ?>
+          <span><?php echo $_SESSION["usersname"] ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
             <a class="dropdown-item" href="../pages/accountprofile.php?id=<?php echo $_SESSION['userid']; ?>">

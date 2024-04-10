@@ -14,12 +14,13 @@
         if (mysqli_num_rows($result) > 0) {
             // Output data of each row
             while($row = mysqli_fetch_assoc($result)) {
+                $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-danger';
                 echo '<tr data-payment-id="' . $row["payment_id"] . '">
                         <td>' . $row["payment_id"] . '</td>
                         <td>' . $row["name"] . '</td>
                         <td>₱' . $row["amount"] . '</td>
                         <td>' . $row["date"] . '</td>
-                        <td>' . $row["status"] . '</td>
+                        <td><span class="badge ' . $badge_color . '">' . $row["status"] . '</span></td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

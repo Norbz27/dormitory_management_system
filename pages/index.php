@@ -21,7 +21,7 @@ $rowIncome = mysqli_fetch_assoc($resultIncome);
 // Transaction History
 if ($_SESSION["username"] != 'admin') {
   $user_id = $_SESSION["userid"];
-  $sql_transactions = "SELECT * FROM payments WHERE user_id = $user_id ORDER BY payment_id DESC LIMIT 5";
+  $sql_transactions = "SELECT * FROM payments WHERE user_id = $user_id AND status = 'Verified' ORDER BY payment_id DESC LIMIT 5";
   $result_transactions = $conn->query($sql_transactions);
 }
 ?>
@@ -330,18 +330,21 @@ if ($_SESSION["username"] != 'admin') {
                         <th>Amount</th>
                         <th>Month</th>
                         <th>Date</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
                       if ($result_transactions->num_rows > 0) {
                         while ($row = $result_transactions->fetch_assoc()) {
+                          $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-warning';
                           ?>
                           <tr>
                             <td><?php echo $row['payment_id']; ?></td>
                             <td><?php echo $row['amount']; ?></td>
                             <td><?php echo date('F Y', strtotime($row['month_of'])); ?></td>
                             <td><?php echo date('F d, Y', strtotime($row['date'])); ?></td>
+                            <td><span class="badge <?php echo $badge_color; ?>"><?php echo $row['status']; ?></span></td>
                           </tr>
                         <?php
                         }

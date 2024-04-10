@@ -72,6 +72,7 @@ $(document).on("click", "#view_button", function (e) {
         $("#room_name").text(res.data.room_name);
         $("#edit_button").val(thisroom_id);
         $("#display_img").attr("src", "assets/" + res.data.display_img);
+        //$("#new_room_id").val(thisroom_id);
       }
     },
   });

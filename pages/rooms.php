@@ -39,7 +39,7 @@ include_once 'display_function.inc.php';
 
                           // Check if the floor is set in the URL, otherwise default to the first floor
                           $selectedFloor = isset($_GET['floor']) ? $_GET['floor'] : 1;
-                          $room = getRoom1( $selectedFloor);
+                          $room = getRoom1($selectedFloor);
 
                           // Output the HTML for the dropdown menu
                           echo '<div class="form-group d-flex align-items-center">
@@ -62,6 +62,7 @@ include_once 'display_function.inc.php';
                         $floor_belong = $room['floor_belong'];
                         $status = $room['status'];
                         $display_img = $room['display_img'];
+                        $available_occupation = $room['available_occupation'];
                         ?>
 
                       <div class="col">
@@ -77,7 +78,7 @@ include_once 'display_function.inc.php';
                                   <?php
                                 }else if ($status == "Lacking"){
                                   ?>
-                                  <span class="badge badge-pill badge-warning"><?php echo $status?></span>
+                                  <span class="badge badge-pill badge-warning"><?php echo $status . ' ' . $available_occupation?></span>
                                   <?php
                                 }else if ($status == "Occupied"){
                                   ?>

@@ -56,21 +56,21 @@ $(document).on("submit", "#new-tenants", function (e) {
 
 $(document).on("click", "#view_button", function (e) {
   e.preventDefault();
-  var room_id = $(this).val();
+  var thisroom_id = $(this).val();
 
   $.ajax({
     type: "GET",
-    url: "server_function.php?view_room_id=" + room_id,
+    url: "server_function.php?view_room_id=" + thisroom_id,
     success: function (response) {
       var res = jQuery.parseJSON(response);
       if (res.status == 422) {
         alert(res.message);
       } else if (res.status == 200) {
         $("#floor").text(res.data.floor_belong);
-        $("#occupy_num").text(res.data.occupy_num);
+        $("#occupy_num").text(res.data.available_occupation);
         $("#status").text(res.data.status);
         $("#room_name").text(res.data.room_name);
-        $("#edit_button").val(res.data.room_id);
+        $("#edit_button").val(thisroom_id);
         $("#display_img").attr("src", "assets/" + res.data.display_img);
       }
     },
@@ -79,11 +79,11 @@ $(document).on("click", "#view_button", function (e) {
 
 $(document).on("click", "#edit_button", function (e) {
   e.preventDefault();
-  var room_id = $(this).val();
+  var thisroom_id = $(this).val();
   $("#exampleModal").modal("hide");
   $.ajax({
     type: "GET",
-    url: "server_function.php?view_room_id=" + room_id,
+    url: "server_function.php?view_room_id=" + thisroom_id,
     success: function (response) {
       var res = jQuery.parseJSON(response);
       if (res.status == 422) {

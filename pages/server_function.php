@@ -135,7 +135,7 @@ if (isset($_POST['edit_room'])) {
 if (isset($_GET['view_room_id'])) {
     $room_id = $_GET['view_room_id'];
 
-    $query = "SELECT * FROM room_details WHERE room_id = ?";
+    $query = "SELECT room_details.*, tenants.*, (room_details.occupy_num - COUNT(tenants.tenants_id)) AS available_occupation FROM room_details LEFT JOIN tenants ON room_details.room_id = tenants.room_id WHERE room_details.room_id = ? GROUP BY room_details.room_id";
     $stmt = mysqli_prepare($conn, $query);
 
     mysqli_stmt_bind_param($stmt, "i", $room_id);
@@ -160,7 +160,8 @@ if (isset($_GET['view_room_id'])) {
     } else {
         $res = [
             'status' => 404,
-            'message' => 'Data not found'
+            'message' => 'Data not found',
+            'data' => $data
         ];
     }
 

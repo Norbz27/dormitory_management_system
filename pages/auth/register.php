@@ -56,12 +56,12 @@
                     <input type="file" class="form-control-file" name="display_picture" required>
                 </div>
                 <div class="mb-4">
-                  <div class="form-check">
+                  <!--<div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
                       I agree to all Terms & Conditions
                     </label>
-                  </div>
+                  </div>-->
                 </div>
                 <div class="mt-3">
                   <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>

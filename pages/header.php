@@ -118,7 +118,7 @@ if (!isset($_SESSION["account"])) {
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
         <?php 
-              if ($_SESSION["username"] == 'admin') {
+              if ($_SESSION["status"] == 'admin') {
                ?>
           <li class="nav-item">
             <a class="nav-link" href="index.php">

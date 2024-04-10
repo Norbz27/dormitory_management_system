@@ -41,9 +41,9 @@
                 <div class="mt-3">
                   <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
+                <!--<div class="my-2 d-flex justify-content-between align-items-center">
                   <a href="#" class="auth-link text-black">Forgot password?</a>
-                </div>
+                </div>-->
                 <div class="text-center mt-4 font-weight-light">
                   Don't have an account? <a href="register.php" class="text-primary">Create</a>
                 </div>

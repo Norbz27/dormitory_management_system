@@ -175,6 +175,9 @@ if (!isset($_SESSION["account"])) {
               <span class="menu-title">Rooms</span>
             </a>
           </li>
+          <?php 
+              if ($_SESSION["status"] == 'Tenant') {
+               ?>
           <li class="nav-item">
             <a class="nav-link" href="payments-user.php">
               <i class="icon-paper menu-icon"></i>
@@ -188,6 +191,7 @@ if (!isset($_SESSION["account"])) {
             </a>
           </li>   
      <?php 
+              }
             }
               ?>
           

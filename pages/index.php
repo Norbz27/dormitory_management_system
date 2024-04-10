@@ -209,7 +209,7 @@ if ($_SESSION["username"] != 'admin') {
               <div class="card card-light-danger">
                 <div class="card-body">
                   <p class="mb-4">Total Income</p>
-                  <p class="fs-30 mb-2"><?php echo $rowIncome['total_income']; ?></p>
+                  <p class="fs-30 mb-2">₱ <?php echo $rowIncome['total_income']; ?></p>
                 </div>
               </div>
             </div>

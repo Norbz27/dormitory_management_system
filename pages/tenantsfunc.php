@@ -63,13 +63,19 @@ function getAllTenants() {
         die("Query failed: " . mysqli_error($conn));
     }
 
+
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
             $badge_color = ($row["status"] == 'New') ? 'badge-success' : 'badge-warning';
+            
+            $profileImage = 'assets/profile.png';
+            if($row["display_img"] !== NULL && $row["display_img"] !== "")
+                $profileImage = 'assets/' . $row["display_img"];
+
             echo '<tr data-tenant-id="' . $row["tenants_id"] . '">
                     <td>' . $row["room_name"]. '</td>
-                    <td><img src="assets/' . $row["display_img"] . '" alt="User Image" style="width: 50px; height: 50px;"></td>
+                    <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
                     <td>' . $row["name"]. '</td>
                     <td>' . $row["contact"]. '</td>
                     <td><span class="badge ' . $badge_color . '">' . $row["status"]. '</span></td>
@@ -82,11 +88,12 @@ function getAllTenants() {
                             <a class="dropdown-item delete-btn" href="#">Delete</a>
                         </div>
                     </div></td>
-                  </tr>';
+                </tr>';
         }
     } else {
         echo "0 results";
     }
+
 }
 ?>
 <script>
@@ -163,7 +170,7 @@ function getAllTenants() {
                 var tenantData = JSON.parse(response);
                 // Populate modal fields with user data
                 modal.find('#edid').val(tenantId);
-                modal.find('#edProfile').attr('src', 'assets/'+tenantData.display_img);
+                modal.find('#edProfile').attr('src', tenantData.display_img !== null ? 'assets/' + tenantData.display_img : 'assets/profile.png');
                 modal.find('#edtenantName').val(tenantData.name);
                 modal.find('#edgender').val(tenantData.gender);
                 modal.find('#edcontactNo').val(tenantData.contact);

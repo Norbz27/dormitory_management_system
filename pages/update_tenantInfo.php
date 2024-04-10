@@ -4,7 +4,7 @@ include_once '../db/db_conn.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['edid'];
     $userType = $_POST['eduserType'];
-    $roomId = $_POST['roomName'];
+    $roomId = $_POST['edroomName'];
     $additionalFee = $_POST['edadditionalFee'];
 
     // Call the updateTenant function with the database connection and form data

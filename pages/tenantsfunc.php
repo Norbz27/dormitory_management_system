@@ -134,7 +134,7 @@ function getAllTenants() {
 
         $('#editTenantBtn').on('click', function() {
             // Make specific input fields editable
-            $('#eduserType, #roomName, #edadditionalFee').prop('disabled', false);
+            $('#eduserType, #roomName, #edadditionalFee, #edroomName').prop('disabled', false);
             // Toggle visibility of buttons
             $('#editTenantBtn').hide();
             $('button[type="submit"]').show();
@@ -142,7 +142,7 @@ function getAllTenants() {
 
         $('#close-btn').on('click', function() {
             // Make specific input fields editable
-            $('#eduserType, #roomName, #edadditionalFee').prop('disabled', true)
+            $('#eduserType, #roomName, #edadditionalFee, #edroomName').prop('disabled', true)
             // Toggle visibility of buttons
             $('#editTenantBtn').show();
             $('button[type="submit"]').hide();

@@ -8,7 +8,7 @@ if(isset($_POST['tenantId'])) {
     $tenantId = mysqli_real_escape_string($conn, $_POST['tenantId']);
 
     // Query to fetch user information based on user ID
-    $sql = "SELECT t.tenants_id, r.room_name, t.room_id, u.display_img, u.id, u.name, u.contact, u.gender, r.floor_belong, ut.monthly_rate, ut.description, ut.user_type_id, t.Date, t.additional_fee FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE t.tenants_id = '$tenantId';";
+    $sql = "SELECT t.tenants_id, r.room_name, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, r.floor_belong, ut.monthly_rate, ut.description, ut.user_type_id, t.Date, t.additional_fee FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE t.tenants_id = '$tenantId';";
     $result = mysqli_query($conn, $sql);
 
     // Check if query was successful

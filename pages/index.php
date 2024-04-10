@@ -25,7 +25,45 @@ if ($_SESSION["username"] != 'admin') {
   $result_transactions = $conn->query($sql_transactions);
 }
 ?>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../css/style.css">
+<?php 
+if ($_SESSION["username"] != 'admin') {
+?>
+<style>
+.head-day {
+  font-size: 8em;
+  line-height: 1;
+  color: #fff; }
+
+.head-month {
+  font-size: 2em;
+  line-height: 1;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase; }
+</style>
+<?php 
+} else {
+?>
+<style>
+.head-day {
+  font-size: 3em;
+  line-height: 1;
+  color: #fff; }
+
+.head-month {
+  line-height: 1;
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase; }
+</style>
+<?php
+}
+?>
 <style>
   .card-data {
     height: 150px;
@@ -45,13 +83,100 @@ if ($_SESSION["username"] != 'admin') {
     </div>
     <?php if ($_SESSION["username"] == 'admin') { ?>
       <div class="row">
-        <div class="col-md-6 grid-margin stretch-card">
-          <div class="card tale-bg">
-            <div class="card-people mt-auto">
-              <img src="../images/dashboard/people.svg" alt="people">
-            </div>
+      <div class="col-md-6">
+            <section class="ftco-section">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="elegant-calencar d-md-flex">
+                      <div class="wrap-header d-flex align-items-center">
+                        <p id="reset">reset</p>
+                        <div id="header" class="p-0">
+                          <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
+                          <div class="head-info">
+                              <div class="head-day" ></div>
+                              <div class="head-month"></div>
+                          </div>
+                          <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                      </div>
+                      <div class="calendar-wrap">
+                        <table id="calendar">
+                          <thead>
+                              <tr>
+                                  <th>Sun</th>
+                                  <th>Mon</th>
+                                  <th>Tue</th>
+                                  <th>Wed</th>
+                                  <th>Thu</th>
+                                  <th>Fri</th>
+                                  <th>Sat</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        </div>
         <div class="col-md-6 grid-margin transparent">
           <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent card-data">
@@ -94,10 +219,99 @@ if ($_SESSION["username"] != 'admin') {
     <?php } else { ?>
       <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-          <div class="card tale-bg">
-            <div class="card-people mt-auto">
-              <img src="../images/dashboard/people.svg" alt="people">
-            </div>
+          <div class="col-md-12">
+            <section class="ftco-section">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="elegant-calencar d-md-flex">
+                      <div class="wrap-header d-flex align-items-center">
+                        <p id="reset">reset</p>
+                        <div id="header" class="p-0">
+                          <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
+                          <div class="head-info">
+                              <div class="head-day"></div>
+                              <div class="head-month"></div>
+                          </div>
+                          <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                      </div>
+                      <div class="calendar-wrap">
+                        <table id="calendar">
+                          <thead>
+                              <tr>
+                                  <th>Sun</th>
+                                  <th>Mon</th>
+                                  <th>Tue</th>
+                                  <th>Wed</th>
+                                  <th>Thu</th>
+                                  <th>Fri</th>
+                                  <th>Sat</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -175,5 +389,8 @@ if ($_SESSION["username"] != 'admin') {
 <script src="../js/Chart.roundedBarCharts.js"></script>
 <!-- End custom js for this page-->
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="../js/main.js"></script>
 </html>

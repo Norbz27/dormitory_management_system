@@ -88,9 +88,15 @@ include_once 'display_function.inc.php';
                                 ?>
                             </div>
                           </div>
+                          <?php 
+                            if ($_SESSION["username"] == 'admin') {
+                          ?>
                           <div class="card-footer">
-                          <button type="button" value="<?php echo $room_id?>" id="view_button" class="btn btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
+                            <button type="button" value="<?php echo $room_id?>" id="view_button" class="btn btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
                           </div>
+                          <?php
+                            }
+                          ?>
                         </div>
                       </div>
                       <?php

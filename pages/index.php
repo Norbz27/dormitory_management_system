@@ -6,17 +6,17 @@ include_once '../db/db_conn.php';
 $totalRoomsQuery = "SELECT COUNT(*) AS total_rooms FROM room_details";
 $totalUsersQuery = "SELECT COUNT(*) AS total_users FROM users";
 $totalTenantsQuery = "SELECT COUNT(*) AS total_tenants FROM tenants";
-$totalIncomeQuery = "SELECT SUM(amount) AS total_income FROM payments";
+$totalPendingQuery = "SELECT COUNT(*) AS totalPendingPaid FROM payments WHERE status = 'Pending'";
 
 $resultRooms = mysqli_query($conn, $totalRoomsQuery);
 $resultUsers = mysqli_query($conn, $totalUsersQuery);
 $resultTenants = mysqli_query($conn, $totalTenantsQuery);
-$resultIncome = mysqli_query($conn, $totalIncomeQuery);
+$resultPending = mysqli_query($conn, $totalPendingQuery);
 
 $rowRooms = mysqli_fetch_assoc($resultRooms);
 $rowUsers = mysqli_fetch_assoc($resultUsers);
 $rowTenants = mysqli_fetch_assoc($resultTenants);
-$rowIncome = mysqli_fetch_assoc($resultIncome);
+$rowPending = mysqli_fetch_assoc($resultPending);
 
 // Transaction History
 if ($_SESSION["username"] != 'admin') {
@@ -208,8 +208,8 @@ if ($_SESSION["username"] != 'admin') {
             <div class="col-md-6 stretch-card transparent card-data">
               <div class="card card-light-danger">
                 <div class="card-body">
-                  <p class="mb-4">Total Income</p>
-                  <p class="fs-30 mb-2">₱ <?php echo $rowIncome['total_income']; ?></p>
+                  <p class="mb-4">Pending Payments</p>
+                  <p class="fs-30 mb-2"><?php echo $rowPending['totalPendingPaid']; ?></p>
                 </div>
               </div>
             </div>

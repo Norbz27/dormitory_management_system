@@ -14,7 +14,7 @@
         if (mysqli_num_rows($result) > 0) {
             // Output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-danger';
+                $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : (($row["status"] == 'Pending') ? 'badge-warning' : 'badge-danger');
                 echo '<tr data-payment-id="' . $row["payment_id"] . '">
                         <td>' . $row["payment_id"] . '</td>
                         <td>' . $row["name"] . '</td>
@@ -27,10 +27,13 @@
                                     <i data-feather="more-horizontal"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">View Details</a>
-                                    <button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
-                                    <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>
-                                </div>
+                                    <a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">View Details</a>';
+                                    // Only show verify and reject buttons if the status is pending
+                                    if ($row["status"] == 'Pending') {
+                                        echo '<button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
+                                            <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>';
+                                    }
+                                echo '</div>
                             </div>
                         </td>
                       </tr>';
@@ -38,6 +41,7 @@
         } else {
             echo "0 results";
         }
+        
     }
     
 

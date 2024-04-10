@@ -28,9 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert data into database
     $date = date("Y-m-d"); // Get current date
 
-    $stmt = $conn->prepare("INSERT INTO payments (user_id, amount, receipt_img, month_of, date) VALUES (?, ?, ?, ?, ?)");
-    $user_id = $_SESSION['userid'];
-    $stmt->bind_param("idsss", $user_id, $amount, $relative_path, $month_of, $date);    
+    $status = 'Pending'; // Assign 'Pending' to a variable
+
+    $stmt = $conn->prepare("INSERT INTO payments (user_id, amount, receipt_img, month_of, date, status) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("idssss", $_SESSION['userid'], $amount, $relative_path, $month_of, $date, $status); // Pass the variable to bind_param
     
     if ($stmt->execute()) {
         // Success

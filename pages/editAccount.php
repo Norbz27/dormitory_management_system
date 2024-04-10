@@ -10,15 +10,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uid = $_POST['eduid'];
     $pwd = $_POST['edpwd'];
 
-    // Call the updateAccount function with the database connection and form data
-    updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id);
+    if (isset($_FILES["viewprofile"]) && $_FILES["viewprofile"]["error"] === UPLOAD_ERR_OK) {
+        // Upload image
+        $target_dir = "assets/";
+        $originalFileName = basename($_FILES["viewprofile"]["name"]);
+        $imageFileType = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+
+        // Generate a random string
+        $randomString = bin2hex(random_bytes(8));
+
+        // Create a new filename with random string appended
+        $newFileName = $randomString . '_' . $originalFileName;
+
+        // Set the target file with the new filename
+        $target_file = $target_dir . $newFileName;
+
+        move_uploaded_file($_FILES["viewprofile"]["tmp_name"], $target_file);
+        
+        // Exclude "assets/" prefix from $target_file
+        $relative_path = substr($target_file, strlen($target_dir));
+
+        // Call the updateAccount function with the database connection and form data
+        updateAccount($conn, $relative_path, $name, $contact, $gender, $uid, $pwd, $id);
+    } else {
+        // No new profile picture uploaded, use the existing one
+        $img = getUserProfileImage($conn, $id);
+        // Call the updateAccount function with the database connection and form data
+        updateAccount($conn, $img, $name, $contact, $gender, $uid, $pwd, $id);
+    }
+
+    
 } else {
     // Redirect to the accounts page if the form is not submitted
     header("Location: ../pages/accounts.php");
     exit();
 }
 
-function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
+function getUserProfileImage($conn, $id) {
+    $sql = "SELECT display_img FROM users WHERE id = ?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return null;
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $display_img);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $display_img;
+}
+
+function updateAccount($conn, $img, $name, $contact, $gender, $uid, $pwd, $id){
     // Check if the UID and password are the same as those in the database
     $sql = "SELECT uid, pwd FROM users WHERE id=?";
     $stmt = mysqli_stmt_init($conn);
@@ -38,7 +83,7 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
 
     // If UID and password are the same, don't update
     if(password_verify($pwd, $db_pwd) || $pwd == $db_pwd) {
-        $sql = "UPDATE users SET name=?, contact=?, gender=?, uid=? WHERE id=?";
+        $sql = "UPDATE users SET display_img=?, name=?, contact=?, gender=?, uid=? WHERE id=?";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -50,7 +95,7 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
         // Bind parameters to the prepared statement
-        mysqli_stmt_bind_param($stmt, "sssss", $name, $contact, $gender, $uid, $id);
+        mysqli_stmt_bind_param($stmt, "ssssss", $img, $name, $contact, $gender, $uid, $id);
 
         // Execute the statement
         mysqli_stmt_execute($stmt);
@@ -87,7 +132,7 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
     mysqli_stmt_close($stmt);
 
     // Prepare the UPDATE query
-    $sql = "UPDATE users SET name=?, contact=?, gender=?, uid=?, pwd=? WHERE id=?";
+    $sql = "UPDATE users SET display_img=?, name=?, contact=?, gender=?, uid=?, pwd=? WHERE id=?";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -99,7 +144,7 @@ function updateAccount($conn, $name, $contact, $gender, $uid, $pwd, $id){
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     // Bind parameters to the prepared statement
-    mysqli_stmt_bind_param($stmt, "ssssss", $name, $contact, $gender, $uid, $hashedPwd, $id);
+    mysqli_stmt_bind_param($stmt, "sssssss", $img, $name, $contact, $gender, $uid, $hashedPwd, $id);
 
     // Execute the statement
     mysqli_stmt_execute($stmt);

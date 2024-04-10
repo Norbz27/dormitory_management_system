@@ -80,17 +80,17 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
-                      <form action="addAccount.php" method="post">
+                      <form action="addAccount.php" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                          <!-- Profile Picture Placeholder -->
                             <div class="profile-wrapper text-center">
                                 <div class="profile-picture">
                                     <label for="adprofile">
-                                        <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                        <img src="../images/profile.webp" id="adprofilePreview" alt="Profile Picture" style="width:180px; height: 180px; object-fit: cover;" class="img-fluid rounded-circle">
                                         <div class="overlay">
                                             <p style="font-size: 14px">Upload new profile</p>
                                         </div>
-                                        <input type="file" name="adprofile" id="adprofile" hidden>
+                                        <input type="file" name="adprofile" id="adprofile" onchange="previewImageAdd()" accept="image/*" hidden>
                                     </label>
                                 </div>
                             </div>
@@ -146,18 +146,18 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
             <div class="modal fade" id="viewAccountModal" tabindex="-1" role="dialog" aria-labelledby="viewAccountModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action="editAccount.php" method="post">
+                        <form action="editAccount.php"  method="post" enctype="multipart/form-data">
                             <div class="modal-body">
                                  <!-- Profile Picture Placeholder -->
                                 <div class="profile-wrapper text-center">
                                     <div class="profile-picture">
-                                        <label for="profile">
-                                            <img src="../images/profile.webp" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
-                                            <div class="overlay">
-                                                <p style="font-size: 14px">Upload new profile</p>
-                                            </div>
-                                            <input type="file" name="profile" id="profile" hidden disabled>
-                                        </label>
+                                    <label for="viewprofile">
+                                        <img src="../images/profile.webp" alt="Profile Picture" id="profilePic" style="width:180px; height: 180px; object-fit: cover;" class="img-fluid rounded-circle">
+                                        <div class="overlay">
+                                            <p style="font-size: 14px">Upload new profile</p>
+                                        </div>
+                                        <input type="file" name="viewprofile" id="viewprofile" hidden disabled onchange="previewImage()" accept="image/*">
+                                    </label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -309,6 +309,32 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
         }
     ?>
 </script>
+<script>
+        function previewImage() {
+            const fileInput = document.getElementById('viewprofile');
+            const img = document.getElementById('profilePic');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+        function previewImageAdd() {
+            const fileInput = document.getElementById('adprofile');
+            const img = document.getElementById('adprofilePreview');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 
 </html>

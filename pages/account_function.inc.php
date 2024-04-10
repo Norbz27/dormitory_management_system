@@ -3,7 +3,7 @@
 
     function getAllAccounts() {
         global $conn;
-        $sql = "SELECT id, name, contact, gender, status FROM users WHERE status != 'admin'";
+        $sql = "SELECT * FROM users WHERE status != 'admin'";
         $result = mysqli_query($conn, $sql);
 
         if (!$result) {
@@ -81,7 +81,7 @@
     $(document).ready(function() {
         $('#editAccountBtn').on('click', function() {
             // Make specific input fields editable
-            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #profile').prop('disabled', false);
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #viewprofile').prop('disabled', false);
             // Toggle visibility of buttons
             $('#editAccountBtn').hide();
             $('button[type="submit"]').show();
@@ -89,7 +89,7 @@
 
         $('#close-btn').on('click', function() {
             // Make specific input fields editable
-            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #profile').prop('disabled', true);
+            $('#edfullName, #edphoneNumber, #edusername, #edgender, #edpassword, #viewprofile').prop('disabled', true);
             // Toggle visibility of buttons
             $('#editAccountBtn').show();
             $('button[type="submit"]').hide();
@@ -97,7 +97,7 @@
     });
 
 
-    // Fetch user information and populate the modal on view button click
+   // Fetch user information and populate the modal on view button click
     $('#viewAccountModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var userId = button.closest('tr').data('user-id'); // Extract user ID from data attribute
@@ -130,6 +130,10 @@
                 });
                 // Set selected gender
                 genderSelect.val(userData.gender);
+
+                // Set profile picture
+                var profilePicSrc = userData.display_img ? 'assets/' + userData.display_img : 'assets/profile.png';
+                modal.find('#profilePic').attr('src', profilePicSrc);
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -142,6 +146,7 @@
             }
         });
     });
+
 });
 
 </script>

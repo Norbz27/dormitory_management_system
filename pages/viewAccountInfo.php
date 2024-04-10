@@ -8,7 +8,7 @@ if(isset($_POST['userId'])) {
     $userId = mysqli_real_escape_string($conn, $_POST['userId']);
 
     // Query to fetch user information based on user ID
-    $sql = "SELECT id, name, contact, gender, uid, pwd FROM users WHERE id = '$userId'";
+    $sql = "SELECT * FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $sql);
 
     // Check if query was successful

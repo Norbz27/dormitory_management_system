@@ -1,10 +1,6 @@
 <?php
 include_once 'header.php';
 include_once 'display_function.inc.php';
-
-$room1 = getRoom1();
-$room2 = getRoom2();
-$room3 = getRoom3();
 ?>
 <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
       <!-- partial -->
@@ -33,17 +29,40 @@ $room3 = getRoom3();
                         </div>
                     </div>
                     </div>
-                    <h3 class="font-weight-bold">Floor 1</h3>
+                    <?php
+                          // Define the available floors and their corresponding values
+                          $floors = [
+                              1 => 'Floor 1',
+                              2 => 'Floor 2',
+                              3 => 'Floor 3',
+                          ];
+
+                          // Check if the floor is set in the URL, otherwise default to the first floor
+                          $selectedFloor = isset($_GET['floor']) ? $_GET['floor'] : 1;
+                          $room = getRoom1($selectedFloor);
+
+                          // Output the HTML for the dropdown menu
+                          echo '<div class="form-group d-flex align-items-center">
+                                  <select class="form-control col-1" name="floorSelect" onchange="location = this.value;">';
+                          foreach ($floors as $floorValue => $floorLabel) {
+                              $selected = ($selectedFloor == $floorValue) ? 'selected' : '';
+                              echo '<option value="?floor=' . $floorValue . '" ' . $selected . '>' . $floorLabel . '</option>';
+                          }
+                          echo '</select>
+                              </div>';
+                          ?>
+
                     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-1">
 
                     <?php
-                      foreach ($room1 as $key => $room1) {
-                        $room_id  = $room1['room_id'];
-                        $room_name = $room1['room_name'];
-                        $occupy_num = $room1['occupy_num'];
-                        $floor_belong = $room1['floor_belong'];
-                        $status = $room1['status'];
-                        $display_img = $room1['display_img'];
+                      foreach ($room as $key => $room) {
+                        $room_id  = $room['room_id'];
+                        $room_name = $room['room_name'];
+                        $occupy_num = $room['occupy_num'];
+                        $floor_belong = $room['floor_belong'];
+                        $status = $room['status'];
+                        $display_img = $room['display_img'];
+                        $available_occupation = $room['available_occupation'];
                         ?>
 
                       <div class="col">
@@ -59,97 +78,7 @@ $room3 = getRoom3();
                                   <?php
                                 }else if ($status == "Lacking"){
                                   ?>
-                                  <span class="badge badge-pill badge-warning"><?php echo $status?></span>
-                                  <?php
-                                }else if ($status == "Occupied"){
-                                  ?>
-                                  <span class="badge badge-pill badge-danger"><?php echo $status?></span>
-                                  <?php
-                                }
-                                ?>
-                            </div>
-                          </div>
-                          <div class="card-footer">
-                          <button type="button" value="<?php echo $room_id?>" id="view_button" class="btn btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
-                          </div>
-                        </div>
-                      </div>
-                      <?php
-                      }
-                      ?>
-                    </div>
-                    <h3 class="font-weight-bold">Floor 2</h3>
-                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-1">
-
-                    <?php
-                      foreach ($room2 as $key => $room2) {
-                        $room_id  = $room2['room_id'];
-                        $room_name = $room2['room_name'];
-                        $occupy_num = $room2['occupy_num'];
-                        $floor_belong = $room2['floor_belong'];
-                        $status = $room2['status'];
-                        $display_img = $room2['display_img'];
-                        ?>
-
-                      <div class="col">
-                        <div class="card">
-                          <img src="assets/<?php echo $display_img?>" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
-                          <div class="card-body">
-                            <div class="room-desc">
-                              <span class="room-title"><?php echo $room_name?></span>
-                              <?php
-                                if($status == "Available"){
-                                  ?>
-                                  <span class="badge badge-pill badge-success"><?php echo $status?></span>
-                                  <?php
-                                }else if ($status == "Lacking"){
-                                  ?>
-                                  <span class="badge badge-pill badge-warning"><?php echo $status?></span>
-                                  <?php
-                                }else if ($status == "Occupied"){
-                                  ?>
-                                  <span class="badge badge-pill badge-danger"><?php echo $status?></span>
-                                  <?php
-                                }
-                                ?>
-                            </div>
-                          </div>
-                          <div class="card-footer">
-                          <button type="button" value="<?php echo $room_id?>" id="view_button" class="btn btn-circle " data-toggle="modal" data-target="#exampleModal">View</button>
-                          </div>
-                        </div>
-                      </div>
-                      <?php
-                      }
-                      ?>
-                    </div>
-                    <h3 class="font-weight-bold">Floor 3</h3>
-                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-1">
-
-                    <?php
-                      foreach ($room3 as $key => $room3) {
-                        $room_id  = $room3['room_id'];
-                        $room_name = $room3['room_name'];
-                        $occupy_num = $room3['occupy_num'];
-                        $floor_belong = $room3['floor_belong'];
-                        $status = $room3['status'];
-                        $display_img = $room3['display_img'];
-                        ?>
-
-                      <div class="col">
-                        <div class="card">
-                          <img src="assets/<?php echo $display_img?>" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
-                          <div class="card-body">
-                            <div class="room-desc">
-                              <span class="room-title"><?php echo $room_name?></span>
-                              <?php
-                                if($status == "Available"){
-                                  ?>
-                                  <span class="badge badge-pill badge-success"><?php echo $status?></span>
-                                  <?php
-                                }else if ($status == "Lacking"){
-                                  ?>
-                                  <span class="badge badge-pill badge-warning"><?php echo $status?></span>
+                                  <span class="badge badge-pill badge-warning"><?php echo $status . ' ' . $available_occupation?></span>
                                   <?php
                                 }else if ($status == "Occupied"){
                                   ?>

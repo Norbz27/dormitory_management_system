@@ -99,6 +99,10 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <label for="startDate" class="form-label">Start Date:</label>
                                             <input type="date" class="form-control" id="edstartDate" name="edstartDate" disabled>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="edEquipments" class="form-label">Equipments::</label>
+                                            <input type="text" class="form-control" id="edEquipments" name="edEquipments" disabled>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -150,70 +154,72 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                 <div class="modal-dialog">
                     <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">New Tenant</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                    <!-- Profile Picture Placeholder -->
-                    <div class="text-center mb-3">
-                        <!-- Image container for user profile picture -->
-                        <div id="profilePictureContainer">
-                            <img src="assets/profile.png" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">New Tenant</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <!-- Profile Picture Placeholder -->
+                            <div class="text-center mb-3">
+                                <!-- Image container for user profile picture -->
+                                <div id="profilePictureContainer">
+                                    <img src="assets/profile.png" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">
+                                </div>
+                            </div>
+
+                            <!-- Profile and Room Selection -->
+                            <form id="new-tenants">
+                                <div class="form-group">
+                                    <label for="profileSelect">Select User:</label>
+                                    <select class="form-control" id="profileSelect" name="profileSelect">
+                                        <?php foreach ($users as $user): ?>
+                                            <option value="<?php echo $user['id']; ?>" data-image="<?php echo $user['display_img']; ?>"><?php echo $user['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userType">User Type:</label>
+                                    <select class="form-control" id="userType" name="userType">
+                                        <?php foreach ($userTypes as $type): ?>
+                                            <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="roomSelect">Select Room:</label>
+                                    <select class="form-control" id="roomSelect" name="roomSelect">
+                                        <?php foreach ($rooms as $room): ?>
+                                            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addEquipments">Equipments:</label>
+                                    <input type="text" class="form-control" id="addEquipments" name="addEquipments" placeholder="Ex. Rice cooker, TV,....">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Additional Fee:</label>
+                                    <input type="text" class="form-control" id="addFee" name="addFee">
+                                </div>
+                        </div>
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="submit" class="btn btn-primary" id="saveTenantBtn">Save</button>
+                        </div>
+                        </form>
+
                     </div>
-    
-    <!-- Profile and Room Selection -->
-   <!-- Profile and Room Selection -->
-    <form id="new-tenants">
-                <div class="form-group">
-                    <label for="profileSelect">Select User:</label>
-                    <select class="form-control" id="profileSelect" name="profileSelect">
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?php echo $user['id']; ?>" data-image="<?php echo $user['display_img']; ?>"><?php echo $user['name']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="userType">User Type:</label>
-                    <select class="form-control" id="userType" name="userType">
-                    <?php foreach ($userTypes as $type): ?>
-                        <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" class="form-control" id="date" name="date">
-                </div>
-                <div class="form-group">
-                    <label for="roomSelect">Select Room:</label>
-                    <select class="form-control" id="roomSelect" name="roomSelect">
-                    <?php foreach ($rooms as $room): ?>
-                        <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
-                    <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Additional Fee:</label>
-                    <input type="text" class="form-control" id="addFee" name="addFee">
-                </div>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" class="btn btn-primary" id="saveTenantBtn">Save</button>
-
-                </div>
-        </form>
-
-                </div>
                 </div>
             </div>
+
 
             <div class="search-box mb-3">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search...">
@@ -306,7 +312,7 @@ $(document).ready(function () {
         var imageUrl = selectedOption.getAttribute('data-image');
         var profilePictureContainer = document.getElementById('profilePictureContainer');
         // Update the image source
-        profilePictureContainer.innerHTML = '<img src="assets/' + imageUrl + '" alt="Profile Picture" width="180px" class="img-fluid rounded-circle">';
+        profilePictureContainer.innerHTML = '<img src="assets/' + imageUrl + '" alt="Profile Picture" width="180px" style="height: 180px"class="img-fluid rounded-circle">';
     });
 </script>
 

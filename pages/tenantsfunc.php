@@ -166,18 +166,21 @@ function getAllTenants() {
             type: 'POST',
             data: {tenantId: tenantId},
             success: function(response) {
-                // Parse the JSON response
                 var tenantData = JSON.parse(response);
+
                 // Populate modal fields with user data
-                modal.find('#edid').val(tenantId);
+                modal.find('#edid').val(tenantData.tenants_id);
                 modal.find('#edProfile').attr('src', tenantData.display_img !== null ? 'assets/' + tenantData.display_img : 'assets/profile.png');
                 modal.find('#edtenantName').val(tenantData.name);
                 modal.find('#edgender').val(tenantData.gender);
                 modal.find('#edcontactNo').val(tenantData.contact);
                 modal.find('#eduserType').val(tenantData.user_type_id);
                 modal.find('#edstartDate').val(tenantData.Date);
-                modal.find('#edroomName').val(tenantData.room_id);
+                modal.find('#edroomName').val(tenantData.room_id); // Set the value of the select element directly
                 modal.find('#edfloorBelong').val(tenantData.floor_belong);
+                modal.find('#edEquipments').val(tenantData.equipments);
+
+                // Calculate total fee
                 var monthlyRate = parseFloat(tenantData.monthly_rate);
                 var additionalFee = parseFloat(tenantData.additional_fee);
                 var totalFee = monthlyRate + additionalFee;
@@ -185,8 +188,8 @@ function getAllTenants() {
                 modal.find('#edmonthlyRate').val(monthlyRate);
                 modal.find('#edadditionalFee').val(additionalFee);
                 modal.find('#edtotalFee').val(totalFee);
-
             },
+
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
                 swal({

@@ -119,6 +119,7 @@ include_once 'display_function.inc.php';
                               <div class="bd-highlight">Floor: <span id="floor"></span></div>
                               <div class="bd-highlight">Available Occupation: <span id="occupy_num"></span></div>
                               <div class="bd-highlight">Status: <span id="status"></span></div>
+                              <div class="bd-highlight" id="tenants"></div>
                             </div>
                           </div>
                           <div class="modal-footer">

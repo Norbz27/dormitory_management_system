@@ -21,6 +21,52 @@
   <script src="../js/Chart.roundedBarCharts.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- End custom js for this page-->
+
+<script>
+$(document).on("submit", "#survey-form", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+  formData.append("survey_form", true);
+
+  $.ajax({
+    type: "POST",
+    url: "server_function.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      var res = JSON.parse(response);
+      if (res.status == 500) {
+        console.log(res); // Log the response for debugging
+      } else if (res.status == 200) {
+      }
+    },
+  });
+});
+
+$(document).on("submit", "#complain-form", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+  formData.append("complain_form", true);
+
+  $.ajax({
+    type: "POST",
+    url: "server_function.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      var res = JSON.parse(response);
+      if (res.status == 500) {
+        console.log(res); // Log the response for debugging
+      } else if (res.status == 200) {
+      }
+    },
+  });
+});
+  </script>
 </body>
 
 </html>

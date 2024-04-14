@@ -98,19 +98,153 @@ if (!isset($_SESSION["account"])) {
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
-          <p class="settings-heading">SURVEY FORM</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-          <p class="settings-heading mt-2">SURVEY</p>
-          <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
+          <p class="settings-heading">SURVEY / COMPLAIN FORM</p>
+          
+            <div class="accordion" id="accordionExample">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none;color:black;">
+                    SURVEY FORM
+                  </button>
+                </h2>
+
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <form id="survey-form">
+                  <div class="p-4">
+                    <p>How satisfied are you with the overall cleanliness and condition of your dorm room and common areas?</p>
+                  </div>
+                  <div class="d-flex flex-row p-4">
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="1-1" name="question1" value="Very Much">
+                      <label class="form-check-label ml-1" for="1-1">
+                      Very Much
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="1-2" name="question1"value="Somewhat">
+                      <label class="form-check-label ml-1" for="1-2">
+                      Somewhat
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="1-3" name="question1" value="Not At All">
+                      <label class="form-check-label ml-1" for="1-3">
+                      Not At All
+                      </label>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <p>To what extent do you feel your current roommate situation contributes to a positive and productive living environment?</p>
+                  </div>
+                  <div class="d-flex flex-row p-4">
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="2-1" name="question2" value="Very Much">
+                      <label class="form-check-label ml-1" for="2-1">
+                      Very Much
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="2-2" name="question2"value="Somewhat">
+                      <label class="form-check-label ml-1" for="2-2">
+                      Somewhat
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="2-3" name="question2" value="Not At All">
+                      <label class="form-check-label ml-1" for="2-3">
+                      Not At All
+                      </label>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <p>How often are you disturbed by noise levels in your dorm (from roommates, hallway activity, etc.) that make it difficult to study, sleep, or relax?</p>
+                  </div>
+                  <div class="d-flex flex-row p-4">
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="3-1" name="question3" value="Very Often">
+                      <label class="form-check-label ml-1" for="3-1">
+                      Very Often
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="3-2" name="question3"value="Sometimes">
+                      <label class="form-check-label ml-1" for="3-2">
+                      Sometimes
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="3-3" name="question3" value="Never">
+                      <label class="form-check-label ml-1" for="3-3">
+                      Never
+                      </label>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <p>Besides your dorm room, are there adequate study spaces available in the dormitory or nearby buildings that you find conducive to focused work?</p>
+                  </div>
+                  <div class="d-flex flex-row p-4">
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="4-1" name="question4" value="Yes">
+                      <label class="form-check-label ml-1" for="4-1">
+                      Yes
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="4-2" name="question4"value="No">
+                      <label class="form-check-label ml-1" for="4-2">
+                      No
+                      </label>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <p>How confident do you feel in the overall security measures in place for the dormitory (building access control, security personnel, etc.)?</p>
+                  </div>
+                  <div class="d-flex flex-row p-4">
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="5-1" name="question5" value="Very">
+                      <label class="form-check-label ml-1" for="5-1">
+                      Very
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="5-2" name="question5"value="Somewhat">
+                      <label class="form-check-label ml-1" for="5-2">
+                      Somewhat
+                      </label>
+                    </div>
+                    <div class="form-check m-auto">
+                      <input class="form-check-input" type="radio" id="5-3" name="question5" value="Not At All">
+                      <label class="form-check-label ml-1" for="5-3">
+                      Not At All
+                      </label>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center p-4">
+                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="text-decoration: none;color:black;">
+                    COMPLAIN FORM
+                  </button>
+                </h2>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  <form id="complain-form">
+                  <div class="form-group">
+                    <label>Type here...</label>
+                    <textarea class="form-control" name="complain" rows="7" required></textarea>
+                    <div class="d-flex justify-content-center p-4">
+                      <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
       </div>
       
       <!-- partial -->
@@ -160,6 +294,12 @@ if (!isset($_SESSION["account"])) {
             <a class="nav-link" href="accounts.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="survey_complain.php">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Surveys / Complains</span>
             </a>
           </li>
           <?php 

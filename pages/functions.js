@@ -73,6 +73,24 @@ $(document).on("click", "#view_button", function (e) {
         $("#edit_button").val(thisroom_id);
         $("#display_img").attr("src", "assets/" + res.data.display_img);
         //$("#new_room_id").val(thisroom_id);
+
+        $.ajax({
+          url: 'getTenants.php', // Modify the URL according to your setup
+          type: 'POST',
+          data: {roomID: thisroom_id},
+          success: function(tenantsResponse) {
+              $('#tenants').html(tenantsResponse);
+          },
+          error: function(xhr, status, error) {
+              console.error(xhr.responseText);
+              swal({
+                  title: "Error",
+                  text: "Failed to fetch tenants!",
+                  icon: "error",
+                  button: false,
+              });
+          }
+          });
       }
     },
   });

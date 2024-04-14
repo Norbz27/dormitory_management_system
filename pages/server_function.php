@@ -1,5 +1,10 @@
 <?php
 include_once '../db/db_conn.php';
+session_start();
+$user_id = $_SESSION["userid"];
+date_default_timezone_set('Asia/Manila');
+
+$currentDate = date('Y-m-d');
 
 if (isset($_POST['add_room'])) {
     $room_name = $_POST['room_name'];
@@ -484,6 +489,158 @@ if (isset($_POST['reject_payment'])) {
                 'message' => 'Payment not found or not Rejected'
             ];
         }
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}
+
+if (isset($_POST['survey_form'])) {
+    $question1 = $_POST['question1'];
+    $question2 = $_POST['question2'];
+    $question3 = $_POST['question3'];
+    $question4 = $_POST['question4'];
+    $question5 = $_POST['question5'];
+
+    $sql = "INSERT INTO survey (question1, question2, question3, question4, question5, tenants_id, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters
+    $stmt->bind_param("sssssis", $question1, $question2, $question3, $question4, $question5, $user_id, $currentDate);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $res = [
+            'status' => 200,
+            'message' => 'Survey submited successfully'
+        ];
+        echo json_encode($res);
+    } else {
+        $error = $stmt->error;
+        $res = [
+            'status' => 500,
+            'message' => 'Survey not submited successfully',
+            'error' => $error
+        ];
+        echo json_encode($res);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+}
+
+if (isset($_POST['complain_form'])) {
+    $complain = $_POST['complain'];
+
+    $sql = "INSERT INTO complain (complain, tenants_id, date) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters
+    $stmt->bind_param("sis", $complain, $user_id, $currentDate);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $res = [
+            'status' => 200,
+            'message' => 'Complain submited successfully'
+        ];
+        echo json_encode($res);
+    } else {
+        $error = $stmt->error;
+        $res = [
+            'status' => 500,
+            'message' => 'Complain not submited successfully',
+            'error' => $error
+        ];
+        echo json_encode($res);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+}
+
+if (isset($_GET['view_survery_id'])) {
+    $survey_id = $_GET['view_survery_id'];
+
+    $query = "SELECT survey.*, users.name FROM survey INNER JOIN users ON survey.tenants_id = users.id WHERE survey.id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "i", $survey_id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Check for errors in the query execution
+    if (!$result) {
+        die('Error in query: ' . mysqli_error($conn));
+    }
+
+    // Check the number of rows
+    if (mysqli_num_rows($result) == 1) {
+        $data = mysqli_fetch_array($result);
+
+        $res = [
+            'status' => 200,
+            'message' => 'Data fetched',
+            'data' => $data
+        ];
+    } else {
+        $res = [
+            'status' => 404,
+            'message' => 'Data not found',
+            'data' => $data
+        ];
+    }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
+
+    echo json_encode($res);
+}
+
+if (isset($_GET['view_complain_id'])) {
+    $complain_id = $_GET['view_complain_id'];
+
+    $query = "SELECT complain.*, users.name FROM complain INNER JOIN users ON complain.tenants_id = users.id WHERE complain.id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "i", $complain_id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Check for errors in the query execution
+    if (!$result) {
+        die('Error in query: ' . mysqli_error($conn));
+    }
+
+    // Check the number of rows
+    if (mysqli_num_rows($result) == 1) {
+        $data = mysqli_fetch_array($result);
+
+        $res = [
+            'status' => 200,
+            'message' => 'Data fetched',
+            'data' => $data
+        ];
+    } else {
+        $res = [
+            'status' => 404,
+            'message' => 'Data not found',
+            'data' => $data
+        ];
     }
 
     // Close the prepared statement

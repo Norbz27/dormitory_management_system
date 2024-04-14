@@ -42,10 +42,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         <div class="col-6 col-xl-4">
                             <div class="justify-content-end d-flex">
                         <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" id="notifyBtn1">
-                        <i class="icon-plus btn-icon-prepend"></i>
-                        Notify
-                    </button>
                                     <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#newTenant">
                                         <i class="icon-plus btn-icon-prepend"></i>
                                         New Tenant
@@ -299,26 +295,9 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
     });
-
-    // Event listener for the Notify button click
-    $("#notifyBtn").click(function () {
-        // Send AJAX request to the PHP file
-        $.ajax({
-            url: "sendsmsapi.php",
-            type: "GET",
-            success: function (response) {
-                // Display the response from the server
-                $("#response").text(response);
-            },
-            error: function (xhr, status, error) {
-                // Display an error message if AJAX request fails
-                console.error(xhr.responseText);
-                $("#response").text("Error occurred while sending notification.");
-            }
-        });
-    });
 });
 
+<<<<<<< HEAD
 $(document).ready(function() {
     // When Notify button is clicked
     $('#notifyBtn1').click(function() {
@@ -362,6 +341,8 @@ $(document).ready(function() {
 });
 
 
+=======
+>>>>>>> e22e8225dd1e81a2b320e30077b7b0ed22d2674f
 </script>
 <script src="functions.js"></script>
 <script>

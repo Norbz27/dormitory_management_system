@@ -83,7 +83,7 @@ if ($_SESSION["username"] != 'admin') {
     </div>
     <?php if ($_SESSION["username"] == 'admin') { ?>
       <div class="row">
-      <div class="col-md-6">
+        <div class="col-md-6">
             <section class="ftco-section">
               <div class="container">
                 <div class="row">
@@ -176,8 +176,16 @@ if ($_SESSION["username"] != 'admin') {
                 </div>
               </div>
             </section>
-          </div>
+        </div>
         <div class="col-md-6 grid-margin transparent">
+          <div class="row">
+            <div class="col-md-12 mb-3" style="text-align: right;">
+              <button type="button" class="btn btn-none btn-icon-text btn-sm" style="color: #4B49AC;" id="notifyBtn1">
+                  <i class="icon-bell btn-icon-prepend"></i>
+                  Notify Tenants
+              </button>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent card-data">
               <div class="card card-tale">
@@ -216,6 +224,7 @@ if ($_SESSION["username"] != 'admin') {
           </div>
         </div>
       </div>
+      
     <?php } else { ?>
       
       <div class="row">
@@ -371,6 +380,7 @@ if ($_SESSION["username"] != 'admin') {
 <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
+<<<<<<< HEAD
 
 
 </script>
@@ -378,6 +388,29 @@ if ($_SESSION["username"] != 'admin') {
 
   
 </script>
+=======
+<script>
+  $(document).ready(function() {
+    // When Notify button is clicked
+    $('#notifyBtn1').click(function() {
+        // Make AJAX request to your PHP script
+        $.ajax({
+            url: 'sendsmsapi.php', // Replace 'send_sms.php' with the path to your PHP script
+            type: 'POST',
+            success: function(response) {
+                // Handle success response if needed
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+</script>
+<!-- plugins:js -->
+>>>>>>> e22e8225dd1e81a2b320e30077b7b0ed22d2674f
 <script src="../vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->

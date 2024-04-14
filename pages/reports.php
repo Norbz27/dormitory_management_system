@@ -41,7 +41,11 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         </div>
                         <div class="col-6 col-xl-4">
                             <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" id="notifyBtn1">
+                        <i class="icon-plus btn-icon-prepend"></i>
+                        Notify
+                    </button>
                                     <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#newTenant">
                                         <i class="icon-plus btn-icon-prepend"></i>
                                         New Tenant
@@ -285,13 +289,51 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 <script>
 // Your JavaScript code here
 $(document).ready(function () {
-
+    // Define the variable 'tenants' by echoing the PHP array
     var tenants = <?php echo json_encode($users); ?>;
 
+    // Add event listener for keyup event on the search input
     $("#searchInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("table tbody tr").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
+    // Event listener for the Notify button click
+    $("#notifyBtn").click(function () {
+        // Send AJAX request to the PHP file
+        $.ajax({
+            url: "sendsmsapi.php",
+            type: "GET",
+            success: function (response) {
+                // Display the response from the server
+                $("#response").text(response);
+            },
+            error: function (xhr, status, error) {
+                // Display an error message if AJAX request fails
+                console.error(xhr.responseText);
+                $("#response").text("Error occurred while sending notification.");
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    // When Notify button is clicked
+    $('#notifyBtn1').click(function() {
+        // Make AJAX request to your PHP script
+        $.ajax({
+            url: 'sendsmsapi.php', // Replace 'send_sms.php' with the path to your PHP script
+            type: 'POST',
+            success: function(response) {
+                // Handle success response if needed
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
         });
     });
 });

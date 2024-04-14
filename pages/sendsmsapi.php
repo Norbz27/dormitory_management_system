@@ -12,10 +12,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch user_id, name, contact, and Date
-$sql = "SELECT t.user_id, u.name, u.contact, t.Date
+// Query to fetch user_id, name, contact, Date, additional_fee, monthly_rate, and user_type_id
+$sql = "SELECT t.user_id, u.name, u.contact, t.Date, t.additional_fee, ut.monthly_rate, ut.user_type_id
         FROM tenants t
-        INNER JOIN users u ON t.user_id = u.id";
+        INNER JOIN users u ON t.user_id = u.id
+        INNER JOIN user_type ut ON t.user_type = ut.user_type_id";
 
 $result = $conn->query($sql);
 
@@ -34,7 +35,15 @@ if ($result->num_rows > 0) {
         $recipient = $row['contact'];
         $name = $row['name'];
         $date = $row['Date'];
-        $message = "Dear $name, move on $date. Welcome to our dormitory!";
+        $additional_fee = $row['additional_fee'];
+        $monthly_rate = $row['monthly_rate'];
+        $user_type_id = $row['user_type_id'];
+        
+        // Calculate total cost
+        $total_cost = $additional_fee + $monthly_rate;
+        
+        // Compose message
+        $message = "Dear $name, Starting Date $date. Welcome to our dormitory! Your total Monthly rate + other expenses is  $total_cost.";
         $send_data['recipient'] = $recipient;
         $send_data['message'] = $message;
 

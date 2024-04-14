@@ -42,10 +42,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         <div class="col-6 col-xl-4">
                             <div class="justify-content-end d-flex">
                         <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" id="notifyBtn1">
-                                        <i class="icon-plus btn-icon-prepend"></i>
-                                        Notify
-                                    </button>
                                     <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#newTenant">
                                         <i class="icon-plus btn-icon-prepend"></i>
                                         New Tenant
@@ -301,24 +297,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function() {
-    // When Notify button is clicked
-    $('#notifyBtn1').click(function() {
-        // Make AJAX request to your PHP script
-        $.ajax({
-            url: 'sendsmsapi.php', // Replace 'send_sms.php' with the path to your PHP script
-            type: 'POST',
-            success: function(response) {
-                // Handle success response if needed
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle error if needed
-                console.error(xhr.responseText);
-            }
-        });
-    });
-});
 </script>
 <script src="functions.js"></script>
 <script>

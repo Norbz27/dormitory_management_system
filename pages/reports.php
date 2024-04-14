@@ -70,7 +70,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                 <div class="text-center mb-4">
                                     <!-- Image container for user profile picture -->
                                     <div id="">
-                                        <img src="assets/profile.png" alt="Profile Picture" width="180px" id="edProfile" name="edProfile" class="img-fluid rounded-circle">
+                                        <img src="assets/profile.png" alt="Profile Picture" width="180px" style="height: 180px;" id="edProfile" name="edProfile" class="img-fluid rounded-circle">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -144,7 +144,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-md-12"><h6><strong>Payment Transactions</strong></h6></div>
+                                    <div class="col-md-12"><h6><strong>Transaction History</strong></h6></div>
                                     <div class="col-md-12 grid-margin transparent">
                                         <div class="table-responsive">
                                             <table class="table">

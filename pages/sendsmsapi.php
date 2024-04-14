@@ -12,25 +12,32 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch tenants and their corresponding users from the database
-$sql = "SELECT t.*, u.name, u.contact FROM tenants t
+// Query to fetch user_id, name, contact, and Date
+$sql = "SELECT t.user_id, u.name, u.contact, t.Date
+        FROM tenants t
         INNER JOIN users u ON t.user_id = u.id";
+
 $result = $conn->query($sql);
+
+if ($result === false) {
+    die("Error executing query: " . $conn->error);
+}
 
 if ($result->num_rows > 0) {
     // SMS parameters
     $send_data = [];
     $send_data['sender_id'] = "PhilSMS";
-    $token = "67|njtjcDHrgeWHk1iHxomWrMaw30FpX4iyyRjxt0WT ";
+    $token = "67|njtjcDHrgeWHk1iHxomWrMaw30FpX4iyyRjxt0WT";
 
     // Loop through each tenant
     while ($row = $result->fetch_assoc()) {
-        $recipient = $row['contact']; // Assuming 'contact' is the column name in the users table
+        $recipient = $row['contact'];
         $name = $row['name'];
         $date = $row['Date'];
-        $message = "Dear $name, your move-in date is on $date. Welcome to our dormitory!";
+        $message = "Dear $name, move on $date. Welcome to our dormitory!";
+        $send_data['recipient'] = $recipient;
         $send_data['message'] = $message;
-        
+
         // Send SMS
         $parameters = json_encode($send_data);
         $ch = curl_init();
@@ -44,10 +51,12 @@ if ($result->num_rows > 0) {
         );
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $get_sms_status = curl_exec($ch);
+
+        if ($get_sms_status === false) {
+            die("Error sending SMS: " . curl_error($ch));
+        }
+
         curl_close($ch);
-        
-        // Log SMS status or handle errors if needed
-        // Example: echo $get_sms_status;
     }
     echo "SMS sent successfully.";
 } else {

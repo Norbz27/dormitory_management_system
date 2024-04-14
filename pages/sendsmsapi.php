@@ -14,21 +14,21 @@ if ($conn->connect_error) {
 
 // Query to fetch tenants and their corresponding users from the database
 $sql = "SELECT t.*, u.name, u.contact FROM tenants t
-        INNER JOIN users u ON t.tenants_id = u.id";
+        INNER JOIN users u ON t.user_id = u.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // SMS parameters
     $send_data = [];
     $send_data['sender_id'] = "PhilSMS";
-    $token = "67|njtjcDHrgeWHk1iHxomWrMaw30FpX4iyyRjxt0WT";
+    $token = "67|njtjcDHrgeWHk1iHxomWrMaw30FpX4iyyRjxt0WT ";
 
     // Loop through each tenant
     while ($row = $result->fetch_assoc()) {
-        $recipient = $row['contact']; 
+        $recipient = $row['contact']; // Assuming 'contact' is the column name in the users table
         $name = $row['name'];
         $date = $row['Date'];
-        $message = "Dear $name, date start $date. welcome!";
+        $message = "Dear $name, your move-in date is on $date. Welcome to our dormitory!";
         $send_data['message'] = $message;
         
         // Send SMS
@@ -46,7 +46,8 @@ if ($result->num_rows > 0) {
         $get_sms_status = curl_exec($ch);
         curl_close($ch);
         
- 
+        // Log SMS status or handle errors if needed
+        // Example: echo $get_sms_status;
     }
     echo "SMS sent successfully.";
 } else {

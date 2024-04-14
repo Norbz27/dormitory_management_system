@@ -25,10 +25,10 @@ if ($result->num_rows > 0) {
 
     // Loop through each tenant
     while ($row = $result->fetch_assoc()) {
-        $recipient = $row['contact']; // Assuming 'contact' is the column name in the users table
+        $recipient = $row['contact']; 
         $name = $row['name'];
         $date = $row['Date'];
-        $message = "Dear $name, your move-in date is on $date. Welcome to our dormitory!";
+        $message = "Dear $name, date start $date. welcome!";
         $send_data['message'] = $message;
         
         // Send SMS
@@ -46,8 +46,7 @@ if ($result->num_rows > 0) {
         $get_sms_status = curl_exec($ch);
         curl_close($ch);
         
-        // Log SMS status or handle errors if needed
-        // Example: echo $get_sms_status;
+ 
     }
     echo "SMS sent successfully.";
 } else {

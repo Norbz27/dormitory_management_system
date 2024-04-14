@@ -297,7 +297,6 @@ $(document).ready(function () {
     });
 });
 
-<<<<<<< HEAD
 $(document).ready(function() {
     // When Notify button is clicked
     $('#notifyBtn1').click(function() {
@@ -341,8 +340,7 @@ $(document).ready(function() {
 });
 
 
-=======
->>>>>>> e22e8225dd1e81a2b320e30077b7b0ed22d2674f
+
 </script>
 <script src="functions.js"></script>
 <script>

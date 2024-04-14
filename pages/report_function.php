@@ -139,13 +139,6 @@ function getAllTenants() {
             });
         });
 
-        $('#editTenantBtn').on('click', function() {
-            // Make specific input fields editable
-            $('#eduserType, #roomName, #edadditionalFee, #edroomName').prop('disabled', false);
-            // Toggle visibility of buttons
-            $('#editTenantBtn').hide();
-            $('button[type="submit"]').show();
-        });
 
         $('#close-btn').on('click', function() {
             // Make specific input fields editable

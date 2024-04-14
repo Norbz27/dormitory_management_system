@@ -13,9 +13,8 @@ if ($conn->connect_error) {
 }
 
 // Query to fetch tenants and their corresponding users from the database
-$sql = "SELECT t.*, u.name, u.contact 
-        FROM tenants AS t
-        INNER JOIN users AS u ON t.user_id = u.id";
+$sql = "SELECT t.*, u.name, u.contact FROM tenants t
+        INNER JOIN users u ON t.tenants_id = u.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

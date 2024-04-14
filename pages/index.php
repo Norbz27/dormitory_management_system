@@ -217,6 +217,7 @@ if ($_SESSION["username"] != 'admin') {
         </div>
       </div>
     <?php } else { ?>
+      
       <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
           <div class="col-md-12">
@@ -371,7 +372,12 @@ if ($_SESSION["username"] != 'admin') {
 </div>
 <!-- container-scroller -->
 
-<!-- plugins:js -->
+
+</script>
+<script>
+
+  
+</script>
 <script src="../vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
@@ -379,9 +385,6 @@ if ($_SESSION["username"] != 'admin') {
 <script src="vendors/datatables.net/jquery.dataTables.js"></script>
 <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
 <script src="js/dataTables.select.min.js"></script>
-
-<!-- End plugin js for this page -->
-<!-- inject:js -->
 <script src="../js/off-canvas.js"></script>
 <script src="../js/hoverable-collapse.js"></script>
 <script src="../js/template.js"></script>

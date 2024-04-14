@@ -166,7 +166,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" name="editTenantBtn" class="btn btn-primary" id="editTenantBtn">Print</button>
+                                <button type="button" name="editTenantBtn" class="btn btn-primary" id="editTenantBtn" ">Print</button>
                                 <button type="submit" name="saveTenant" class="btn btn-primary" id="saveTenant"  style="display: none;">Save</button>
                             </div>
                         </form>
@@ -337,6 +337,31 @@ $(document).ready(function() {
         });
     });
 });
+
+$(document).ready(function() {
+    $('#editTenantBtn').click(function() {
+        // Retrieve the tenant ID from the hidden input field
+        var tenantId = $('#edid').val();
+
+        // Make an AJAX request to your PHP script
+        $.ajax({
+            url: 'pdf.php', 
+            type: 'POST',
+            data: { tenants_id: tenantId }, // Pass the tenant ID to the PHP script as tenants_id
+            success: function(response) {
+                // Open the PDF in a new tab
+                var pdfWindow = window.open("", "_blank");
+                pdfWindow.document.write(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+
 </script>
 <script src="functions.js"></script>
 <script>

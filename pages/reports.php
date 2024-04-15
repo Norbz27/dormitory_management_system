@@ -297,6 +297,57 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function() {
+    // When Notify button is clicked
+    $('#notifyBtn1').click(function() {
+        // Make AJAX request to your PHP script
+        $.ajax({
+            url: 'sendsmsapi.php', // Replace 'send_sms.php' with the path to your PHP script
+            type: 'POST',
+            success: function(response) {
+                // Handle success response if needed
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#editTenantBtn').click(function() {
+        // Retrieve the tenant ID from the hidden input field
+        var tenantId = $('#edid').val();
+
+        // Make an AJAX request to your PHP script
+        $.ajax({
+            url: 'pdf.php', 
+            type: 'POST',
+            data: { tenants_id: tenantId }, // Pass the tenant ID to the PHP script as tenants_id
+            responseType: 'blob', // Set the expected response type to blob
+            success: function(response) {
+                // Create a blob URL for the PDF response
+                var blobUrl = URL.createObjectURL(response);
+                
+                // Open the PDF in a new tab using an iframe
+                var pdfWindow = window.open("", "_blank");
+                pdfWindow.document.write('<iframe src="' + blobUrl + '" style="width:100%;height:100%;" frameborder="0"></iframe>');
+
+                // After displaying the PDF content, navigate to the next page
+                window.location.href = 'next_page.php';
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+
+
 </script>
 <script src="functions.js"></script>
 <script>

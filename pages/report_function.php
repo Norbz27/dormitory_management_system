@@ -67,7 +67,8 @@ function getAllTenants() {
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
-            $badge_color = ($row["status"] == 'New') ? 'badge-success' : 'badge-warning';
+            $badge_color = ($row["status"] == 'Tenant') ? 'badge-success' : 'badge-danger';
+            $status = ($row["status"] == 'Tenant') ? 'Active' : 'Inactive';
             
             $profileImage = 'assets/profile.png';
             if($row["display_img"] !== NULL && $row["display_img"] !== "")
@@ -78,7 +79,7 @@ function getAllTenants() {
                     <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
                     <td>' . $row["name"]. '</td>
                     <td>' . $row["contact"]. '</td>
-                    <td><span class="badge ' . $badge_color . '">' . $row["status"]. '</span></td>
+                    <td><span class="badge ' . $badge_color . '">' . $status . '</span></td>
                     <td><div class="btn-group">
                         <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i data-feather="more-horizontal"></i>
@@ -161,8 +162,8 @@ function getAllTenants() {
             success: function(response) {
                 var tenantData = JSON.parse(response);
 
-                // Populate modal fields with user data
-                modal.find('#edid').val(tenantData.tenants_id);
+               // Populate modal fields with user data
+               modal.find('#edid').val(tenantData.tenants_id);
                 modal.find('#edProfile').attr('src', tenantData.display_img !== null ? 'assets/' + tenantData.display_img : 'assets/profile.png');
                 modal.find('#edtenantName').val(tenantData.name);
                 modal.find('#edgender').val(tenantData.gender);
@@ -172,6 +173,15 @@ function getAllTenants() {
                 modal.find('#edroomName').val(tenantData.room_id); // Set the value of the select element directly
                 modal.find('#edfloorBelong').val(tenantData.floor_belong);
                 modal.find('#edEquipments').val(tenantData.equipments);
+
+                // Calculate total fee
+                var monthlyRate = parseFloat(tenantData.monthly_rate);
+                var additionalFee = parseFloat(tenantData.additional_fee);
+                var totalFee = monthlyRate + additionalFee;
+
+                modal.find('#edmonthlyRate').val(monthlyRate);
+                modal.find('#edadditionalFee').val(additionalFee);
+                modal.find('#edtotalFee').val(totalFee);
 
                 $.ajax({
                 url: 'getPayments.php', // Modify the URL according to your setup

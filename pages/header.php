@@ -308,7 +308,7 @@ if (!isset($_SESSION["account"])) {
           </li>
           <li class="nav-item">
             <a class="nav-link" href="survey_complain.php">
-              <i class="icon-head menu-icon"></i>
+              <i class="icon-folder menu-icon"></i>
               <span class="menu-title">Surveys / Complains</span>
             </a>
           </li>

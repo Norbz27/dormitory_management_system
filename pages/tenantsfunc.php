@@ -67,7 +67,7 @@ function getAllTenants() {
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
-            $badge_color = ($row["status"] == 'New') ? 'badge-success' : 'badge-warning';
+            $badge_color = ($row["status"] == 'Tenant') ? 'badge-warning' : 'badge-danger';
             
             $profileImage = 'assets/profile.png';
             if($row["display_img"] !== NULL && $row["display_img"] !== "")
@@ -85,6 +85,8 @@ function getAllTenants() {
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewTenantModal">View</a>
+                            <a class="dropdown-item active-btn" href="#">Set as Active</a>
+                            <a class="dropdown-item inactive-btn" href="#">Set as Inactive</a>
                             <a class="dropdown-item delete-btn" href="#">Delete</a>
                         </div>
                     </div></td>
@@ -98,6 +100,86 @@ function getAllTenants() {
 ?>
 <script>
     $(document).ready(function() {
+        $('.inactive-btn').on('click', function(e) {
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var tenantId = row.data('tenant-id');
+            swal({
+                title: "Are you sure?",
+                text: "Once marked as inactive, this tenant account will be deactivated!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willInactive) => {
+                if (willInactive) {
+                    $.ajax({
+                        url: 'updateTenantStatus.php',
+                        type: 'POST',
+                        data: {tenantId: tenantId, status: 'Inactive'}, // Pass status as Inactive
+                        success: function(response) {
+                            // Optionally update row's status cell with "Inactive"
+                            row.find('.status').text('Inactive');
+                            // Optionally display a success message
+                            swal({
+                                title: "Success",
+                                text: "Tenant status updated to Inactive!",
+                                icon: "success",
+                                button: false,
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            swal({
+                                title: "Error",
+                                text: "Failed to update tenant status!",
+                                icon: "error",
+                                button: false,
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        $('.active-btn').on('click', function(e) {
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var tenantId = row.data('tenant-id');
+            swal({
+                title: "Are you sure?",
+                text: "Once marked as active, this tenant account will be activated!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willInactive) => {
+                if (willInactive) {
+                    $.ajax({
+                        url: 'updateTenantStatus.php',
+                        type: 'POST',
+                        data: {tenantId: tenantId, status: 'Tenant'}, // Pass status as Inactive
+                        success: function(response) {
+                            // Optionally update row's status cell with "Inactive"
+                            row.find('.status').text('Inactive');
+                            // Optionally display a success message
+                            swal({
+                                title: "Success",
+                                text: "Tenant status updated to Inactive!",
+                                icon: "success",
+                                button: false,
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            swal({
+                                title: "Error",
+                                text: "Failed to update tenant status!",
+                                icon: "error",
+                                button: false,
+                            });
+                        }
+                    });
+                }
+            });
+        });
         $('.delete-btn').on('click', function(e) {
             e.preventDefault();
             var row = $(this).closest('tr');

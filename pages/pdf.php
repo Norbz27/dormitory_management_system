@@ -8,7 +8,7 @@ $password = "";
 $dbname = "dormitorydb";
 
 // Tenant ID to use
-$tenantId = isset($_POST['tenants_id']) ? $_POST['tenants_id'] : '';
+$tenantId = isset($_GET['tenants_id']) ? $_GET['tenants_id'] : '';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

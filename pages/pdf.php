@@ -66,7 +66,30 @@ if ($result->num_rows > 0) {
     $pdf->Cell(95, 10, 'Total Fee: ' . $total_fee, 1);
     $pdf->Cell(95, 10, 'Additional Fee: ' . $row['additional_fee'], 1, 1);
     
-    
+    // Payment Information
+    $pdf->SetFont('Arial', 'B', 12); // Set font to bold
+    $pdf->Cell(0, 10, 'Payment Information', 0, 1, 'C'); // New line with centered alignment
+    $pdf->SetFont('Arial', '', 12); // Set font back to regular
+
+    // Fetch payment information from the payments table
+    $paymentSql = "SELECT * FROM payments WHERE user_id = '" . $row['user_id'] . "'";
+    $paymentResult = $conn->query($paymentSql);
+
+    // Check if payment information is available
+    if ($paymentResult->num_rows > 0) {
+        // Loop through each payment record
+        while ($paymentRow = $paymentResult->fetch_assoc()) {
+            // Display payment details
+            $pdf->Cell(95, 10, 'Payment ID: ' . $paymentRow['payment_id'], 1);
+            $pdf->Cell(95, 10, 'Amount: ' . $paymentRow['amount'], 1, 1);
+            $pdf->Cell(95, 10, 'Month: ' . $paymentRow['month_of'], 1);
+            $pdf->Cell(95, 10, 'Date: ' . $paymentRow['date'], 1, 1);
+        }
+    } else {
+        // If no payment records found, display a message
+        $pdf->Cell(0, 10, 'No payment information available', 1, 1);
+    }
+
 } else {
     $pdf->Cell(0, 10, 'No data found', 0, 1);
 }

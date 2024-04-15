@@ -60,7 +60,7 @@ class Login extends Dbh {
     }
 
     public function trackLoginAttempts($ip) {
-        $login_time = time() - 30;
+        $login_time = time() - 60;
         $login_attempts = $this->connect()->prepare("SELECT COUNT(*) AS total_count FROM ip_details WHERE ip = ? AND login_time > ?");
         $login_attempts->execute([$ip, $login_time]);
         $res = $login_attempts->fetch(PDO::FETCH_ASSOC);

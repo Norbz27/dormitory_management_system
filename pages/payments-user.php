@@ -42,7 +42,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';?>
                                 <div class="form-group">
                                     <label for="month_of">Month from:</label>
                                     <div class="input-group">
-                                        <input type="month" class="form-control" id="month_of" name="month_of" placeholder="Select month and year">
+                                        <input type="date" class="form-control" id="month_of" name="month_of" placeholder="Select month and year">
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';?>
                                 <div class="form-group">
                                     <label for="month_of">To:</label>
                                     <div class="input-group">
-                                        <input type="month" class="form-control" id="month_to" name="month_to" placeholder="Select month and year">
+                                        <input type="date" class="form-control" id="month_to" name="month_to" placeholder="Select month and year">
                                     </div>
                                 </div>
                             </div>

@@ -37,17 +37,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-6 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Tenants</h3>
-                        </div>
-                        <div class="col-6 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button type="button" class="btn btn-primary btn-icon-text btn-sm" data-toggle="modal" data-target="#newTenant">
-                                        <i class="icon-plus btn-icon-prepend"></i>
-                                        New Tenant
-                                    </button>
-                                </div>
-                            </div>
+                            <h3 class="font-weight-bold">Tenants Report</h3>
                         </div>
                     </div>
                 </div>

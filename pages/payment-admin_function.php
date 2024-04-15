@@ -61,17 +61,8 @@
             // Calculate the total fee
             $total_fee = $row["monthly_rate"] + $row["additional_fee"];
             // Format month_of as "Month Year"
-            // Assuming $row["month_of"] contains the date range "2024-04 - 2024-05"
-            $date_range = explode(" - ", $row["month_of"]);
-
-            // Format the start date
-            $start_date = date('F Y', strtotime($date_range[0]));
-
-            // Format the end date
-            $end_date = date('F Y', strtotime($date_range[1]));
-
             // Concatenate the formatted dates with a hyphen in between
-            $formatted_date_range = $start_date . ' - ' . $end_date;
+            $formatted_date_range = $row["month_of"];
 
             // Format date as "Month Day, Year"
             $date_formatted = date('F j, Y', strtotime($row["date"]));

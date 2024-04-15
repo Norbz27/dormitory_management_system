@@ -17,6 +17,13 @@
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
+  <style>
+    .content-wrapper {
+      background-image: url('../assets/bg.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+</style>
 </head>
 
 <body>

@@ -32,20 +32,41 @@ $pdf->SetFont('Arial', '', 12);
 // Output fetched data in PDF
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $pdf->Cell(0, 10, 'Personal Information:', 0, 1); // New line
-    $pdf->Cell(0, 10, 'Tenant Name: ' . $row['name'], 0, 1);
-    $pdf->Cell(0, 10, 'Gender: ' . $row['gender'], 0, 1);
-    $pdf->Cell(0, 10, 'Contact No.: ' . $row['contact'], 0, 1);
-    $pdf->Cell(0, 10, 'User Type: ' . $row['description'], 0, 1);
-    $pdf->Cell(0, 10, 'Start Date: ' . $row['Date'], 0, 1);
-    $pdf->Cell(0, 10, 'Equipments: ' . $row['equipments'], 0, 1);
-    $pdf->Cell(0, 10, 'Room Information', 0, 1); // New line
-    $pdf->Cell(0, 10, 'Room Name: ' . $row['room_name'], 0, 1);
-    $pdf->Cell(0, 10, 'Monthly Rate: ' . $row['monthly_rate'], 0, 1);
+
+    $pdf->SetFont('Arial', 'B', 12); // Set font to bold
+    $pdf->Cell(0, 10, 'Personal Information:', 0, 1, 'C'); // New line with centered alignment
+    $pdf->SetFont('Arial', '', 12); // Set font back to regular
+    
+    // First row
+    $pdf->Cell(95, 10, 'Tenant Name: ' . $row['name'], 1);
+    $pdf->Cell(95, 10, 'User Type: ' . $row['description'], 1, 1);
+    
+    // Second row
+    $pdf->Cell(95, 10, 'Gender: ' . $row['gender'], 1);
+    $pdf->Cell(95, 10, 'Start Date: ' . $row['Date'], 1, 1);
+    
+    // Third row
+    $pdf->Cell(95, 10, 'Contact No.: ' . $row['contact'], 1);
+    $pdf->Cell(95, 10, 'Equipments: ' . $row['equipments'], 1, 1);
+    
+    $pdf->SetFont('Arial', 'B', 12); // Set font to bold
+    $pdf->Cell(0, 10, 'Room Information', 0, 1, 'C'); // New line with centered alignment
+    $pdf->SetFont('Arial', '', 12); // Set font back to regular
+    
+    // Room Information
+    $pdf->Cell(95, 10, 'Room Name: ' . $row['room_name'], 1);
+    $pdf->Cell(95, 10, 'Floor Belong: ' . $row['floor_belong'], 1, 1);
+    
+    // Second row
+    $pdf->Cell(95, 10, 'Monthly Rate: ' . $row['monthly_rate'], 1);
+    $pdf->Cell(95, 10, 'Start Date: ' . $row['Date'], 1, 1);
+    
+    // Third row
     $total_fee = $row['monthly_rate'] + $row['additional_fee'];
-    $pdf->Cell(0, 10, 'Total Fee: ' . $total_fee, 0, 1);
-    $pdf->Cell(0, 10, 'Floor Belong: ' . $row['floor_belong'], 0, 1);
-    $pdf->Cell(0, 10, 'Additional Fee: ' . $row['additional_fee'], 0, 1);
+    $pdf->Cell(95, 10, 'Total Fee: ' . $total_fee, 1);
+    $pdf->Cell(95, 10, 'Additional Fee: ' . $row['additional_fee'], 1, 1);
+    
+    
 } else {
     $pdf->Cell(0, 10, 'No data found', 0, 1);
 }

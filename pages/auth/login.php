@@ -41,6 +41,15 @@
                 <div class="mt-3">
                   <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
+                <?php 
+                    if(isset($_GET['error']) && $_GET['error'] == 'loginblocked') {
+                    ?>
+                    <div class="mt-3 text-center text-danger">
+                        <p>Login is blocked. Wait after 60 seconds</p>
+                    </div>
+                    <?php 
+                    } 
+                    ?>
                 <!--<div class="my-2 d-flex justify-content-between align-items-center">
                   <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div>-->

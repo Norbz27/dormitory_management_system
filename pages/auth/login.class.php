@@ -49,6 +49,10 @@ class Login extends Dbh {
             $_SESSION["displayImg"] = $user[0]["display_img"];
             $_SESSION["status"] = $user[0]["status"];
 
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $delete_stmt = $this->connect()->prepare("DELETE FROM ip_details WHERE ip = ?");
+            $delete_stmt->execute([$ip]);
+
             $stmt = null;
         }
 

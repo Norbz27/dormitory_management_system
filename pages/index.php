@@ -380,15 +380,6 @@ if ($_SESSION["username"] != 'admin') {
 <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
-<<<<<<< HEAD
-
-
-</script>
-<script>
-
-  
-</script>
-=======
 <script>
   $(document).ready(function() {
     // When Notify button is clicked
@@ -410,7 +401,6 @@ if ($_SESSION["username"] != 'admin') {
 });
 </script>
 <!-- plugins:js -->
->>>>>>> e22e8225dd1e81a2b320e30077b7b0ed22d2674f
 <script src="../vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->

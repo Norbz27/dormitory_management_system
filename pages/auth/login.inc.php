@@ -9,13 +9,12 @@ if (isset($_POST["submit"])) {
     include "login-contr.class.php";
     $login = new LoginContr($uid, $pwd);
 
-    // Assuming you have verified the user's credentials and obtained the user ID
-    // Set the user ID in the session
-    $_SESSION['userid'] = $id; // Replace $id with the actual user ID obtained from the database
+    // Track login attempts before authenticating user
+    $login->trackLoginAttempts($_SERVER['REMOTE_ADDR']);
 
     $login->loginUser();
 
     // Redirect to the next page with the user ID as a parameter in the URL
-    header("index.php" . $_SESSION['userid'] . "&error=none");
+    header("Location: index.php?userid=" . $_SESSION['userid'] . "&error=none");
     exit();
 }

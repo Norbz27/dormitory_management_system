@@ -188,7 +188,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <select class="form-control" id="edgender" name="edgender" disabled>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
                                         <!-- Password -->

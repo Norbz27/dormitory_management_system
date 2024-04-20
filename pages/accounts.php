@@ -173,7 +173,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                         <!-- Phone Number -->
                                         <div class="form-group">
                                             <label for="phoneNumber">Phone Number</label>
-                                            <input type="tel" class="form-control" id="edphoneNumber" name="edcontact" placeholder="Enter phone number" disabled>
+                                            <input type="tel" class="form-control" id="edphoneNumber" name="edcontact" placeholder="Enter phone number"  disabled>
                                         </div>
                                         <!-- Username -->
                                         <div class="form-group">
@@ -332,7 +332,26 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 
             reader.readAsDataURL(file);
         }
-    </script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var phoneInput = document.getElementById("phoneNumber");
+            
+            phoneInput.addEventListener("input", function(event) {
+                var inputValue = event.target.value;
+                var sanitizedValue = inputValue.replace(/[^0-9\+]/g, ''); // Remove any characters that are not numbers or +
+                sanitizedValue = sanitizedValue.slice(0, 13); // Limit to 12 characters
+                event.target.value = sanitizedValue;
+            });
+
+            var phoneInput = document.getElementById("edphoneNumber");
+            
+            phoneInput.addEventListener("input", function(event) {
+                var inputValue = event.target.value;
+                var sanitizedValue = inputValue.replace(/[^0-9\+]/g, ''); // Remove any characters that are not numbers or +
+                sanitizedValue = sanitizedValue.slice(0, 13); // Limit to 12 characters
+                event.target.value = sanitizedValue;
+            });
+        });
+  </script>
 </body>
 
 </html>

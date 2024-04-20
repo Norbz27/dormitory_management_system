@@ -206,6 +206,14 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
       feather.replace();
     </script>
 <script>
+    var phoneInput = document.getElementById("contact");
+            
+    phoneInput.addEventListener("input", function(event) {
+        var inputValue = event.target.value;
+        var sanitizedValue = inputValue.replace(/[^0-9\+]/g, ''); // Remove any characters that are not numbers or +
+        sanitizedValue = sanitizedValue.slice(0, 13); // Limit to 12 characters
+        event.target.value = sanitizedValue;
+    });
     <?php
         if ($status === 'success') {
             echo 'swal({

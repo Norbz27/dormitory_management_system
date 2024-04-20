@@ -6,18 +6,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userType = $_POST['eduserType'];
     $roomId = $_POST['edroomName'];
     $additionalFee = $_POST['edadditionalFee'];
-    $Montylyfee = $_POST['edmonthlyRate']; // Corrected variable name
+    $Montylyfee = $_POST['edmonthlyRate'];
+    $Equipment =$_POST['edEquipments'];
     // Call the updateTenant function with the database connection and form data
-    updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $id); // Passed correct number of arguments
+    updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $Equipment, $id); // Passed correct number of arguments
     
 } else {
     header("Location: ../pages/tenants.php?status='error'");
     exit();
 }
 
-function updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $id) {
+function updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $Equipment, $id) {
     // Prepare the UPDATE query for the tenant table
-    $sql = "UPDATE tenants SET user_type=?, room_id=?, additional_fee=?, monthlyrate=? WHERE tenants_id=?";
+    $sql = "UPDATE tenants SET user_type=?, room_id=?, additional_fee=?, monthlyrate=?, equipments=?  WHERE tenants_id=?";
 
     // Prepare and execute the statement
     $stmt = mysqli_stmt_init($conn);
@@ -27,7 +28,7 @@ function updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $i
     }
 
     // Bind parameters to the prepared statement
-    mysqli_stmt_bind_param($stmt, "siiii", $userType, $roomId, $additionalFee, $Montylyfee, $id);
+    mysqli_stmt_bind_param($stmt, "siiisi", $userType, $roomId, $additionalFee, $Montylyfee, $Equipment, $id);
 
     // Execute the statement
     mysqli_stmt_execute($stmt);

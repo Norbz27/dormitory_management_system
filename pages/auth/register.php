@@ -94,7 +94,7 @@
         phoneInput.addEventListener("input", function(event) {
             var inputValue = event.target.value;
             var sanitizedValue = inputValue.replace(/[^0-9\+]/g, ''); // Remove any characters that are not numbers or +
-            sanitizedValue = sanitizedValue.slice(0, 12); // Limit to 12 characters
+            sanitizedValue = sanitizedValue.slice(0, 13); // Limit to 12 characters
             event.target.value = sanitizedValue;
         });
     });

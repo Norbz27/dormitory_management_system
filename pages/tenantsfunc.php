@@ -263,7 +263,7 @@ function getAllTenants() {
                 modal.find('#edEquipments').val(tenantData.equipments);
 
                 // Calculate total fee
-                var monthlyRate = parseFloat(tenantData.monthly_rate);
+                var monthlyRate = parseFloat(tenantData.monthlyrate);
                 var additionalFee = parseFloat(tenantData.additional_fee);
                 var totalFee = monthlyRate + additionalFee;
 
@@ -284,36 +284,8 @@ function getAllTenants() {
         });
     });
 
-    function updateTotalFee() {
-        var monthlyRate = parseFloat($('#edmonthlyRate').val()) || 0; // Get the monthly rate, default to 0 if not a number
-        var additionalFee = parseFloat($('#edadditionalFee').val()) || 0; // Get the additional fee, default to 0 if not a number
-        var userType = $('#eduserType').val(); // Get the selected user type
-        
-        if (userType === '2') {
-            var totalFee = monthlyRate;
-            totalFee = 750;
-            $('#edmonthlyRate').val(totalFee.toFixed(2));
-            // Add additional fee to total fee
-            totalFee += additionalFee;
 
-            // Update the total fee field
-            $('#edtotalFee').val(totalFee.toFixed(2));
-        } else if (userType === '1') {
-            var totalFee = monthlyRate;
-            totalFee = 3000;
-            $('#edmonthlyRate').val(totalFee.toFixed(2));
-            // Add additional fee to total fee
-            totalFee += additionalFee;
 
-            // Update the total fee field
-            $('#edtotalFee').val(totalFee.toFixed(2));
-        }
-
-         // Set the total fee, rounded to 2 decimal places
-    }
-
-    // Trigger updateTotalFee when userType, monthlyRate, or additionalFee changes
-    $('#eduserType, #edmonthlyRate, #edadditionalFee').on('change', updateTotalFee);
     });
 
     $(document).ready(function() {

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $id) {
     // Prepare the UPDATE query for the tenant table
-    $sql = "UPDATE tenants SET user_type=?, room_id=?, additional_fee=?, monthlyfee=? WHERE tenants_id=?";
+    $sql = "UPDATE tenants SET user_type=?, room_id=?, additional_fee=?, monthlyrate=? WHERE tenants_id=?";
 
     // Prepare and execute the statement
     $stmt = mysqli_stmt_init($conn);
@@ -27,7 +27,7 @@ function updateTenant($conn, $userType, $roomId, $additionalFee, $Montylyfee, $i
     }
 
     // Bind parameters to the prepared statement
-    mysqli_stmt_bind_param($stmt, "siddi", $userType, $roomId, $additionalFee, $Montylyfee, $id);
+    mysqli_stmt_bind_param($stmt, "siiii", $userType, $roomId, $additionalFee, $Montylyfee, $id);
 
     // Execute the statement
     mysqli_stmt_execute($stmt);

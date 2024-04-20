@@ -60,7 +60,7 @@
             
             if(isset($_SESSION['userid'])) {
                 // Sanitize the input to prevent SQL injection (not needed with prepared statements)
-                $userid = 6;
+                $userid = $_SESSION['userid'];
                 echo '<script>console.log('.$userid.');</script>';
                 
                 // Query to fetch user information based on user ID

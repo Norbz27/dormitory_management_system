@@ -47,12 +47,13 @@ include_once 'payment-admin_function.php' ?>
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>Payment ID</th>
                                         <th>Client Name</th>
                                         <th>Ammount</th>
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
+                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,6 +101,27 @@ include_once 'payment-admin_function.php' ?>
                 }
             });
         });
+        $(document).on("click", ".delete-btn", function () {
+        // Get the payment ID from the clicked button's data-payment-id attribute
+        var payment_id = $(this).data('payment-id');
+        // Confirm deletion
+        if (confirm("Are you sure you want to delete this payment?")) {
+            // Send AJAX request to delete payment
+            $.ajax({
+                url: 'deletepayment.php', // Replace with your PHP script file for deletion
+                method: 'POST',
+                data: {payment_id: payment_id}, // Pass payment ID to PHP script
+                success: function(response){
+                    // Reload page or update UI as needed
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
 
         // When the modal is hidden, remove its content
         $('#modal-container').on('hidden.bs.modal', '.modal', function () {
@@ -155,6 +177,7 @@ include_once 'payment-admin_function.php' ?>
             });
         });
     });
+    
 </script>
     <!-- page-body-wrapper ends -->
     <?php include_once 'footer.php' ?>

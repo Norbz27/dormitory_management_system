@@ -88,7 +88,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="eduserType" class="form-label">User Type:</label>
+                                            <label for="eduserType" class="form-label">Tenant Type:</label>
                                             <select class="form-control" id="eduserType" name="eduserType" disabled>
                                                 <?php foreach ($userTypes as $type): ?>
                                                     <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
@@ -181,7 +181,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="userType">User Type:</label>
+                                    <label for="userType">Tenant Type:</label>
                                     <select class="form-control" id="userType" name="userType">
                                         <?php foreach ($userTypes as $type): ?>
                                             <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
@@ -208,7 +208,12 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <label for="date">Additional Fee:</label>
                                     <input type="text" class="form-control" id="addFee" name="addFee">
                                 </div>
+                                <div class="form-group">
+                                    <label for="date">Monthly Rate:</label>
+                                    <input type="text" class="form-control" id="addmonthlyrate" name="monthlyrate">
+                                </div>
                         </div>
+                        
                         <!-- Modal Footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

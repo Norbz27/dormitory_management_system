@@ -391,11 +391,23 @@ if ($_SESSION["username"] != 'admin') {
             success: function(response) {
                 // Handle success response if needed
                 console.log(response);
+                swal({
+                    title: "Success",
+                    text: "SMS sent to tenants successfully!",
+                    icon: "success",
+                    button: false,
+                });
             },
             error: function(xhr, status, error) {
-                // Handle error if needed
                 console.error(xhr.responseText);
+                swal({
+                    title: "Error",
+                    text: "Failed to send SMS to tenants.",
+                    icon: "error",
+                    button: false,
+                });
             }
+
         });
     });
 });

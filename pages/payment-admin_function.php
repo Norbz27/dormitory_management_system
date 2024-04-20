@@ -16,28 +16,28 @@
             while($row = mysqli_fetch_assoc($result)) {
                 $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : (($row["status"] == 'Pending') ? 'badge-warning' : 'badge-danger');
                 echo '<tr data-payment-id="' . $row["payment_id"] . '">
-                        <td>' . $row["payment_id"] . '</td>
-                        <td>' . $row["name"] . '</td>
-                        <td>₱' . $row["amount"] . '</td>
-                        <td>' . $row["date"] . '</td>
-                        <td><span class="badge ' . $badge_color . '">' . $row["status"] . '</span></td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i data-feather="more-horizontal"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">View Details</a>';
-                                    // Only show verify and reject buttons if the status is pending
-                                    if ($row["status"] == 'Pending') {
-                                        echo '<button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
-                                            <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>';
-                                    }
-                                echo '</div>
-                            </div>
-                        </td>
-                      </tr>';
-            }
+                <td>' . $row["name"] . '</td>
+                <td>₱' . $row["amount"] . '</td>
+                <td>' . $row["date"] . '</td>
+                <td><span class="badge ' . $badge_color . '">' . $row["status"] . '</span></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-horizontal"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">View Details</a>';
+                            // Only show verify and reject buttons if the status is pending
+                            if ($row["status"] == 'Pending') {
+                                echo '<button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
+                                    <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>';
+                            }
+                        echo '</div>
+                    </div>
+                </td>
+                <td><button class="btn btn-danger delete-btn" data-payment-id="' . $row["payment_id"] . '">Delete</button></td>
+            </tr>';
+                        }            
         } else {
             echo "0 results";
         }
@@ -81,7 +81,6 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <p><strong>Payment ID:</strong> ' . $row["payment_id"] . '</p>
                                     <p><strong>Room No:</strong> ' . $row["room_name"] . '</p>
                                 </div>
                                 <div class="col-md-7">

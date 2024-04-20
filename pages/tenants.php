@@ -74,7 +74,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <div class="col-md-12"><h6><strong>Personal Information</strong></h6></div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="tenantName" class="form-label">Tenant Name:</label>
+                                            <label for="tenantName" class="form-label">Name:</label>
                                             <input type="text" class="form-control" id="edtenantName" name="edtenantName" disabled>
                                         </div>
                                         <div class="mb-3">

@@ -64,11 +64,12 @@
                 echo '<script>console.log('.$userid.');</script>';
                 
                 // Query to fetch user information based on user ID
-                $sql = "SELECT t.tenants_id, r.room_name, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, r.floor_belong, ut.monthly_rate, ut.description, ut.user_type_id, t.Date, t.additional_fee 
+                $sql = "SELECT t.tenants_id, r.room_name, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, ten.monthlyrate, r.floor_belong, ut.description, ut.user_type_id, t.Date, t.additional_fee 
                         FROM tenants t 
                         LEFT JOIN users u ON t.user_id = u.id 
                         LEFT JOIN user_type ut ON t.user_type = ut.user_type_id 
-                        LEFT JOIN room_details r ON t.room_id = r.room_id 
+                        LEFT JOIN room_details r ON t.room_id = r.room_id
+                        LEFT JOIN tenants ten ON t.user_id = ten.user_id
                         WHERE u.id = ?";
                 
                 // Prepare the statement
@@ -101,9 +102,9 @@
                             </div>
                             <div class="col-md-6">
                                 <p><strong>Room No.:</strong> <?php echo $userData['room_name']; ?></p>
-                                <p><strong>Monthly Rate:</strong> ₱<?php echo $userData['monthly_rate']; ?></p>
+                                <p><strong>Monthly Rate:</strong> ₱<?php echo $userData['monthlyrate']; ?></p>
                                 <p><strong>Additional Fee:</strong> ₱<?php echo $userData['additional_fee']; ?></p>
-                                <p><strong>Total Fee:</strong> ₱<?php echo $userData['monthly_rate'] + $userData['additional_fee']; ?></p>
+                                <p><strong>Total Fee:</strong> ₱<?php echo $userData['monthlyrate'] + $userData['additional_fee']; ?></p>
                             </div>
                         </div>
 

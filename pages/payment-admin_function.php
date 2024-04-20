@@ -32,10 +32,9 @@
                                 echo '<button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
                                     <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>';
                             }
-                        echo '</div>
+                        echo '<a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">Delete</a></div>
                     </div>
                 </td>
-                <td><button class="btn btn-danger delete-btn" data-payment-id="' . $row["payment_id"] . '">Delete</button></td>
             </tr>';
                         }            
         } else {
@@ -48,7 +47,7 @@
     // Function to display payment details in the modal
     function displayPaymentDetails($payment_id) {
         global $conn;
-        $sql = "SELECT p.payment_id, r.room_name, u.name, ut.description, ut.monthly_rate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
+        $sql = "SELECT p.payment_id, r.room_name, u.name, ut.description, t.monthlyrate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
@@ -59,7 +58,7 @@
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             // Calculate the total fee
-            $total_fee = $row["monthly_rate"] + $row["additional_fee"];
+            $total_fee = $row["monthlyrate"] + $row["additional_fee"];
             // Format month_of as "Month Year"
             // Concatenate the formatted dates with a hyphen in between
             $formatted_date_range = $row["month_of"];
@@ -91,7 +90,7 @@
                             
                             <div class="row mt-4 mb-5">
                                 <div class="col-md-5">
-                                    <p><strong>Monthly Rate:</strong> ₱' . $row["monthly_rate"] . '</p>
+                                    <p><strong>Monthly Rate:</strong> ₱' . $row["monthlyrate"] . '</p>
                                     <p><strong>Additional fee:</strong> ₱' . $row["additional_fee"] . '</p>
                                 </div>
                                 <div class="col-md-7">

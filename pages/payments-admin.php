@@ -42,7 +42,6 @@ include_once 'payment-admin_function.php' ?>
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
                                     <col style="width: auto;">
-                                    <col style="width: auto;"> 
                                     <col style="width: 20px;"> 
                                 </colgroup>
                                 <thead>
@@ -52,8 +51,6 @@ include_once 'payment-admin_function.php' ?>
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
-                                        <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>

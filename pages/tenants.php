@@ -217,10 +217,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         <!-- Modal Footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class="btn btn-primary" id="saveTenantBtn">Save</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Save</button>
                         </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -321,5 +320,4 @@ $(document).ready(function () {
     });
 </script>
 
-    <?php include_once 'footer.php' ?>
-    <script src="functions.js"></script>
+<?php include_once 'footer.php' ?>

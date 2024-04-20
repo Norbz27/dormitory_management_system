@@ -80,7 +80,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <p><strong>Room No:</strong> ' . $row["room_name"] . '</p>
+                                   
                                 </div>
                                 <div class="col-md-7">
                                     <p><strong>Name:</strong> ' . $row["name"] . '</p>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <p><strong>Month of:</strong> ' . $formatted_date_range . '</p>
-                                    <p><strong>Total Amount:</strong> ₱' . $total_fee . '</p>
+                                    
                                 </div>
                             </div>
                             <hr>

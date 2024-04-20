@@ -461,11 +461,12 @@ if (isset($_POST['accept_payment'])) {
 if (isset($_POST['reject_payment'])) {
     $id = $_POST['id'];
     $status = "Rejected";
+    $reason = $_POST['reason'];
 
-    $query = "UPDATE payments SET status = ? WHERE payment_id = ?";
+    $query = "UPDATE payments SET status = ?, reason = ? WHERE payment_id = ?";
     $stmt = mysqli_prepare($conn, $query);
 
-    mysqli_stmt_bind_param($stmt, "si", $status, $id);
+    mysqli_stmt_bind_param($stmt, "ssi", $status, $reason, $id);
     mysqli_stmt_execute($stmt);
 
     // Check for errors in the query execution

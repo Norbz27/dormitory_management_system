@@ -63,6 +63,30 @@ include_once 'payment-admin_function.php' ?>
             </div>
         </div>
       </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="rejectmodal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rejection Reason</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                <form id="reason_form">
+                    <div class="form-group">
+                        <label>Rejection Reason</label>
+                        <input type="text" class="form-control" name="reason" placeholder="Enter reason">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
      
       <script>
       feather.replace();
@@ -153,11 +177,17 @@ include_once 'payment-admin_function.php' ?>
         $(document).on("click", ".reject-btn", function (e) {
             e.preventDefault();
             var id = $(this).val();
-            var formData = new FormData();
-            formData.append("reject_payment", true);
-            formData.append("id", id);
 
-            $.ajax({
+            $('#rejectmodal').modal('show');
+
+            $(document).on("submit", "#reason_form", function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+                formData.append("reject_payment", true);
+                formData.append("id", id);
+
+                $.ajax({
                 type: "POST",
                 url: "server_function.php",
                 data: formData,
@@ -171,6 +201,7 @@ include_once 'payment-admin_function.php' ?>
                     location.reload();
                 }
                 },
+                }); 
             });
         });
     });

@@ -100,7 +100,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <input type="date" class="form-control" id="edstartDate" name="edstartDate" disabled>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edEquipments" class="form-label">Equipments::</label>
+                                            <label for="edEquipments" class="form-label">Equipments:</label>
                                             <input type="text" class="form-control" id="edEquipments" name="edEquipments" disabled>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="floorBelong" class="form-label">Floor Belong:</label>
+                                            <label for="floorBelong" class="form-label">Floor:</label>
                                             <input type="text" class="form-control" id="edfloorBelong" name="edfloorBelong" disabled>
                                         </div>
                                         <div class="mb-3">

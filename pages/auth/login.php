@@ -41,15 +41,22 @@
                 <div class="mt-3">
                   <button type="submit" name="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
-                <?php 
-                    if(isset($_GET['error']) && $_GET['error'] == 'loginblocked') {
-                    ?>
-                    <div class="mt-3 text-center text-danger">
-                        <p>Login is blocked. Wait after 60 seconds</p>
-                    </div>
-                    <?php 
-                    } 
-                    ?>
+                <?php
+                if (isset($_GET['error']) && $_GET['error'] == 'loginblocked') {
+                  ?>
+                  <div class="mt-3 text-center text-danger">
+                    <p>Login is blocked. Wait after <span id="remainingSeconds">60</span> seconds</p>
+                  </div>
+                  <div id="countdown">
+                    <div id="seconds" class="text-center"></div>
+                  </div>
+                <?php
+                } else if (isset($_GET['error']) && $_GET['error'] == 'usernotfound') {
+                  echo '<div class="mt-3 text-center text-danger">
+                              <p>Incorrect password or username</p>
+                          </div>';
+                }
+                ?>
                 <!--<div class="my-2 d-flex justify-content-between align-items-center">
                   <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div>-->
@@ -79,6 +86,58 @@
   <script src="../../js/todolist.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- endinject -->
+
+  <!-- JavaScript for countdown -->
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  <?php
+  if (isset($_GET['error']) && $_GET['error'] == 'loginblocked') {
+    ?>
+    const remainingSecondsElement = document.getElementById('remainingSeconds');
+    const secondsElement = document.getElementById('seconds');
+    let secondsLeft = parseInt(remainingSecondsElement.innerText);
+    let countdownInterval = null;
+
+    const updateCountdown = () => {
+      if (secondsLeft > 0) {
+        secondsElement.innerText = secondsLeft + 's';
+        console.log('Countdown:', secondsLeft + 's');
+        secondsLeft--;
+      } else {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').innerHTML = '<center><p>Countdown is over!</p></center>';
+        window.location.href = 'login.php'; // Redirect to login.php
+      }
+    };
+
+    const startCountdown = () => {
+      if (countdownInterval === null && secondsLeft > 0) {
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
+      }
+    };
+
+    // Fetch remaining seconds from the server and start the countdown
+    fetch('remaining_seconds.php?ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>')
+      .then(response => response.json())
+      .then(data => {
+        secondsLeft = data.remainingSeconds;
+        startCountdown();
+      });
+
+    // Update the countdown every second
+    setInterval(() => {
+      fetch('remaining_seconds.php?ip=<?php echo $_SERVER['REMOTE_ADDR']; ?>')
+        .then(response => response.json())
+        .then(data => {
+          secondsLeft = data.remainingSeconds;
+        });
+    }, 1000);
+  <?php
+  }
+  ?>
+});
+</script>
 </body>
 
 </html>

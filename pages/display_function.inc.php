@@ -29,7 +29,7 @@ function getAnnouncements() {
     global $conn;
 
     // Perform the query to fetch paginated rows from the "patients" table
-    $sql = "SELECT * FROM announcements";
+    $sql = "SELECT * FROM announcements ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

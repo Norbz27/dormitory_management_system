@@ -122,7 +122,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                           <select class="form-control" id="gender" name="gender">
                                               <option value="Male">Male</option>
                                               <option value="Female">Female</option>
-                                              <option value="Other">Other</option>
                                           </select>
                                       </div>
                                       <!-- Password -->
@@ -189,7 +188,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <select class="form-control" id="edgender" name="edgender" disabled>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
                                         <!-- Password -->
@@ -203,7 +201,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="close-btn" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
-                                <button type="button" id="editAccountBtn" class="btn btn-primary btn-md">Edit Account</button>
+                                <button type="button" id="editAccountBtn" class="btn btn-primary btn-md">Edit Details</button>
                                 <button type="submit" class="btn btn-primary btn-md" style="display: none;">Save Changes</button>
                             </div>
                         </form>

@@ -336,7 +336,6 @@ if ($_SESSION["username"] != 'admin') {
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Payment ID</th>
                         <th>Amount</th>
                         <th>Month</th>
                         <th>Date</th>
@@ -350,7 +349,6 @@ if ($_SESSION["username"] != 'admin') {
                           $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-warning';
                           ?>
                           <tr>
-                            <td><?php echo $row['payment_id']; ?></td>
                             <td><?php echo $row['amount']; ?></td>
                             <td><?php echo date('F Y', strtotime($row['month_of'])); ?></td>
                             <td><?php echo date('F d, Y', strtotime($row['date'])); ?></td>

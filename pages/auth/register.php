@@ -43,7 +43,7 @@
                   <input type="text" class="form-control form-control-lg" id="exampleInputName" name="name" placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                  <input type="tel" class="form-control form-control-lg" id="exampleInputPhone" name="contact" placeholder="Phone Number" required>
+                    <input type="text" class="form-control form-control-lg" id="exampleInputPhone" name="contact" placeholder="Phone Number" required>
                 </div>
                 <div class="form-group">
                   <select class="form-control form-control-lg" style="padding-left: 30px" id="exampleInputGender" name="gender" required>
@@ -87,6 +87,18 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var phoneInput = document.getElementById("exampleInputPhone");
+        
+        phoneInput.addEventListener("input", function(event) {
+            var inputValue = event.target.value;
+            var sanitizedValue = inputValue.replace(/[^0-9\+]/g, ''); // Remove any characters that are not numbers or +
+            sanitizedValue = sanitizedValue.slice(0, 12); // Limit to 12 characters
+            event.target.value = sanitizedValue;
+        });
+    });
+  </script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->

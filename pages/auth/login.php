@@ -54,13 +54,14 @@
                 if (isset($_GET['error']) && $_GET['error'] == 'loginblocked') {
                   ?>
                   <div class="mt-3 text-center text-danger">
-                    <p>Login is blocked. Wait after <span id="remainingSeconds">60</span> seconds</p>
-                  </div>
-                  <div id="countdown">
-                    <div id="seconds" class="text-center"></div>
+                    <p>Login is blocked. Wait after <span id="remainingSeconds"><span id="countdown"><span id="seconds"></span></span></span> seconds</p>
                   </div>
                 <?php
                 } else if (isset($_GET['error']) && $_GET['error'] == 'usernotfound') {
+                  echo '<div class="mt-3 text-center text-danger">
+                              <p>Incorrect password or username</p>
+                          </div>';
+                } else if (isset($_GET['error']) && $_GET['error'] == 'wrongpassword') {
                   echo '<div class="mt-3 text-center text-danger">
                               <p>Incorrect password or username</p>
                           </div>';

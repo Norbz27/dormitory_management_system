@@ -88,7 +88,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="eduserType" class="form-label">User Type:</label>
+                                            <label for="eduserType" class="form-label">Tenant Type:</label>
                                             <select class="form-control" id="eduserType" name="eduserType" disabled>
                                                 <?php foreach ($userTypes as $type): ?>
                                                     <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>

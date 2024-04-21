@@ -334,6 +334,12 @@ if ($_SESSION["username"] != 'admin') {
                 <h4 class="card-title">Transaction History</h4>
                 <div class="table-responsive">
                   <table class="table">
+                    <colgroup>
+                        <col style="width: auto;"> 
+                        <col style="width: auto;"> 
+                        <col style="width: auto;"> 
+                        <col style="width: 100px;"> 
+                    </colgroup>
                     <thead>
                       <tr>
                         <th>Amount</th>

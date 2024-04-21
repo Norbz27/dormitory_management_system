@@ -205,12 +205,12 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <input type="text" class="form-control" id="addEquipments" name="addEquipments" placeholder="Ex. Rice cooker, TV,....">
                                 </div>
                                 <div class="form-group">
-                                    <label for="date">Additional Fee:</label>
-                                    <input type="text" class="form-control" id="addFee" name="addFee">
-                                </div>
-                                <div class="form-group">
                                     <label for="date">Monthly Rate:</label>
                                     <input type="text" class="form-control" id="addmonthlyrate" name="monthlyrate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Additional Fee:</label>
+                                    <input type="text" class="form-control" id="addFee" name="addFee">
                                 </div>
                         </div>
                         

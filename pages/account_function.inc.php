@@ -122,8 +122,7 @@
                 genderSelect.empty(); // Clear previous options
                 var genderOptions = {
                     'Male': 'Male',
-                    'Female': 'Female',
-                    'Other': 'Other'
+                    'Female': 'Female'
                 };
                 $.each(genderOptions, function(value, text) {
                     genderSelect.append($('<option></option>').val(value).text(text));

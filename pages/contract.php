@@ -64,10 +64,10 @@
                 echo '<script>console.log('.$userid.');</script>';
                 
                 // Query to fetch user information based on user ID
-                $sql = "SELECT t.tenants_id, r.room_name, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, ten.monthlyrate, r.floor_belong, ut.description, ut.user_type_id, t.Date, t.additional_fee 
+                $sql = "SELECT t.tenants_id, r.room_no, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, ten.monthlyrate, r.floor, ut.description, ut.tenant_type_id, t.Date, t.additional_fee 
                         FROM tenants t 
                         LEFT JOIN users u ON t.user_id = u.id 
-                        LEFT JOIN user_type ut ON t.user_type = ut.user_type_id 
+                        LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id 
                         LEFT JOIN room_details r ON t.room_id = r.room_id
                         LEFT JOIN tenants ten ON t.user_id = ten.user_id
                         WHERE u.id = ?";
@@ -95,13 +95,13 @@
             ?>
                         <div class="row contract-details">
                             <div class="col-md-6">
-                                <p><strong>Client Name:</strong> <?php echo $userData['name']; ?></p>
+                                <p><strong>Name:</strong> <?php echo $userData['name']; ?></p>
                                 <p><strong>Contact Number:</strong> <?php echo $userData['contact']; ?></p>
                                 <p><strong>Gender:</strong> <?php echo $userData['gender']; ?></p>
-                                <p><strong>User Type:</strong> <?php echo $userData['description']; ?></p>
+                                <p><strong>Tenant Type:</strong> <?php echo $userData['description']; ?></p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Room No.:</strong> <?php echo $userData['room_name']; ?></p>
+                                <p><strong>Room No.:</strong> <?php echo $userData['room_no']; ?></p>
                                 <p><strong>Monthly Rate:</strong> ₱<?php echo $userData['monthlyrate']; ?></p>
                                 <p><strong>Additional Fee:</strong> ₱<?php echo $userData['additional_fee']; ?></p>
                                 <p><strong>Total Fee:</strong> ₱<?php echo $userData['monthlyrate'] + $userData['additional_fee']; ?></p>

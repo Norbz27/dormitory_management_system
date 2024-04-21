@@ -64,7 +64,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <div class="col-md-12"><h6><strong>Personal Information</strong></h6></div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="tenantName" class="form-label">Tenant Name:</label>
+                                            <label for="tenantName" class="form-label">Name:</label>
                                             <input type="text" class="form-control" id="edtenantName" name="edtenantName" disabled>
                                         </div>
                                         <div class="mb-3">
@@ -78,10 +78,10 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="eduserType" class="form-label">User Type:</label>
+                                            <label for="eduserType" class="form-label">Tenant Type:</label>
                                             <select class="form-control" id="eduserType" name="eduserType" disabled>
                                                 <?php foreach ($userTypes as $type): ?>
-                                                    <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+                                                    <option value="<?php echo $type['tenant_type_id']; ?>"><?php echo $type['description']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -100,11 +100,11 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <div class="col-md-12"><h6><strong>Room Information</strong></h6></div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="edroomName" class="form-label">Room Name:</label>
+                                            <label for="edroomName" class="form-label">Room No.:</label>
                                             <select class="form-control" id="edroomName" name="edroomName" disabled>
                                                 <?php foreach ($rooms as $room): ?>
                                                     <!-- Embed floor belong data as data attribute -->
-                                                    <option value="<?php echo $room['room_id']; ?>" data-floor-belong="<?php echo $room['floor_belong']; ?>"><?php echo $room['room_name']; ?></option>
+                                                    <option value="<?php echo $room['room_id']; ?>" data-floor-belong="<?php echo $room['floor']; ?>"><?php echo $room['room_no']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -119,7 +119,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="floorBelong" class="form-label">Floor Belong:</label>
+                                            <label for="floorBelong" class="form-label">Floor:</label>
                                             <input type="text" class="form-control" id="edfloorBelong" name="edfloorBelong" disabled>
                                         </div>
                                         <div class="mb-3">
@@ -194,7 +194,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <label for="userType">User Type:</label>
                                     <select class="form-control" id="userType" name="userType">
                                         <?php foreach ($userTypes as $type): ?>
-                                            <option value="<?php echo $type['user_type_id']; ?>"><?php echo $type['description']; ?></option>
+                                            <option value="<?php echo $type['tenant_type_id']; ?>"><?php echo $type['description']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -206,7 +206,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <label for="roomSelect">Select Room:</label>
                                     <select class="form-control" id="roomSelect" name="roomSelect">
                                         <?php foreach ($rooms as $room): ?>
-                                            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_name']; ?></option>
+                                            <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_no']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

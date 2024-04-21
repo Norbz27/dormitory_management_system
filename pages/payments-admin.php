@@ -22,8 +22,37 @@ include_once 'payment-admin_function.php' ?>
             <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <div class="col-6 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Payments</h3>
+                        </div>
+                        <div class="col-4">
+                            <div class="justify-content-end d-flex">
+                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                    <form action="generate_report.php" method="post">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <select class="form-control" name="month" id="month">
+                                                    <option value="January">January</option>
+                                                    <option value="February">February</option>
+                                                    <option value="March">March</option>
+                                                    <option value="April">April</option>
+                                                    <option value="May">May</option>
+                                                    <option value="June">June</option>
+                                                    <option value="July">July</option>
+                                                    <option value="August">August</option>
+                                                    <option value="September">September</option>
+                                                    <option value="October">October</option>
+                                                    <option value="November">November</option>
+                                                    <option value="December">December</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="submit" class="btn btn-primary btn-sm" name="generate_report">Generate Report</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

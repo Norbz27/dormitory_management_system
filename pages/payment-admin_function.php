@@ -3,7 +3,7 @@
 
     function getAllPayments() {
         global $conn;
-        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status, p.reason, user_t.description FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants ten ON u.id = ten.user_id LEFT JOIN user_type user_t ON ten.user_type = user_t.user_type_id;";
+        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status, p.reason, user_t.description FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants ten ON u.id = ten.user_id LEFT JOIN tenant_type user_t ON ten.tenant_type = user_t.tenant_type_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
@@ -52,7 +52,7 @@
     // Function to display payment details in the modal
     function displayPaymentDetails($payment_id) {
         global $conn;
-        $sql = "SELECT p.payment_id, r.room_name, u.name, ut.description, t.monthlyrate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
+        $sql = "SELECT p.payment_id, r.room_no, u.name, ut.description, t.monthlyrate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
@@ -93,11 +93,10 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                   
+                                    <p><strong>Name:</strong> ' . $row["name"] . '</p>
                                 </div>
                                 <div class="col-md-7">
-                                    <p><strong>Name:</strong> ' . $row["name"] . '</p>
-                                    <p><strong>User type:</strong> ' . $row["description"] . '</p>
+                                    <p><strong>Tenant type:</strong> ' . $row["description"] . '</p>
                                 </div>
                             </div>
                             

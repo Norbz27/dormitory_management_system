@@ -27,7 +27,7 @@ function getAvailableRooms() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
         
-        $sql = "SELECT room_id, room_name, floor_belong FROM room_details WHERE status = 'available' OR status = 'lacking'";
+        $sql = "SELECT room_id, room_no, floor FROM room_details WHERE status = 'available' OR status = 'lacking'";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,7 +42,7 @@ function getUserTypes() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
 
-        $sql = "SELECT user_type_id, description FROM user_type";
+        $sql = "SELECT tenant_type_id, description FROM tenant_type";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ function getUserTypes() {
 
 function getAllTenants() {
     global $conn;
-    $sql = "SELECT t.tenants_id, r.room_name, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id;";
+    $sql = "SELECT t.tenants_id, r.room_no, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id;";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -74,7 +74,7 @@ function getAllTenants() {
                 $profileImage = 'assets/' . $row["display_img"];
 
             echo '<tr data-tenant-id="' . $row["tenants_id"] . '">
-                    <td>' . $row["room_name"]. '</td>
+                    <td>' . $row["room_no"]. '</td>
                     <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
                     <td>' . $row["name"]. '</td>
                     <td>' . $row["contact"]. '</td>
@@ -222,87 +222,98 @@ function getAllTenants() {
         });
 
         $('#editTenantBtn').on('click', function() {
-            // Make specific input fields editable
+
             $('#eduserType, #roomName, #edadditionalFee, #edroomName ,#edmonthlyRate ,#edEquipments').prop('disabled', false);
-            // Toggle visibility of buttons
+
             $('#editTenantBtn').hide();
             $('button[type="submit"]').show();
         });
 
         $('#close-btn').on('click', function() {
-            // Make specific input fields editable
+
             $('#eduserType, #roomName, #edadditionalFee, #edroomName').prop('disabled', true)
-            // Toggle visibility of buttons
+
             $('#editTenantBtn').show();
             $('button[type="submit"]').hide();
         });
-       
+
         $('#viewTenantModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var tenantId = button.closest('tr').data('tenant-id'); // Extract user ID from data attribute
-        var modal = $(this);
+            var button = $(event.relatedTarget);
+            var tenantId = button.closest('tr').data('tenant-id'); 
+            var modal = $(this);
 
-        // AJAX call to fetch user information
-        $.ajax({
-            url: 'viewTenantsInfo.php', // Modify the URL according to your setup
-            type: 'POST',
-            data: {tenantId: tenantId},
-            success: function(response) {
-                var tenantData = JSON.parse(response);
-
-                // Populate modal fields with user data
-                modal.find('#edid').val(tenantData.tenants_id);
-                modal.find('#edProfile').attr('src', tenantData.display_img !== null ? 'assets/' + tenantData.display_img : 'assets/profile.png');
-                modal.find('#edtenantName').val(tenantData.name);
-                modal.find('#edgender').val(tenantData.gender);
-                modal.find('#edcontactNo').val(tenantData.contact);
-                modal.find('#eduserType').val(tenantData.user_type_id);
-                modal.find('#edstartDate').val(tenantData.Date);
-                modal.find('#edroomName').val(tenantData.room_id); // Set the value of the select element directly
-                modal.find('#edfloorBelong').val(tenantData.floor_belong);
-                modal.find('#edEquipments').val(tenantData.equipments);
-
-                // Calculate total fee
-                var monthlyRate = parseFloat(tenantData.monthlyrate);
-                var additionalFee = parseFloat(tenantData.additional_fee);
-                var totalFee = monthlyRate + additionalFee;
-
-                // Format decimal values to display with two decimal places
-                var formattedMonthlyRate = monthlyRate.toFixed(2);
-                var formattedAdditionalFee = additionalFee.toFixed(2);
-                var formattedTotalFee = totalFee.toFixed(2);
-
-                modal.find('#edmonthlyRate').val(formattedMonthlyRate);
-                modal.find('#edadditionalFee').val(formattedAdditionalFee);
-                modal.find('#edtotalFee').val(formattedTotalFee);
-            },
-
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                swal({
-                    title: "Error",
-                    text: "Failed to fetch user information!",
-                    icon: "error",
-                    button: false,
-                });
+            // Function to calculate total fee
+            function calculateTotalFee(monthlyRate, additionalFee) {
+                var totalFee = parseFloat(monthlyRate) + parseFloat(additionalFee);
+                return totalFee.toFixed(2);
             }
+
+
+            function updateTotalFee() {
+                var monthlyRate = parseFloat(modal.find('#edmonthlyRate').val());
+                var additionalFee = parseFloat(modal.find('#edadditionalFee').val());
+                var totalFee = calculateTotalFee(monthlyRate, additionalFee);
+                modal.find('#edtotalFee').val(totalFee);
+            }
+
+            $.ajax({
+                url: 'viewTenantsInfo.php', 
+                type: 'POST',
+                data: { tenantId: tenantId },
+                success: function(response) {
+                    var tenantData = JSON.parse(response);
+
+                    modal.find('#edid').val(tenantData.tenants_id);
+                    modal.find('#edProfile').attr('src', tenantData.display_img !== null ? 'assets/' + tenantData.display_img : 'assets/profile.png');
+                    modal.find('#edtenantName').val(tenantData.name);
+                    modal.find('#edgender').val(tenantData.gender);
+                    modal.find('#edcontactNo').val(tenantData.contact);
+                    modal.find('#eduserType').val(tenantData.tenant_type_id);
+                    modal.find('#edstartDate').val(tenantData.Date);
+                    modal.find('#edroomName').val(tenantData.room_id); 
+                    modal.find('#edfloorBelong').val(tenantData.floor);
+                    modal.find('#edEquipments').val(tenantData.equipments);
+
+                    // Calculate total fee
+                    var monthlyRate = parseFloat(tenantData.monthlyrate);
+                    var additionalFee = parseFloat(tenantData.additional_fee);
+                    var totalFee = calculateTotalFee(monthlyRate, additionalFee);
+
+                    modal.find('#edmonthlyRate').val(monthlyRate.toFixed(2)); 
+                    modal.find('#edadditionalFee').val(additionalFee.toFixed(2)); 
+                    modal.find('#edtotalFee').val(totalFee);
+
+                    modal.find('#edmonthlyRate, #edadditionalFee').on('input', updateTotalFee);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    swal({
+                        title: "Error",
+                        text: "Failed to fetch user information!",
+                        icon: "error",
+                        button: false,
+                    });
+                }
+            });
         });
-    });
-
-
 
     });
 
     $(document).ready(function() {
-    // Function to update floor belong based on selected room name
-    $('#roomName').on('change', function() {
-        // Get the selected room ID and floor belong data
-        var room_id = $(this).val();
-        var floor_belong = $(this).find('option:selected').data('floor-belong');
+        // Function to update floor belong based on selected room name
+        $('#roomName').on('change', function() {
+            // Get the selected room ID and floor belong data
+            var room_id = $(this).val();
+            var floor = $(this).find('option:selected').data('floor-belong');
 
-        // Update the floor belong field with the fetched value
-        $('#edfloorBelong').val(floor_belong);
+            // Update the floor belong field with the fetched value
+            $('#edfloorBelong').val(floor);
+        });
+
+        $('#edmonthlyRate').on('change', function() {
+            
+        });
     });
-});
 
+    
 </script>

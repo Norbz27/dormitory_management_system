@@ -24,6 +24,16 @@
       background-size: cover;
       background-repeat: no-repeat;
     }
+    .col-9 {
+      margin: 0 auto; 
+      text-align: left; 
+      display: absolute;
+      top: 20px;
+    }
+    h3{
+      font-weight: bold;
+      font-size: 30px
+    }
 </style>
 
 </head>
@@ -36,7 +46,14 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <div class="row">
+                  <div class="col-3">
+                    <img src="../../images/logo.svg" alt="logo">
+                  </div>
+                  <div class="col-9">
+                    <h3>SEC Dormitory</h3>
+                  </div>
+                </div>
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>

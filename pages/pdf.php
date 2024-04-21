@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 }
 
 // SQL query to fetch data for the specified tenant ID
-$sql = "SELECT t.tenants_id, r.room_name, r.room_id, t.equipments, t.user_id, u.display_img, u.id, u.name, u.contact, u.gender, r.floor_belong, t.monthlyrate, ut.description, ut.user_type_id, t.Date, t.additional_fee FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE t.tenants_id = '$tenantId';";
+$sql = "SELECT t.tenants_id, r.room_no, r.room_id, t.equipments, t.user_id, u.display_img, u.id, u.name, u.contact, u.gender, r.floor, t.monthlyrate, ut.description, ut.tenant_type_id, t.Date, t.additional_fee FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE t.tenants_id = '$tenantId';";
 $result = $conn->query($sql);
 
 // Initialize PDF
@@ -57,8 +57,8 @@ if ($result->num_rows > 0) {
     
     
     // Room Information
-    $pdf->Cell(95, 10, 'Room Name: ' . $row['room_name'], 0, 0);
-    $pdf->Cell(95, 10, 'Floor Belong: ' . $row['floor_belong'], 0, 1);
+    $pdf->Cell(95, 10, 'Room No.: ' . $row['room_no'], 0, 0);
+    $pdf->Cell(95, 10, 'Floor Belong: ' . $row['floor'], 0, 1);
 
     // Second row
     $pdf->Cell(95, 10, 'Monthly Rate: ' . $row['monthlyrate'], 0, 0);

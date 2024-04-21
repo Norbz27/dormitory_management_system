@@ -55,7 +55,7 @@ function getUserTypes() {
 
 function getAllTenants() {
     global $conn;
-    $sql = "SELECT t.tenants_id, r.room_name, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id;";
+    $sql = "SELECT t.tenants_id, r.room_name, u.display_img, u.id, u.name, u.contact, u.status, user_t.description FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id LEFT JOIN user_type user_t ON t.user_type = user_t.user_type_id;";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -78,7 +78,7 @@ function getAllTenants() {
                     <td>' . $row["room_name"]. '</td>
                     <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
                     <td>' . $row["name"]. '</td>
-                    <td>' . $row["contact"]. '</td>
+                    <td>' . $row["description"]. '</td>
                     <td><span class="badge ' . $badge_color . '">' . $status . '</span></td>
                     <td><div class="btn-group">
                         <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

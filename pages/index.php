@@ -345,6 +345,7 @@ if ($_SESSION["username"] != 'admin') {
                         <th>Amount</th>
                         <th>Month</th>
                         <th>Date</th>
+                        <th>Reason</th>
                         <th>Status</th>
                       </tr>
                     </thead>
@@ -352,12 +353,14 @@ if ($_SESSION["username"] != 'admin') {
                       <?php
                       if ($result_transactions->num_rows > 0) {
                         while ($row = $result_transactions->fetch_assoc()) {
-                          $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-warning';
+                          $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : 'badge-danger';
+                          $formattedAmount = number_format($row['amount'], 2);
                           ?>
                           <tr>
-                            <td><?php echo $row['amount']; ?></td>
+                            <td><?php echo $formattedAmount; ?></td>
                             <td><?php echo $row['month_of']; ?></td>
                             <td><?php echo date('F d, Y', strtotime($row['date'])); ?></td>
+                            <td><?php echo $row['reason']; ?></td>
                             <td><span class="badge <?php echo $badge_color; ?>"><?php echo $row['status']; ?></span></td>
                           </tr>
                         <?php

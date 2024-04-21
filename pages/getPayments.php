@@ -30,9 +30,10 @@ if (isset($_POST['userId'])) {
     if (mysqli_num_rows($result) > 0) {
         // Output data of each row
         while ($row = mysqli_fetch_assoc($result)) {
+            $formattedAmount = number_format($row['amount'], 2);
             echo '<tr>
                     <td>' . $row["payment_id"] . '</td>
-                    <td>' . $row["amount"] . '</td>
+                    <td>' . $formattedAmount . '</td>
                     <td>' . date('F Y', strtotime($row['month_of'])) . '</td>
                     <td>' . date('F d, Y', strtotime($row['date'])) . '</td>
                     <td><span class="badge badge-success">' . $row["status"] . '</span></td>

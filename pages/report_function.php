@@ -175,13 +175,18 @@ function getAllTenants() {
                 modal.find('#edEquipments').val(tenantData.equipments);
 
                 // Calculate total fee
-                var monthlyRate = parseFloat(tenantData.monthly_rate);
+                var monthlyRate = parseFloat(tenantData.monthlyrate);
                 var additionalFee = parseFloat(tenantData.additional_fee);
                 var totalFee = monthlyRate + additionalFee;
 
-                modal.find('#edmonthlyRate').val(monthlyRate);
-                modal.find('#edadditionalFee').val(additionalFee);
-                modal.find('#edtotalFee').val(totalFee);
+                // Format decimal values to display with two decimal places
+                var formattedMonthlyRate = monthlyRate.toFixed(2);
+                var formattedAdditionalFee = additionalFee.toFixed(2);
+                var formattedTotalFee = totalFee.toFixed(2);
+
+                modal.find('#edmonthlyRate').val(formattedMonthlyRate);
+                modal.find('#edadditionalFee').val(formattedAdditionalFee);
+                modal.find('#edtotalFee').val(formattedTotalFee);
 
                 $.ajax({
                 url: 'getPayments.php', // Modify the URL according to your setup
@@ -200,15 +205,6 @@ function getAllTenants() {
                     });
                 }
                 });
-
-                // Calculate total fee
-                var monthlyRate = parseFloat(tenantData.monthly_rate);
-                var additionalFee = parseFloat(tenantData.additional_fee);
-                var totalFee = monthlyRate + additionalFee;
-
-                modal.find('#edmonthlyRate').val(monthlyRate);
-                modal.find('#edadditionalFee').val(additionalFee);
-                modal.find('#edtotalFee').val(totalFee);
             },
 
             error: function(xhr, status, error) {

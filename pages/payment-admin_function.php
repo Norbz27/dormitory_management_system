@@ -3,23 +3,28 @@
 
     function getAllPayments() {
         global $conn;
-        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status FROM payments p LEFT JOIN users u ON p.user_id = u.id;";
+        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status, p.reason, user_t.description FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants ten ON u.id = ten.user_id LEFT JOIN user_type user_t ON ten.user_type = user_t.user_type_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
             // Handle the query error
             die("Query failed: " . mysqli_error($conn));
         }
+        
     
         if (mysqli_num_rows($result) > 0) {
             // Output data of each row
             while($row = mysqli_fetch_assoc($result)) {
                 $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : (($row["status"] == 'Pending') ? 'badge-warning' : 'badge-danger');
+                $formattedAmount = number_format($row['amount'], 2);
+
                 echo '<tr data-payment-id="' . $row["payment_id"] . '">
                 <td>' . $row["name"] . '</td>
-                <td>₱' . $row["amount"] . '</td>
+                <td>' . $row["description"] . '</td>
+                <td>₱' . $formattedAmount . '</td>
                 <td>' . $row["date"] . '</td>
                 <td><span class="badge ' . $badge_color . '">' . $row["status"] . '</span></td>
+                <td>' . $row["reason"] . '</td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,6 +70,14 @@
 
             // Format date as "Month Day, Year"
             $date_formatted = date('F j, Y', strtotime($row["date"]));
+
+            $monthlyRate = $row['monthlyrate'];
+            $additionalFee = $row['additional_fee'];
+            $mount = $row['amount'];
+
+            $formattedMonthlyRate = number_format($monthlyRate, 2);
+            $formattedAdditionalFee = number_format($additionalFee, 2);
+            $formattedAmount = number_format($mount, 2);
             // Generate unique modal IDs
             $modal_id = 'paymentModal_' . $payment_id;
             // Display modal content dynamically
@@ -90,8 +103,8 @@
                             
                             <div class="row mt-4 mb-5">
                                 <div class="col-md-5">
-                                    <p><strong>Monthly Rate:</strong> ₱' . $row["monthlyrate"] . '</p>
-                                    <p><strong>Additional fee:</strong> ₱' . $row["additional_fee"] . '</p>
+                                    <p><strong>Monthly Rate:</strong> ₱' . $formattedMonthlyRate . '</p>
+                                    <p><strong>Additional fee:</strong> ₱' . $formattedAdditionalFee . '</p>
                                 </div>
                                 <div class="col-md-7">
                                     <p><strong>Month of:</strong> ' . $formatted_date_range . '</p>
@@ -103,7 +116,7 @@
                                 <div class="col-md-12">
                                     <p style="display: flex; justify-content: space-between;">
                                         <span style="text-align: left; font-size: 18px">' . $date_formatted . '</span>
-                                        <span style="text-align: right; font-size: 18px"><strong>Paid Amount:</strong> ₱' . $row["amount"] . '</span>
+                                        <span style="text-align: right; font-size: 18px"><strong>Paid Amount:</strong> ₱' . $formattedAmount . '</span>
                                     </p>
                                 </div>
                             </div>

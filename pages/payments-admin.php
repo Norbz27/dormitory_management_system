@@ -42,14 +42,18 @@ include_once 'payment-admin_function.php' ?>
                                     <col style="width: auto;"> 
                                     <col style="width: auto;"> 
                                     <col style="width: auto;">
+                                    <col style="width: auto;">
+                                    <col style="width: auto;">
                                     <col style="width: 20px;"> 
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>Client Name</th>
+                                        <th>Tenant Name</th>
+                                        <th>Tenant Type</th>
                                         <th>Ammount</th>
                                         <th>Date</th>
                                         <th>Status</th>
+                                        <th>Reason</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
         secondsLeft--;
       } else {
         clearInterval(countdownInterval);
-        document.getElementById('countdown').innerHTML = '<center><p>Countdown is over!</p></center>';
+        //document.getElementById('countdown').innerHTML = '<center><p>Countdown is over!</p></center>';
         window.location.href = 'login.php'; // Redirect to login.php
       }
     };

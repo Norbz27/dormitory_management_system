@@ -267,9 +267,14 @@ function getAllTenants() {
                 var additionalFee = parseFloat(tenantData.additional_fee);
                 var totalFee = monthlyRate + additionalFee;
 
-                modal.find('#edmonthlyRate').val(monthlyRate);
-                modal.find('#edadditionalFee').val(additionalFee);
-                modal.find('#edtotalFee').val(totalFee);
+                // Format decimal values to display with two decimal places
+                var formattedMonthlyRate = monthlyRate.toFixed(2);
+                var formattedAdditionalFee = additionalFee.toFixed(2);
+                var formattedTotalFee = totalFee.toFixed(2);
+
+                modal.find('#edmonthlyRate').val(formattedMonthlyRate);
+                modal.find('#edadditionalFee').val(formattedAdditionalFee);
+                modal.find('#edtotalFee').val(formattedTotalFee);
             },
 
             error: function(xhr, status, error) {

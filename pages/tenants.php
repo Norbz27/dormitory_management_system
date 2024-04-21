@@ -5,9 +5,9 @@ include_once '../pages/auth/dbh.class.php';
 
 $dbh = new Dbh();
 $pdo = $dbh->connect();
-$users = getUsers($pdo);
-$rooms = getAvailableRooms($pdo); 
-$userTypes = getUserTypes($pdo);
+$users = getUsers();
+$rooms = getAvailableRooms(); 
+$userTypes = getUserTypes();
 
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>

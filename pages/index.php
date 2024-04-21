@@ -21,7 +21,7 @@ $rowPending = mysqli_fetch_assoc($resultPending);
 // Transaction History
 if ($_SESSION["username"] != 'admin') {
   $user_id = $_SESSION["userid"];
-  $sql_transactions = "SELECT * FROM payments WHERE user_id = $user_id AND status = 'Verified' ORDER BY payment_id DESC LIMIT 5";
+  $sql_transactions = "SELECT * FROM payments WHERE user_id = $user_id ORDER BY date ASC LIMIT 5";
   $result_transactions = $conn->query($sql_transactions);
 }
 ?>
@@ -350,7 +350,7 @@ if ($_SESSION["username"] != 'admin') {
                           ?>
                           <tr>
                             <td><?php echo $row['amount']; ?></td>
-                            <td><?php echo date('F Y', strtotime($row['month_of'])); ?></td>
+                            <td><?php echo $row['month_of']; ?></td>
                             <td><?php echo date('F d, Y', strtotime($row['date'])); ?></td>
                             <td><span class="badge <?php echo $badge_color; ?>"><?php echo $row['status']; ?></span></td>
                           </tr>

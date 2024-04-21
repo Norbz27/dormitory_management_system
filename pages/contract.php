@@ -95,10 +95,10 @@
             ?>
                         <div class="row contract-details">
                             <div class="col-md-6">
-                                <p><strong>Client Name:</strong> <?php echo $userData['name']; ?></p>
+                                <p><strong>Name:</strong> <?php echo $userData['name']; ?></p>
                                 <p><strong>Contact Number:</strong> <?php echo $userData['contact']; ?></p>
                                 <p><strong>Gender:</strong> <?php echo $userData['gender']; ?></p>
-                                <p><strong>User Type:</strong> <?php echo $userData['description']; ?></p>
+                                <p><strong>Tenant Type:</strong> <?php echo $userData['description']; ?></p>
                             </div>
                             <div class="col-md-6">
                                 <p><strong>Room No.:</strong> <?php echo $userData['room_no']; ?></p>

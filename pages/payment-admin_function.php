@@ -96,7 +96,7 @@
                                     <p><strong>Name:</strong> ' . $row["name"] . '</p>
                                 </div>
                                 <div class="col-md-7">
-                                    <p><strong>User type:</strong> ' . $row["description"] . '</p>
+                                    <p><strong>Tenant type:</strong> ' . $row["description"] . '</p>
                                 </div>
                             </div>
                             

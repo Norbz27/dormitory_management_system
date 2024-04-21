@@ -69,7 +69,7 @@ $(document).on("click", "#view_button", function (e) {
         $("#floor").text(res.data.floor_belong);
         $("#occupy_num").text(res.data.available_occupation);
         $("#status").text(res.data.status);
-        $("#room_name").text(res.data.room_name);
+        $("#room_no").text(res.data.room_no);
         $("#edit_button").val(thisroom_id);
         $("#display_img").attr("src", "assets/" + res.data.display_img);
         //$("#new_room_id").val(thisroom_id);
@@ -108,7 +108,7 @@ $(document).on("click", "#edit_button", function (e) {
       if (res.status == 422) {
         alert(res.message);
       } else if (res.status == 200) {
-        $("#new_room_name").val(res.data.room_name);
+        $("#new_room_no").val(res.data.room_no);
         $("#new_occupy_num").val(res.data.occupy_num);
         $("#new_floor_belong").val(res.data.floor_belong);
         $("#new_status").val(res.data.status);
@@ -279,11 +279,11 @@ $("#floor_belong").change(function () {
       if (res.status == 422) {
         alert(res.message);
       } else if (res.status == 200) {
-        var roomData = res.data.room_name;
+        var roomData = res.data.room_no;
         var roomNumber = parseInt(roomData.match(/\d+/)[0]);
         roomNumber++;
         var updatedRoomData = roomData.replace(/\d+/, roomNumber);
-        $("#auto_room_name").val(updatedRoomData);
+        $("#auto_room_no").val(updatedRoomData);
       }
     },
   });

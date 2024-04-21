@@ -110,7 +110,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <div class="col-md-12"><h6><strong>Room Information</strong></h6></div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="edroomName" class="form-label">Room Name:</label>
+                                            <label for="edroomName" class="form-label">Room No.:</label>
                                             <select class="form-control" id="edroomName" name="edroomName" disabled>
                                                 <?php foreach ($rooms as $room): ?>
                                                     <!-- Embed floor belong data as data attribute -->

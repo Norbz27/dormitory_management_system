@@ -127,7 +127,7 @@ include_once 'display_function.inc.php';
                             <?php 
                               if ($_SESSION["username"] == 'admin') {
                               ?>
-                            <button type="button" id="edit_button" class="btn btn-primary">Edit Room</button>
+                            <button type="button" id="edit_button" class="btn btn-primary">Edit Details</button>
                             <?php } ?>
                           </div>
                         </div>

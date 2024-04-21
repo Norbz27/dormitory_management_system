@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     
     
     // Room Information
-    $pdf->Cell(95, 10, 'Room Name: ' . $row['room_no'], 0, 0);
+    $pdf->Cell(95, 10, 'Room No.: ' . $row['room_no'], 0, 0);
     $pdf->Cell(95, 10, 'Floor Belong: ' . $row['floor'], 0, 1);
 
     // Second row

@@ -52,7 +52,7 @@
     // Function to display payment details in the modal
     function displayPaymentDetails($payment_id) {
         global $conn;
-        $sql = "SELECT p.payment_id, r.room_name, u.name, ut.description, t.monthlyrate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
+        $sql = "SELECT p.payment_id, r.room_no, u.name, ut.description, t.monthlyrate, t.additional_fee, p.month_of, p.amount, p.date, p.receipt_img FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants t ON u.id = t.user_id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE p.payment_id = $payment_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {

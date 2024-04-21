@@ -27,7 +27,7 @@ function getAvailableRooms() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
         
-        $sql = "SELECT room_id, room_name, floor_belong FROM room_details WHERE status = 'available' OR status = 'lacking'";
+        $sql = "SELECT room_id, room_no, floor FROM room_details WHERE status = 'available' OR status = 'lacking'";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,7 +42,7 @@ function getUserTypes() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
 
-        $sql = "SELECT user_type_id, description FROM user_type";
+        $sql = "SELECT tenant_type_id, description FROM tenant_type";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ function getUserTypes() {
 
 function getAllTenants() {
     global $conn;
-    $sql = "SELECT t.tenants_id, r.room_name, u.display_img, u.id, u.name, u.contact, u.status, user_t.description FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN user_type ut ON t.user_type = ut.user_type_id LEFT JOIN room_details r ON t.room_id = r.room_id LEFT JOIN user_type user_t ON t.user_type = user_t.user_type_id;";
+    $sql = "SELECT t.tenants_id, r.room_no, u.display_img, u.id, u.name, u.contact, u.status, user_t.description FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id LEFT JOIN tenant_type user_t ON t.tenant_type = user_t.tenant_type_id;";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -75,7 +75,7 @@ function getAllTenants() {
                 $profileImage = 'assets/' . $row["display_img"];
 
             echo '<tr data-tenant-id="' . $row["tenants_id"] . '">
-                    <td>' . $row["room_name"]. '</td>
+                    <td>' . $row["room_no"]. '</td>
                     <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
                     <td>' . $row["name"]. '</td>
                     <td>' . $row["description"]. '</td>
@@ -168,10 +168,10 @@ function getAllTenants() {
                 modal.find('#edtenantName').val(tenantData.name);
                 modal.find('#edgender').val(tenantData.gender);
                 modal.find('#edcontactNo').val(tenantData.contact);
-                modal.find('#eduserType').val(tenantData.user_type_id);
+                modal.find('#eduserType').val(tenantData.tenant_type_id);
                 modal.find('#edstartDate').val(tenantData.Date);
                 modal.find('#edroomName').val(tenantData.room_id); // Set the value of the select element directly
-                modal.find('#edfloorBelong').val(tenantData.floor_belong);
+                modal.find('#edfloorBelong').val(tenantData.floor);
                 modal.find('#edEquipments').val(tenantData.equipments);
 
                 // Calculate total fee
@@ -256,10 +256,10 @@ function getAllTenants() {
     $('#roomName').on('change', function() {
         // Get the selected room ID and floor belong data
         var room_id = $(this).val();
-        var floor_belong = $(this).find('option:selected').data('floor-belong');
+        var floor = $(this).find('option:selected').data('floor-belong');
 
         // Update the floor belong field with the fetched value
-        $('#edfloorBelong').val(floor_belong);
+        $('#edfloorBelong').val(floor);
     });
 });
 

@@ -114,7 +114,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <select class="form-control" id="edroomName" name="edroomName" disabled>
                                                 <?php foreach ($rooms as $room): ?>
                                                     <!-- Embed floor belong data as data attribute -->
-                                                    <option value="<?php echo $room['room_id']; ?>" data-floor-belong="<?php echo $room['floor_belong']; ?>"><?php echo $room['room_no']; ?></option>
+                                                    <option value="<?php echo $room['room_id']; ?>" data-floor-belong="<?php echo $room['floor']; ?>"><?php echo $room['room_no']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

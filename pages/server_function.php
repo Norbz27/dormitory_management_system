@@ -9,7 +9,7 @@ $currentDate = date('Y-m-d');
 if (isset($_POST['add_room'])) {
     $room_no = $_POST['room_no'];
     $occupy_num = $_POST['occupy_num'];
-    $floor_belong = $_POST['floor_belong'];
+    $floor = $_POST['floor'];
     $status = $_POST['status'];
 
     if (isset($_FILES['staffformFile']) && $_FILES['staffformFile']['error'] == 0) {
@@ -47,7 +47,7 @@ if (isset($_POST['add_room'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("sisss", $room_no, $occupy_num, $floor_belong, $newFileName, $status);
+    $stmt->bind_param("sisss", $room_no, $occupy_num, $floor, $newFileName, $status);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -74,7 +74,7 @@ if (isset($_POST['add_room'])) {
 if (isset($_POST['edit_room'])) {
     $room_no = $_POST['new_room_no'];
     $occupy_num = $_POST['new_occupy_num'];
-    $floor_belong = $_POST['new_floor_belong'];
+    $floor = $_POST['new_floor'];
     $status = $_POST['new_status'];
     $room_id = $_POST['new_room_id'];
     $imageSrc = $_POST['imageSrc'];
@@ -113,7 +113,7 @@ if (isset($_POST['edit_room'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("siissi", $room_no, $occupy_num, $floor_belong, $status, $newFileName, $room_id);
+    $stmt->bind_param("siissi", $room_no, $occupy_num, $floor, $status, $newFileName, $room_id);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -334,7 +334,7 @@ if (isset($_GET['get_latest_room'])) {
     $id = $_GET['get_latest_room'];
 
     // Prepare the SQL statement with a parameter placeholder
-    $query = "SELECT * FROM room_details WHERE floor_belong = ? ORDER BY room_id DESC LIMIT 1";
+    $query = "SELECT * FROM room_details WHERE floor = ? ORDER BY room_id DESC LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
 
     // Bind the parameter

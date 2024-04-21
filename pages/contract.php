@@ -64,7 +64,7 @@
                 echo '<script>console.log('.$userid.');</script>';
                 
                 // Query to fetch user information based on user ID
-                $sql = "SELECT t.tenants_id, r.room_no, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, ten.monthlyrate, r.floor_belong, ut.description, ut.tenant_type_id, t.Date, t.additional_fee 
+                $sql = "SELECT t.tenants_id, r.room_no, r.room_id, u.display_img, u.id, u.name, u.contact, u.gender, ten.monthlyrate, r.floor, ut.description, ut.tenant_type_id, t.Date, t.additional_fee 
                         FROM tenants t 
                         LEFT JOIN users u ON t.user_id = u.id 
                         LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id 

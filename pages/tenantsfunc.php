@@ -27,7 +27,7 @@ function getAvailableRooms() {
         $dbh = new Dbh();
         $pdo = $dbh->connect();
         
-        $sql = "SELECT room_id, room_no, floor_belong FROM room_details WHERE status = 'available' OR status = 'lacking'";
+        $sql = "SELECT room_id, room_no, floor FROM room_details WHERE status = 'available' OR status = 'lacking'";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -271,7 +271,7 @@ function getAllTenants() {
                     modal.find('#eduserType').val(tenantData.tenant_type_id);
                     modal.find('#edstartDate').val(tenantData.Date);
                     modal.find('#edroomName').val(tenantData.room_id); 
-                    modal.find('#edfloorBelong').val(tenantData.floor_belong);
+                    modal.find('#edfloorBelong').val(tenantData.floor);
                     modal.find('#edEquipments').val(tenantData.equipments);
 
                     // Calculate total fee
@@ -304,10 +304,10 @@ function getAllTenants() {
         $('#roomName').on('change', function() {
             // Get the selected room ID and floor belong data
             var room_id = $(this).val();
-            var floor_belong = $(this).find('option:selected').data('floor-belong');
+            var floor = $(this).find('option:selected').data('floor-belong');
 
             // Update the floor belong field with the fetched value
-            $('#edfloorBelong').val(floor_belong);
+            $('#edfloorBelong').val(floor);
         });
 
         $('#edmonthlyRate').on('change', function() {

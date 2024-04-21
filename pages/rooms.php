@@ -59,7 +59,7 @@ include_once 'display_function.inc.php';
                         $room_id  = $room['room_id'];
                         $room_no = $room['room_no'];
                         $occupy_num = $room['occupy_num'];
-                        $floor_belong = $room['floor_belong'];
+                        $floor = $room['floor'];
                         $status = $room['status'];
                         $display_img = $room['display_img'];
                         $available_occupation = $room['available_occupation'];
@@ -147,7 +147,7 @@ include_once 'display_function.inc.php';
                             <form id="add_room">
                               <div class="form-group">
                               <label>Floor</label>
-                                <select class="form-control mb-3" name="floor_belong" id="floor_belong" required>
+                                <select class="form-control mb-3" name="floor" id="floor" required>
                                   <option disabled selected value="">Choose</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -204,7 +204,7 @@ include_once 'display_function.inc.php';
                                 </div>
                                 <div class="col-6">
                                 <label>Floor</label>
-                                <select class="form-control mb-3" name="new_floor_belong" id="new_floor_belong" required>
+                                <select class="form-control mb-3" name="new_floor" id="new_floor" required>
                                   <option disabled selected value="">Choose</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>

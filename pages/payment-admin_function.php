@@ -93,10 +93,9 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                   
+                                    <p><strong>Name:</strong> ' . $row["name"] . '</p>
                                 </div>
                                 <div class="col-md-7">
-                                    <p><strong>Name:</strong> ' . $row["name"] . '</p>
                                     <p><strong>User type:</strong> ' . $row["description"] . '</p>
                                 </div>
                             </div>

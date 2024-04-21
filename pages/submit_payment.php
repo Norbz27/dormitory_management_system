@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $month_from = date("F j", strtotime($_POST['month_of']));
+    $month_from = date("F j, Y", strtotime($_POST['month_of']));
     $month_to = date("F j, Y", strtotime($_POST['month_to']));
     $amount = $_POST['amount'];
     $month_of = $month_from ." - ". $month_to;

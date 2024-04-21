@@ -117,7 +117,7 @@ if (!isset($_SESSION["account"])) {
                     SURVEY FORM
                   </button>
                 </h2>
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="height: 100vh; margin-bottom:100px">
                 <div class="card-body">
                   <form id="survey-form">
                   <div class="p-4">
@@ -240,7 +240,7 @@ if (!isset($_SESSION["account"])) {
                     COMPLAIN FORM
                   </button>
                 </h2>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" style="height: 100vh; margin-bottom:100px">
                 <div class="card-body">
                   <form id="complain-form">
                   <div class="form-group">

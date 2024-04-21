@@ -136,7 +136,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <table class="table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Payment ID</th>
                                                     <th>Amount</th>
                                                     <th>Month</th>
                                                     <th>Date</th>

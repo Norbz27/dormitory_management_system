@@ -32,7 +32,6 @@ if (isset($_POST['userId'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $formattedAmount = number_format($row['amount'], 2);
             echo '<tr>
-                    <td>' . $row["payment_id"] . '</td>
                     <td>' . $formattedAmount . '</td>
                     <td>' . date('F Y', strtotime($row['month_of'])) . '</td>
                     <td>' . date('F d, Y', strtotime($row['date'])) . '</td>

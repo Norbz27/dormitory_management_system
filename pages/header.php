@@ -297,7 +297,7 @@ if (!isset($_SESSION["account"])) {
           <li class="nav-item">
             <a class="nav-link" href="reports.php">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Reports</span>
+              <span class="menu-title">Tenant Report</span>
             </a>
           </li>
           <li class="nav-item">

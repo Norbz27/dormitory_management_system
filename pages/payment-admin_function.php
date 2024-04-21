@@ -3,21 +3,25 @@
 
     function getAllPayments() {
         global $conn;
-        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status, p.reason FROM payments p LEFT JOIN users u ON p.user_id = u.id;";
+        $sql = "SELECT p.payment_id, u.name, p.amount, p.date, p.status, p.reason, user_t.description FROM payments p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN tenants ten ON u.id = ten.user_id LEFT JOIN user_type user_t ON ten.user_type = user_t.user_type_id;";
         $result = mysqli_query($conn, $sql);
     
         if (!$result) {
             // Handle the query error
             die("Query failed: " . mysqli_error($conn));
         }
+        
     
         if (mysqli_num_rows($result) > 0) {
             // Output data of each row
             while($row = mysqli_fetch_assoc($result)) {
                 $badge_color = ($row["status"] == 'Verified') ? 'badge-success' : (($row["status"] == 'Pending') ? 'badge-warning' : 'badge-danger');
+                $formattedAmount = number_format($row['amount'], 2);
+
                 echo '<tr data-payment-id="' . $row["payment_id"] . '">
                 <td>' . $row["name"] . '</td>
-                <td>₱' . $row["amount"] . '</td>
+                <td>' . $row["description"] . '</td>
+                <td>₱' . $formattedAmount . '</td>
                 <td>' . $row["date"] . '</td>
                 <td><span class="badge ' . $badge_color . '">' . $row["status"] . '</span></td>
                 <td>' . $row["reason"] . '</td>

@@ -8,7 +8,8 @@ function generatePDF($conn, $month) {
             FROM payments p 
             JOIN users u ON p.user_id = u.id 
             WHERE STR_TO_DATE(CONCAT(SUBSTRING_INDEX(p.month_of, ' - ', 1)), '%M %d, %Y') <= '$month' 
-            AND STR_TO_DATE(CONCAT(SUBSTRING_INDEX(p.month_of, ' - ', -1)), '%M %d, %Y') >= '$month'";
+            AND STR_TO_DATE(CONCAT(SUBSTRING_INDEX(p.month_of, ' - ', -1)), '%M %d, %Y') >= '$month'
+            AND p.status = 'Verified'";
 
     $result = mysqli_query($conn, $sql);
 
@@ -62,7 +63,7 @@ function generatePDF($conn, $month) {
             AND STR_TO_DATE(CONCAT(SUBSTRING_INDEX(p.month_of, ' - ', 1)), '%M %d, %Y') <= '$month'
             AND STR_TO_DATE(CONCAT(SUBSTRING_INDEX(p.month_of, ' - ', -1)), '%M %d, %Y') >= '$month'
             WHERE 
-            p.payment_id IS NULL;";
+            p.payment_id IS NULL OR p.status != 'Verified';";
 
     $result = mysqli_query($conn, $sql);
 

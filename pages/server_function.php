@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Manila');
 $currentDate = date('Y-m-d');
 
 if (isset($_POST['add_room'])) {
-    $room_name = $_POST['room_name'];
+    $room_no = $_POST['room_no'];
     $occupy_num = $_POST['occupy_num'];
     $floor_belong = $_POST['floor_belong'];
     $status = $_POST['status'];
@@ -47,7 +47,7 @@ if (isset($_POST['add_room'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("sisss", $room_name, $occupy_num, $floor_belong, $newFileName, $status);
+    $stmt->bind_param("sisss", $room_no, $occupy_num, $floor_belong, $newFileName, $status);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -72,7 +72,7 @@ if (isset($_POST['add_room'])) {
 }
 
 if (isset($_POST['edit_room'])) {
-    $room_name = $_POST['new_room_name'];
+    $room_no = $_POST['new_room_no'];
     $occupy_num = $_POST['new_occupy_num'];
     $floor_belong = $_POST['new_floor_belong'];
     $status = $_POST['new_status'];
@@ -113,7 +113,7 @@ if (isset($_POST['edit_room'])) {
     }
 
     // Bind the parameters
-    $stmt->bind_param("siissi", $room_name, $occupy_num, $floor_belong, $status, $newFileName, $room_id);
+    $stmt->bind_param("siissi", $room_no, $occupy_num, $floor_belong, $status, $newFileName, $room_id);
 
     // Execute the statement
     if ($stmt->execute()) {

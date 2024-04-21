@@ -57,7 +57,7 @@ include_once 'display_function.inc.php';
                     <?php
                       foreach ($room as $key => $room) {
                         $room_id  = $room['room_id'];
-                        $room_name = $room['room_name'];
+                        $room_no = $room['room_no'];
                         $occupy_num = $room['occupy_num'];
                         $floor_belong = $room['floor_belong'];
                         $status = $room['status'];
@@ -70,7 +70,7 @@ include_once 'display_function.inc.php';
                           <img src="assets/<?php echo $display_img?>" class="card-img-top" style="height: 20vh; object-fit: cover;" alt="Room 1">
                           <div class="card-body">
                             <div class="room-desc">
-                              <span class="room-title"><?php echo $room_name?></span>
+                              <span class="room-title"><?php echo $room_no?></span>
                               <?php
                                 if($status == "Available"){
                                   ?>
@@ -108,7 +108,7 @@ include_once 'display_function.inc.php';
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="room_name"></h5>
+                            <h5 class="modal-title" id="room_no"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -154,7 +154,7 @@ include_once 'display_function.inc.php';
                                   <option value="3">3</option>
                                 </select>
                                 <label>Room No.</label>
-                                <input type="text" class="form-control mb-3" name="room_name" id="auto_room_name" required>
+                                <input type="text" class="form-control mb-3" name="room_no" id="auto_room_no" required>
                                 <label>Max Occupancy</label>
                                 <input type="number" class="form-control mb-3" name="occupy_num" required>
                                 <label>Status</label>
@@ -196,7 +196,7 @@ include_once 'display_function.inc.php';
                               <div class="form-group row">
                                 <div class="col-6">
                                 <label>Room Name</label>
-                                <input type="text" class="form-control mb-3" name="new_room_name" id="new_room_name" required>
+                                <input type="text" class="form-control mb-3" name="new_room_no" id="new_room_no" required>
                                 </div>
                                 <div class="col-6">
                                 <label>Occupy Number</label>

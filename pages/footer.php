@@ -61,7 +61,20 @@ $(document).on("submit", "#complain-form", function (e) {
       var res = JSON.parse(response);
       if (res.status == 500) {
         console.log(res); // Log the response for debugging
+        swal({
+            title: "Error",
+            text: "Failed to send compain.",
+            icon: "error",
+            button: false,
+        });
       } else if (res.status == 200) {
+        
+        swal({
+            title: "Success",
+            text: "Compain sent to successfully!",
+            icon: "success",
+            button: false,
+        });
       }
     },
   });

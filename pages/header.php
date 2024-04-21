@@ -245,9 +245,9 @@ if (!isset($_SESSION["account"])) {
                   <form id="complain-form">
                   <div class="form-group">
                     <label>Type here...</label>
-                    <textarea class="form-control" name="complain" rows="3" required></textarea>
+                    <textarea class="form-control" name="complain" rows="5" required></textarea>
                     <div class="d-flex justify-content-center p-4">
-                      <button type="submit" name="submit" class="btn btn-primary" style="margin-bottom: 100px;">Submit</button>
+                      <button type="submit" name="submit" class="btn btn-primary" style="margin-bottom: 150px;">Submit</button>
                     </div>
                   </div>
                   </form>

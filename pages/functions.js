@@ -66,7 +66,7 @@ $(document).on("click", "#view_button", function (e) {
       if (res.status == 422) {
         alert(res.message);
       } else if (res.status == 200) {
-        $("#floor").text(res.data.floor_belong);
+        $("#floor").text(res.data.floor);
         $("#occupy_num").text(res.data.available_occupation);
         $("#status").text(res.data.status);
         $("#room_no").text(res.data.room_no);
@@ -110,7 +110,7 @@ $(document).on("click", "#edit_button", function (e) {
       } else if (res.status == 200) {
         $("#new_room_no").val(res.data.room_no);
         $("#new_occupy_num").val(res.data.occupy_num);
-        $("#new_floor_belong").val(res.data.floor_belong);
+        $("#new_floor").val(res.data.floor);
         $("#new_status").val(res.data.status);
         $("#new_room_id").val(res.data.room_id);
         $("#new_display_img").attr("src", "assets/" + res.data.display_img);
@@ -268,7 +268,7 @@ $(document).on("click", "#ann_delete", function (e) {
   }
 });
 
-$("#floor_belong").change(function () {
+$("#floor").change(function () {
   var selectedValue = $(this).val();
 
   $.ajax({

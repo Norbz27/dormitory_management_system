@@ -37,7 +37,7 @@
                                 echo '<button class="dropdown-item accept-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Verify</button>
                                     <button class="dropdown-item reject-btn" style="cursor:pointer" value="' . $row["payment_id"] . '">Reject</button>';
                             }
-                        echo '<a class="dropdown-item view-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">Delete</a></div>
+                        echo '<a class="dropdown-item delete-btn" style="cursor:pointer" data-payment-id="' . $row["payment_id"] . '">Delete</a></div>
                     </div>
                 </td>
             </tr>';

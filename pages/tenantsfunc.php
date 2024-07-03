@@ -55,7 +55,7 @@ function getUserTypes() {
 
 function getAllTenants() {
     global $conn;
-    $sql = "SELECT t.tenants_id, r.room_no, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id;";
+    $sql = "SELECT t.tenants_id, r.room_no, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE u.status = 'Tenant'";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -87,7 +87,7 @@ function getAllTenants() {
                             <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewTenantModal">View</a>
                             <a class="dropdown-item active-btn" href="#">Set as Active</a>
                             <a class="dropdown-item inactive-btn" href="#">Set as Inactive</a>
-                            <a class="dropdown-item delete-btn" href="#">Delete</a>
+                            <!--<a class="dropdown-item delete-btn" href="#">Delete</a>-->
                         </div>
                     </div></td>
                 </tr>';

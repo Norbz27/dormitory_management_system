@@ -90,7 +90,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                             <input type="date" class="form-control" id="edstartDate" name="edstartDate" disabled>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edEquipments" class="form-label">Equipments::</label>
+                                            <label for="edEquipments" class="form-label">Equipment:</label>
                                             <input type="text" class="form-control" id="edEquipments" name="edEquipments" disabled>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addEquipments">Equipments:</label>
+                                    <label for="addEquipments">Equipment:</label>
                                     <input type="text" class="form-control" id="addEquipments" name="addEquipments" placeholder="Ex. Rice cooker, TV,....">
                                 </div>
                                 <div class="form-group">

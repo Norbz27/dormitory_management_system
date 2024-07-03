@@ -312,6 +312,12 @@ if (!isset($_SESSION["account"])) {
               <span class="menu-title">Surveys / Complains</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="archive.php">
+              <i class="icon-briefcase menu-icon"></i>
+              <span class="menu-title">Archive</span>
+            </a>
+          </li>  
           <?php 
             }else{
               ?>
@@ -347,7 +353,7 @@ if (!isset($_SESSION["account"])) {
               <i class="icon-briefcase menu-icon"></i>
               <span class="menu-title">Contract</span>
             </a>
-          </li>   
+          </li>
      <?php 
               }
             }

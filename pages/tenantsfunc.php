@@ -85,8 +85,53 @@ function getAllTenants() {
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewTenantModal">View</a>
-                            <a class="dropdown-item active-btn" href="#">Set as Active</a>
+                            <!--<a class="dropdown-item active-btn" href="#">Set as Active</a>-->
                             <a class="dropdown-item inactive-btn" href="#">Set as Inactive</a>
+                            <!--<a class="dropdown-item delete-btn" href="#">Delete</a>-->
+                        </div>
+                    </div></td>
+                </tr>';
+        }
+    } else {
+        echo "0 results";
+    }
+
+}
+
+function getInactiveTenants() {
+    global $conn;
+    $sql = "SELECT t.tenants_id, r.room_no, u.display_img, u.id, u.name, u.contact, u.status FROM tenants t LEFT JOIN users u ON t.user_id = u.id LEFT JOIN tenant_type ut ON t.tenant_type = ut.tenant_type_id LEFT JOIN room_details r ON t.room_id = r.room_id WHERE u.status = 'Inactive'";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        // Handle the query error
+        die("Query failed: " . mysqli_error($conn));
+    }
+
+
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            $badge_color = ($row["status"] == 'Tenant') ? 'badge-warning' : 'badge-danger';
+            
+            $profileImage = 'assets/profile.png';
+            if($row["display_img"] !== NULL && $row["display_img"] !== "")
+                $profileImage = 'assets/' . $row["display_img"];
+
+            echo '<tr data-tenant-id="' . $row["tenants_id"] . '">
+                    <td>' . $row["room_no"]. '</td>
+                    <td><img src="' . $profileImage . '" style="width: 50px; height: 50px;"></td>
+                    <td>' . $row["name"]. '</td>
+                    <td>' . $row["contact"]. '</td>
+                    <td><span class="badge ' . $badge_color . '">' . $row["status"]. '</span></td>
+                    <td><div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" style="content: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-horizontal"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewTenantModal">View</a>
+                            <a class="dropdown-item active-btn" href="#">Set as Active</a>
+                            <!--<a class="dropdown-item inactive-btn" href="#">Set as Inactive</a>-->
                             <!--<a class="dropdown-item delete-btn" href="#">Delete</a>-->
                         </div>
                     </div></td>
@@ -120,6 +165,7 @@ function getAllTenants() {
                             // Optionally update row's status cell with "Inactive"
                             row.find('.status').text('Inactive');
                             // Optionally display a success message
+                            row.remove();
                             swal({
                                 title: "Success",
                                 text: "Tenant status updated to Inactive!",
@@ -160,6 +206,7 @@ function getAllTenants() {
                             // Optionally update row's status cell with "Inactive"
                             row.find('.status').text('Inactive');
                             // Optionally display a success message
+                            row.remove();
                             swal({
                                 title: "Success",
                                 text: "Tenant status updated to Inactive!",

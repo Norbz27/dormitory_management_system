@@ -161,7 +161,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                         <th>Profile</th>
                                         <th>Name</th>
                                         <th>Contact</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

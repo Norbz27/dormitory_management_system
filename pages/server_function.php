@@ -140,7 +140,7 @@ if (isset($_POST['edit_room'])) {
 if (isset($_GET['view_room_id'])) {
     $room_id = $_GET['view_room_id'];
 
-    $query = "SELECT room_details.*, tenants.tenants_id, (room_details.occupy_num - COUNT(tenants.tenants_id)) AS available_occupation FROM room_details LEFT JOIN tenants ON room_details.room_id = tenants.room_id WHERE room_details.room_id = ? GROUP BY room_details.room_id";
+    $query = "SELECT room_details.*, tenants.tenants_id, (room_details.occupy_num - COUNT(tenants.tenants_id)) AS available_occupation FROM room_details LEFT JOIN tenants ON room_details.room_id = tenants.room_id LEFT JOIN users ON tenants.user_id = users.id WHERE room_details.room_id = ? AND users.status != 'Inactive' GROUP BY room_details.room_id";
     $stmt = mysqli_prepare($conn, $query);
 
     mysqli_stmt_bind_param($stmt, "i", $room_id);

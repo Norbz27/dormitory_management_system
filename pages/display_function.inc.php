@@ -6,7 +6,7 @@ function getRoom1($floor) {
     global $conn;
 
     // Perform the query to fetch paginated rows from the "patients" table
-    $sql = "SELECT room_details.*, tenants.tenants_id, (room_details.occupy_num - COUNT(tenants.tenants_id)) AS available_occupation FROM room_details LEFT JOIN tenants ON room_details.room_id = tenants.room_id WHERE room_details.floor = $floor GROUP BY room_details.room_id";
+    $sql = "SELECT room_details.*, tenants.tenants_id, (room_details.occupy_num - SUM(CASE WHEN users.status != 'Inactive' THEN 1 ELSE 0 END)) AS available_occupation FROM room_details LEFT JOIN tenants ON room_details.room_id = tenants.room_id LEFT JOIN users ON tenants.user_id = users.id WHERE room_details.floor = $floor GROUP BY room_details.room_id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

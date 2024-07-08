@@ -3,7 +3,7 @@
 
     function getAllAccounts() {
         global $conn;
-        $sql = "SELECT * FROM users WHERE status != 'admin' AND status != 'Inactive'";
+        $sql = "SELECT * FROM users WHERE status != 'admin'";
         $result = mysqli_query($conn, $sql);
 
         if (!$result) {
@@ -14,7 +14,7 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                $badge_color = ($row["status"] == 'New') ? 'badge-success' : 'badge-warning';
+                $badge_color = ($row["status"] == 'New') ? 'badge-success' : (($row["status"] == 'Tenant') ? 'badge-warning' : 'badge-danger');
                 echo '<tr data-user-id="' . $row["id"] . '">
                         <td>' . $row["name"]. '</td>
                         <td>' . $row["gender"]. '</td>
@@ -26,7 +26,7 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item view-btn" href="" data-toggle="modal" data-target="#viewAccountModal">View</a>
-                                <!--<a class="dropdown-item delete-btn" href="#">Delete</a>-->
+                                <a class="dropdown-item delete-btn" href="#">Delete</a>
                             </div>
                         </div></td>
                       </tr>';

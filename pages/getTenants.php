@@ -7,7 +7,7 @@ if (isset($_POST['roomID'])) {
     $roomID = $_POST['roomID'];
 
     // Prepare SQL statement using a parameterized query
-    $sql = "SELECT users.name FROM `tenants` INNER JOIN room_details ON tenants.room_id = room_details.room_id INNER JOIN users ON tenants.user_id = users.id WHERE room_details.room_id = ?";
+    $sql = "SELECT users.name FROM `tenants` INNER JOIN room_details ON tenants.room_id = room_details.room_id INNER JOIN users ON tenants.user_id = users.id WHERE room_details.room_id = ? AND users.status != 'Inactive'";
     $stmt = mysqli_prepare($conn, $sql);
 
     if (!$stmt) {

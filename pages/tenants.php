@@ -176,7 +176,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                                     <label for="profileSelect">Select User:</label>
                                     <select class="form-control" id="profileSelect" name="profileSelect">
                                         <?php foreach ($users as $user): ?>
-                                            <option value="<?php echo $user['id']; ?>" data-image="<?php echo $user['display_img']; ?>"><?php echo $user['name']; ?></option>
+                                            <option value="<?php echo $user['id']; ?>"><?php echo $user['name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

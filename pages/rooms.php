@@ -76,11 +76,15 @@ include_once 'display_function.inc.php';
                                   ?>
                                   <span class="badge badge-pill badge-success"><?php echo $status?></span>
                                   <?php
+                                }else if ($available_occupation == "0" ){
+                                  ?>
+                                  <span class="badge badge-pill badge-danger">Occupied</span>
+                                  <?php
                                 }else if ($status == "Lacking"){
                                   ?>
                                   <span class="badge badge-pill badge-warning"><?php echo $status . ' ' . $available_occupation?></span>
                                   <?php
-                                }else if ($status == "Occupied"){
+                                }else if ($status == "Occupied" ){
                                   ?>
                                   <span class="badge badge-pill badge-danger"><?php echo $status?></span>
                                   <?php

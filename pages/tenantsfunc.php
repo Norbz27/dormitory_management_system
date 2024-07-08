@@ -8,7 +8,7 @@ function getUsers() {
         $pdo = $dbh->connect();
         
         // Modify the SQL query to check if users exist in tenants table
-        $sql = "SELECT u.id, u.name, u.display_img FROM users u LEFT JOIN tenants t ON u.id = t.user_id WHERE u.status != 'Tenant' AND u.status != 'admin'";
+        $sql = "SELECT u.id, u.name, u.display_img FROM users u LEFT JOIN tenants t ON u.id = t.user_id WHERE t.user_id IS NULL AND u.status != 'admin'";
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
